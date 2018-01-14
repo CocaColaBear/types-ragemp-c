@@ -1,0 +1,10 @@
+{
+	"editor.tabSize": 2,
+	"files.encoding": "utf8",
+	"files.autoSave": "afterDelay",
+	"editor.insertSpaces": false,
+	"editor.trimAutoWhitespace": true,
+	"files.insertFinalNewline": true,
+	"editor.detectIndentation": false,
+	"editor.rulers": [ 120 ]
+}
