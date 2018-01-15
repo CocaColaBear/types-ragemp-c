@@ -3195,7 +3195,7 @@ interface EntityMpPool<TEntity> {
 	at(index: number): TEntity;
 	atHandle(handle: number): TEntity;
 	atRemoteId(remoteId: number): TEntity;
-	exists(entity: TEntity): boolean;
+	exists(entity: TEntity | number): boolean;
 	forEach(fn: (entity: TEntity) => void): void;
 	forEachInRange(position: Vector3Mp, range: number, fn: (entity: TEntity) => void): void;
 	forEachInDimension(position: Vector3Mp, range: number, dimension: number, fn: (entity: TEntity) => void): void;
