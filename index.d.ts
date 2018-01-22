@@ -159,6 +159,8 @@ interface EntityMp {
 	clearLastDamage(): void;
 	destroy(): void;
 	detach(p0: boolean, collision: boolean): void;
+	dist(position: Vector3Mp): number;
+	distSquared(position: Vector3Mp): number;
 	doesBelongToThisScript(p0: boolean): boolean;
 	doesExist(): boolean;
 	doesHaveDrawable(): boolean;
@@ -2070,7 +2072,7 @@ interface GameGraphicsMp {
 		y: number;
 	};
 	getTextureResolution(textureDict: string, textureName: string): Vector3Mp;
-	hasHudScaleformLoaded(hudComponent: number): boolean;
+	hasHudScaleformLoaded(componentIndex: RageEnums.HudComponent | number): boolean;
 	hasNamedScaleformMovieLoaded(scaleformName: string): boolean;
 	hasScaleformContainerMovieLoadedIntoParent(scaleformHandle: number): boolean;
 	hasScaleformMovieLoaded(scaleformHandle: number): boolean;
@@ -2082,7 +2084,7 @@ interface GameGraphicsMp {
 	moveVehicleDecals(p0: any, p1: any): void;
 	notify(text: string): void;
 	pushScaleformMovieFunction(scaleform: number, functionName: string): boolean;
-	pushScaleformMovieFunctionFromHudComponent(hudComponent: number, functionName: string): boolean;
+	pushScaleformMovieFunctionFromHudComponent(componentIndex: RageEnums.HudComponent | number, functionName: string): boolean;
 	pushScaleformMovieFunctionN(functionName: string): boolean;
 	pushScaleformMovieFunctionParameterBool(value: boolean): void;
 	pushScaleformMovieFunctionParameterFloat(value: number): void;
@@ -2095,7 +2097,7 @@ interface GameGraphicsMp {
 	removeDecalsInRange(x: number, y: number, z: number, range: number): void;
 	removeParticleFx(ptfxHandle: number, p1: boolean): void;
 	removeParticleFxInRange(X: number, Y: number, Z: number, radius: number): void;
-	requestHudScaleform(hudComponent: number): void;
+	requestHudScaleform(componentIndex: RageEnums.HudComponent | number): void;
 	requestScaleformMovie(scaleformName: string): number;
 	requestScaleformMovie3(scaleformName: string): number;
 	requestScaleformMovieInstance(scaleformName: string): number;
@@ -2828,7 +2830,7 @@ interface GameUiMp {
 		b: number;
 		a: number;
 	};
-	getHudComponentPosition(p0: any): number;
+	getHudComponentPosition(componentIndex: RageEnums.HudComponent | number): number;
 	getLabelText(labelName: string): string;
 	getLengthOfLiteralString(string: string): number;
 	getLengthOfStringWithThisTextLabel(gxt: string): number;
@@ -2842,15 +2844,15 @@ interface GameUiMp {
 	hasAdditionalTextLoaded(slot: number): boolean;
 	hasHeadDisplayLoaded(headDisplayId: number): boolean;
 	hasThisAdditionalTextLoaded(gxt: string, slot: number): boolean;
-	hideHudComponentThisFrame(id: number): void;
-	hideScriptedHudComponentThisFrame(id: number): void;
+	hideHudComponentThisFrame(componentIndex: RageEnums.HudComponent | number): void;
+	hideScriptedHudComponentThisFrame(componentIndex: RageEnums.HudComponent | number): void;
 	hideSpecialAbilityLockonOperation(p0: any, p1: boolean): void;
-	isHudComponentActive(id: number): boolean;
+	isHudComponentActive(componentIndex: RageEnums.HudComponent | number): boolean;
 	isMinimapAreaRevealed(x: number, y: number, radius: number): boolean;
 	isNamedRendertargetLinked(hash: Hash): boolean;
 	isNamedRendertargetRegistered(p0: string): boolean;
 	isPauseMenuActive(): boolean;
-	isScriptedHudComponentActive(id: number): boolean;
+	isScriptedHudComponentActive(componentIndex: RageEnums.HudComponent | number): boolean;
 	isStreamingAdditionalText(p0: number): boolean;
 	keyHudColour(p0: boolean, p1: any): void;
 	linkNamedRendertarget(hash: Hash): void;
@@ -2859,11 +2861,11 @@ interface GameUiMp {
 	objectDecalToggle(hash: Hash): void;
 	registerNamedRendertarget(p0: string, p1: boolean): boolean;
 	releaseNamedRendertarget(p0: any): boolean;
-	removeBlip(blip: BlipMp): BlipMp;
+	removeBlip(blip: Hash): void;
 	removeNotification(notifactionId: number): void;
 	requestAdditionalText(gxt: string, slot: number): void;
 	requestAdditionalText2(gxt: string, slot: number): void;
-	resetHudComponentValues(id: number): void;
+	resetHudComponentValues(componentIndex: RageEnums.HudComponent | number): void;
 	respondingAsTemp(p0: number): void;
 	restartFrontendMenu(menuHash: Hash, p1: number): void;
 	setAbilityBarValue(p0: number, p1: number): void;
@@ -2874,8 +2876,8 @@ interface GameUiMp {
 	setHeadDisplayFlag(headDisplayId: number, sprite: number, toggle: boolean): void;
 	setHeadDisplayString(headDisplayId: number, string: string): void;
 	setHeadDisplayWanted(headDisplayId: number, wantedlvl: number): void;
-	setHudColour(hudIndex: number, r: number, g: number, b: number, a: number): void;
-	setHudComponentPosition(id: number, p1: number, p2: number): void;
+	setHudColour(componentIndex: RageEnums.HudComponent | number, r: number, g: number, b: number, a: number): void;
+	setHudComponentPosition(componentIndex: RageEnums.HudComponent | number, x: number, y: number): void;
 	setLoadingPromptTextEntry(string: string): void;
 	setMinimapAttitudeIndicatorLevel(altitude: number, p1: boolean): void;
 	setMinimapBlockWaypoint(toggle: boolean): void;
@@ -2926,7 +2928,7 @@ interface GameUiMp {
 	setWarningMessage3(entryHeader: string, entryLine1: string, instructionalKey: any, entryLine2: string,
 		p4: any, p5: any, p6: any, p7: any, p8: any, p9: boolean): void;
 	setWidescreenFormat(p0: any): void;
-	showHudComponentThisFrame(id: number): void;
+	showHudComponentThisFrame(componentIndex: RageEnums.HudComponent | number): void;
 	showLoadingPrompt(busySpinnerType: number): void;
 	showWeaponWheel(forcedShow: boolean): void;
 	toggleStealthRadar(toggle: boolean): void;
@@ -3203,7 +3205,7 @@ interface EntityMpPool<TEntity> {
 }
 
 interface EventMpPool {
-	add(eventName: EnumsMp.EventKey | string, callback: (...args: any[]) => void): void;
+	add(eventName: RageEnums.EventKey | string, callback: (...args: any[]) => void): void;
 	add(events: ({ [name: string]: (...args: any[]) => void; })): void;
 	addCommand(commandName: string, callback: (player: PlayerMp, fullText: string, ...args: string[]) => void): void;
 	call(eventName: string, ...args: any[]): void;
@@ -3284,33 +3286,6 @@ type QuaternionMp = {
 	y: number;
 	z: number;
 	w: number;
-}
-
-// -------------------------------------------------------------------------
-// Enums
-// -------------------------------------------------------------------------
-
-declare namespace EnumsMp {
-	const enum EventKey {
-		entityCreated = "entityCreated",
-		entityStreamIn = "entityStreamIn",
-		entityStreamOut = "entityStreamOut",
-		playerChat = "playerChat",
-		playerCommand = "playerCommand",
-		playerDeath = "playerDeath",
-		playerEnterCheckpoint = "playerEnterCheckpoint",
-		playerEnterColshape = "playerEnterColshape",
-		playerExitCheckpoint = "playerExitCheckpoint",
-		playerExitColshape = "playerExitColshape",
-		playerJoin = "playerJoin",
-		playerQuit = "playerQuit",
-		playerResurrect = "playerResurrect",
-		playerRuleTriggered = "playerRuleTriggered",
-		playerSpawn = "playerSpawn",
-		playerWeaponShoot = "playerWeaponShoot",
-		render = "render",
-		vehicleDeath = "vehicleDeath"
-	}
 }
 
 // -------------------------------------------------------------------------
