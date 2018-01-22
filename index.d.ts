@@ -1256,6 +1256,7 @@ interface VehicleMp extends EntityMp {
 	setGravity(toggle: boolean): void;
 	setHalt(distance: number, killEngine: boolean, unknown: boolean): void;
 	setHandbrake(toggle: boolean): void;
+	setHandling(...value: any[]): void; // TODO
 	setHasBeenOwnedByPlayer(owned: boolean): void;
 	setHasStrongAxles(toggle: boolean): void;
 	setHeliBladesFullSpeed(): void;
@@ -1566,6 +1567,7 @@ interface GameCamMp {
 	doScreenFadeOut(duration: number): void;
 	getCamSplineNodeIndex(cam: number): boolean;
 	getCamSplineNodePhase(p0: any): number;
+	getGameplayCamRelativeHeading(): number;
 	getGameplayCamRot(p0: number): Vector3Mp;
 	getGameplayCamRot(p0: number): Vector3Mp;
 	getIsMultiplayerBrief(p0: boolean): void;
@@ -3144,7 +3146,7 @@ interface GuiCursorMp {
 	position: boolean;
 	visible: boolean;
 
-	update(...args: any[]): any;
+	show(state: boolean, freezeControls: boolean): void;
 }
 
 // -------------------------------------------------------------------------
