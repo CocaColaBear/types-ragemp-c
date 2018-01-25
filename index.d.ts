@@ -1,4 +1,4 @@
-import { RageEnums } from "./enums";
+/// <reference path="enums.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
@@ -3296,4 +3296,4 @@ type QuaternionMp = {
 // Vars
 // -------------------------------------------------------------------------
 
-declare var mp: Mp;
+declare const mp: Mp;
