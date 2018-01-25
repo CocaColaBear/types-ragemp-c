@@ -1,4 +1,4 @@
-declare namespace RageEnums {
+export declare namespace RageEnums {
 	const enum EventKey {
 		entityCreated = "entityCreated",
 		entityStreamIn = "entityStreamIn",
