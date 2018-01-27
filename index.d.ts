@@ -1,4 +1,5 @@
 /// <reference path="enums.d.ts" />
+/// <reference path="hashes.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
@@ -76,7 +77,7 @@ type GameMp = {
 	weapon: GameWeaponMp;
 	worldprobe: GameWorldprobeMp;
 	zone: GameZoneMp;
-	
+
 	invoke(hash: string, ...args: any[]): any;
 	joaat(text: string): Hash;
 	joaat(textArray: string[]): Hash[];
