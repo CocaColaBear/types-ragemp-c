@@ -1005,7 +1005,6 @@ interface PlayerMp extends EntityMp {
 	wasKilledByStealth(): boolean;
 	wasKilledByTakedown(): boolean;
 	wasSkeletonUpdated(): boolean;
-	wasSkeletonUpdated(): boolean;
 }
 
 interface TextLabelMp extends EntityMp {

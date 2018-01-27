@@ -3,6 +3,7 @@ declare namespace RageEnums {
 		entityCreated = "entityCreated",
 		entityStreamIn = "entityStreamIn",
 		entityStreamOut = "entityStreamOut",
+		click = "click",
 		playerChat = "playerChat",
 		playerCommand = "playerCommand",
 		playerDeath = "playerDeath",
