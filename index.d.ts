@@ -76,6 +76,8 @@ type GameMp = {
 	weapon: GameWeaponMp;
 	worldprobe: GameWorldprobeMp;
 	zone: GameZoneMp;
+
+	invoke(hash: string, ...args: any[]);
 }
 
 type GuiMp = {
@@ -1421,8 +1423,8 @@ interface NametagsMp {
 }
 
 interface RaycastingMp {
-	testPointToPoint(startPos: Vector3Mp, endPos: Vector3Mp, ignoreEntity?: Handle, flags?: number): void; // TODO: ignoreEntity
-	testCapsule(startPos: Vector3Mp, endPos: Vector3Mp, radius: number, ignoreEntity?: Handle, flags?: any[]): void; // TODO: ignoreEntity
+	testPointToPoint(startPos: Vector3Mp, endPos: Vector3Mp, ignoreEntity?: Handle, flags?: number): RaycastResult; // TODO: ignoreEntity
+	testCapsule(startPos: Vector3Mp, endPos: Vector3Mp, radius: number, ignoreEntity?: Handle, flags?: any[]): RaycastResult; // TODO: ignoreEntity
 }
 
 // -------------------------------------------------------------------------
@@ -1815,7 +1817,7 @@ interface GameEntityMp {
 		newModel: Hash, p6: boolean): void;
 	findAnimEventPhase(animDictionary: string, animName: string, p2: string, p3: any, p4: any): boolean;
 	getEntityAnimDuration(animDict: string, animName: string): number;
-	isAnEntity(handle: number): boolean;
+	isAnEntity(handle: Handle): boolean;
 	playSynchronizedMapEntityAnim(p0: number, p1: number, p2: number, p3: number, p4: any, p5: any, p6: any,
 		p7: any, p8: number, p9: number, p10: any, p11: number): boolean;
 	removeForcedObject(p0: any, p1: any, p2: any, p3: any, p4: any): void;
@@ -1838,7 +1840,7 @@ interface GameFireMp {
 		angle: number): boolean;
 	isExplosionInArea(explosionType: number, x1: number, y1: number, z1: number, x2: number, y2: number, z2: number): boolean;
 	isExplosionInSphere(explosionType: number, x: number, y: number, z: number, radius: number): boolean;
-	removeScriptFire(fireHandle: number): void;
+	removeScriptFire(fireHandle: Handle): void;
 	startScriptFire(x: number, y: number, z: number, maxChildren: number, isGasFire: boolean): number;
 	stopFireInRange(x: number, y: number, z: number, radius: number): void;
 }
@@ -3291,6 +3293,12 @@ type QuaternionMp = {
 	y: number;
 	z: number;
 	w: number;
+}
+
+type RaycastResult = {
+	entity: Handle,
+	position: Vector3Mp,
+	surfaceNormal: Vector3Mp
 }
 
 // -------------------------------------------------------------------------
