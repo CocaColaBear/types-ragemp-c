@@ -9,6 +9,8 @@ type Hash = number; // TODO: Temp type. Replace to HashOrString, when methods ar
 type HashOrString = Hash;
 type RGB = [ number, number, number ];
 type RGBA = [ number, number, number, number ];
+type Array3d = [ number, number, number ];
+type Array2d = [ number, number ];
 
 // -------------------------------------------------------------------------
 // Main MP types
@@ -2048,15 +2050,14 @@ interface GameGraphicsMp {
 		radius: number, falloff: number, shadow: number): void;
 	drawSprite(textureDict: string, textureName: string, screenX: number, screenY: number, scaleX: number,
 		scaleY: number,heading: number, colorR: number, colorG: number, colorB: number, alpha: number): void;
-	drawText(text: string, position: [ number, number, number ] | [ number, number ],
-		data: { // TODO: Optional?
-			font: number,
-			color: RGBA,
-			scale: [ number, number ],
-			outline: boolean
+	drawText(text: string, position: Array3d | Array2d,
+		data?: {
+			font?: number,
+			color?: RGBA,
+			scale?: Array2d,
+			outline?: boolean
 		}
 	): void;
-	drawText3d(text: any, pos: any, rotation: any, scale: any, r: any, g: any, b: any, a: any, initialOffsetScaled: any): any; //TODO: Exist?
 	drawTvChannel(xPos: number, yPos: number, xScale: number, yScale: number, rotation: number, r: number, g: number,
 		b: number, alpha: number): void;
 	enableAlienBloodVfx(toggle: boolean): void;
@@ -2106,6 +2107,7 @@ interface GameGraphicsMp {
 	requestScaleformMovie3(scaleformName: string): number;
 	requestScaleformMovieInstance(scaleformName: string): number;
 	requestStreamedTextureDict(textureDict: string, p1: boolean): void;
+	screen2dToWorld3d(x: number, y: number): Vector3Mp;
 	set2dLayer(layer: number): void;
 	setBlackout(enable: boolean): void;
 	setDebugLinesAndSpheresDrawingActive(enabled: boolean): void;
@@ -3262,7 +3264,7 @@ interface TextLabelMpPool extends EntityMpPool<TextLabelMp> {
 interface VehicleMpPool extends EntityMpPool<VehicleMp> {
 	"new"(model: HashOrString, position: Vector3Mp, options?: {
 		alpha?: number,
-		color?: [ [number, number], [number, number] ] | [ RGB, RGB ],
+		color?: [ Array2d, Array2d ] | [ RGB, RGB ],
 		dimension?: number,
 		engine?: boolean,
 		heading?: number;
