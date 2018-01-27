@@ -76,8 +76,10 @@ type GameMp = {
 	weapon: GameWeaponMp;
 	worldprobe: GameWorldprobeMp;
 	zone: GameZoneMp;
-
-	invoke(hash: string, ...args: any[]);
+	
+	invoke(hash: string, ...args: any[]): any;
+	joaat(text: string): Hash;
+	joaat(textArray: string[]): Hash[];
 }
 
 type GuiMp = {
