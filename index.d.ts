@@ -36,6 +36,7 @@ type Mp = {
 	pickups: PickupMpPool;
 	players: PlayerMpPool;
 	raycasting: RaycastingMp;
+	storage: StorageMp;
 	Vector3: Vector3Mp;
 	vehicles: VehicleMpPool;
 }
@@ -1428,6 +1429,11 @@ interface NametagsMp {
 interface RaycastingMp {
 	testPointToPoint(startPos: Vector3Mp, endPos: Vector3Mp, ignoreEntity?: Handle, flags?: number): RaycastResult; // TODO: ignoreEntity
 	testCapsule(startPos: Vector3Mp, endPos: Vector3Mp, radius: number, ignoreEntity?: Handle, flags?: any[]): RaycastResult; // TODO: ignoreEntity
+}
+
+interface StorageMp {
+	flush(): void;
+	data: { [key: string]: any };
 }
 
 // -------------------------------------------------------------------------
