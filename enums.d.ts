@@ -1,10 +1,15 @@
 declare namespace RageEnums {
 	const enum EventKey {
+		browserCreated = "browserCreated",
+		browserDomReady = "browserDomReady",
+		browserLoadingFailed = "browserLoadingFailed",
 		entityCreated = "entityCreated",
 		entityStreamIn = "entityStreamIn",
 		entityStreamOut = "entityStreamOut",
+		guiReady = "guiReady",
 		click = "click",
 		playerChat = "playerChat",
+		playerCreateWaypoint = "playerCreateWaypoint",
 		playerCommand = "playerCommand",
 		playerDeath = "playerDeath",
 		playerEnterCheckpoint = "playerEnterCheckpoint",
@@ -13,10 +18,11 @@ declare namespace RageEnums {
 		playerExitColshape = "playerExitColshape",
 		playerJoin = "playerJoin",
 		playerQuit = "playerQuit",
+		playerReachWaypoint = "playerReachWaypoint",
 		playerResurrect = "playerResurrect",
 		playerRuleTriggered = "playerRuleTriggered",
 		playerSpawn = "playerSpawn",
-		playerWeaponShoot = "playerWeaponShoot",
+		playerWeaponShot = "playerWeaponShot",
 		render = "render",
 		vehicleDeath = "vehicleDeath"
 	}

@@ -352,6 +352,7 @@ interface PlayerMp extends EntityMp {
 	heading: number;
 	health: number;
 	name: string;
+	weapon: Hash;
 	readonly action: string;
 	readonly aimTarget: boolean;
 	readonly ip: string;
@@ -364,7 +365,6 @@ interface PlayerMp extends EntityMp {
 	readonly ping: number;
 	readonly seat: boolean;
 	readonly vehicle: boolean;
-	readonly weapon: any; // TODO: RETURN
 
 	addVehicleSubtaskAttack(ped2: Handle): void;
 	addVehicleSubtaskAttackCoord(x: number, y: number, z: number): void;
@@ -411,6 +411,7 @@ interface PlayerMp extends EntityMp {
 	forceToOpenParachute(): void;
 	getAccuracy(): number;
 	getAlertness(): number;
+	getAmmoInClip(weapon: Hash): number;
 	getArmour(): number;
 	getBoneCoords(boneId: number, offsetX: number, offsetY: number, offsetZ: number): Vector3Mp;
 	getBoneIndex(boneId: number): number;
@@ -508,6 +509,7 @@ interface PlayerMp extends EntityMp {
 	giveHelmet(cannotRemove: boolean, helmetFlag: number, textureIndex: number): void;
 	giveNmMessage(): void;
 	giveRagdollControl(toggle: boolean): void;
+	giveWeapon(weapon: Hash, ammo: number, equipNow: boolean): void;
 	hasBeenSpottedInStolenVehicle(): boolean;
 	hasDamagedAtLeastOneNonAnimalPed(): boolean;
 	hasDamagedAtLeastOnePed(): boolean;
@@ -629,6 +631,8 @@ interface PlayerMp extends EntityMp {
 	removeFromGroup(): void;
 	removeHelmet(p2: boolean): void;
 	removePreferredCoverSet(): void;
+	removeWeapon(weapon: Hash): void;
+	removeAllWeapons(): void;
 	resetArrestState(): void;
 	resetInputGait(): void;
 	resetInVehicleContext(): void;
@@ -646,6 +650,7 @@ interface PlayerMp extends EntityMp {
 	setAllowedToDuck(toggle: boolean): void;
 	setAllowVehiclesOverride(toggle: boolean): void;
 	setAlternateMovementAnim(stance: number, animDictionary: string, animationName: string, p4: number, p5: boolean): void;
+	setAmmoInClip(weapon: Hash, ammo: number): void;
 	setAngledDefensiveArea(p1: number, p2: number, p3: number, p4: number, p5: number, p6: number, p7: number,
 		p8: boolean, p9: boolean): void;
 	setArmour(amount: number): void;
@@ -2117,7 +2122,7 @@ interface GameGraphicsMp {
 	requestScaleformMovie3(scaleformName: string): number;
 	requestScaleformMovieInstance(scaleformName: string): number;
 	requestStreamedTextureDict(textureDict: string, p1: boolean): void;
-	screen2dToWorld3d(x: number, y: number): Vector3Mp;
+	screen2dToWorld3d(x: number, y: number, useRaycast: boolean): Vector3Mp;
 	set2dLayer(layer: number): void;
 	setBlackout(enable: boolean): void;
 	setDebugLinesAndSpheresDrawingActive(enabled: boolean): void;
