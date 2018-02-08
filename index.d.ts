@@ -3237,6 +3237,7 @@ interface EventMpPool {
 
 interface MarkerMpPool extends EntityMpPool<MarkerMp> {
 	"new"(type: number, position: Vector3Mp, scale: number, options?: {
+		bobUpAndDown?: boolean,
 		color?: RGBA,
 		dimension?: number,
 		direction?: Vector3Mp,
