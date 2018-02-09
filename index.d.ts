@@ -1,5 +1,7 @@
 /// <reference path="enums.d.ts" />
-/// <reference path="hashes.d.ts" />
+/// <reference path="natives.d.ts" />
+/// <reference path="ped_models.d.ts" />
+/// <reference path="vehicle_models.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
