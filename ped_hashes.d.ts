@@ -1,4 +1,4 @@
-declare namespace RageEnums.Models {
+declare namespace RageEnums.Hashes {
 	const enum Ped {
 		A_C_BOAR = 0xCE5FF074,
 		A_C_CAT_01 = 0x573201B8,

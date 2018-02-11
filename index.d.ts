@@ -1,7 +1,8 @@
 /// <reference path="enums.d.ts" />
 /// <reference path="natives.d.ts" />
-/// <reference path="ped_models.d.ts" />
-/// <reference path="vehicle_models.d.ts" />
+/// <reference path="ped_hashes.d.ts" />
+/// <reference path="vehicle_hashes.d.ts" />
+/// <reference path="weapon_hashes.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
@@ -459,7 +460,7 @@ interface PlayerMp extends EntityMp {
 	getNavmeshRouteDistanceRemaining(p1: any, p2: any): any;
 	getNearbyPeds(sizeAndPeds: number, ignore: number): number;
 	getNearbyVehicles(sizeAndVehs: number): number;
-	getNumberOfDrawableVariations(componentId: number): void;
+	getNumberOfDrawableVariations(componentId: number): number;
 	getNumberOfPropDrawableVariations(propId: number): number;
 	getNumberOfPropTextureVariations(propId: number, drawableId: number): number;
 	getNumberOfTextureVariations(componentId: number, drawableId: number): number;
@@ -511,7 +512,7 @@ interface PlayerMp extends EntityMp {
 	giveHelmet(cannotRemove: boolean, helmetFlag: number, textureIndex: number): void;
 	giveNmMessage(): void;
 	giveRagdollControl(toggle: boolean): void;
-	giveWeapon(weapon: Hash, ammo: number, equipNow: boolean): void;
+	giveWeapon(weapon: RageEnums.Hashes.Weapon | Hash, ammo: number, equipNow: boolean): void;
 	hasBeenSpottedInStolenVehicle(): boolean;
 	hasDamagedAtLeastOneNonAnimalPed(): boolean;
 	hasDamagedAtLeastOnePed(): boolean;
@@ -633,7 +634,7 @@ interface PlayerMp extends EntityMp {
 	removeFromGroup(): void;
 	removeHelmet(p2: boolean): void;
 	removePreferredCoverSet(): void;
-	removeWeapon(weapon: Hash): void;
+	removeWeapon(weapon: RageEnums.Hashes.Weapon | Hash): void;
 	removeAllWeapons(): void;
 	resetArrestState(): void;
 	resetInputGait(): void;
@@ -652,7 +653,7 @@ interface PlayerMp extends EntityMp {
 	setAllowedToDuck(toggle: boolean): void;
 	setAllowVehiclesOverride(toggle: boolean): void;
 	setAlternateMovementAnim(stance: number, animDictionary: string, animationName: string, p4: number, p5: boolean): void;
-	setAmmoInClip(weapon: Hash, ammo: number): void;
+	setAmmoInClip(weapon: RageEnums.Hashes.Weapon | Hash, ammo: number): void;
 	setAngledDefensiveArea(p1: number, p2: number, p3: number, p4: number, p5: number, p6: number, p7: number,
 		p8: boolean, p9: boolean): void;
 	setArmour(amount: number): void;
@@ -1135,7 +1136,7 @@ interface VehicleMp extends EntityMp {
 	getModColor2TextLabel(): string;
 	getModKit(): number;
 	getModKitType(): number;
-	getModModifierValue(modType: number, modIndex: number): void;
+	getModModifierValue(modType: number, modIndex: number): any; // TODO
 	getModSlotName(modType: number): string;
 	getModTextLabel(modType: number, modValue: number): string;
 	getModVariation(modType: number): boolean;
@@ -2418,7 +2419,7 @@ interface GamePedMp {
 	getClosestPed(x: number, y: number, z: number, radius: number, p4: boolean, p5: boolean, outPed: Handle, p7: boolean,
 		p8: boolean, pedType: number): Handle;
 	getFirstParentIdForPedType(type: number): number;
-	getGroupSize(groupId: number, unknown: any, sizeInMembers: number): void;
+	getGroupSize(groupId: number, unknown: any, sizeInMembers: number): number;
 	getNumHeadOverlayValues(overlayId: number): number;
 	getNumParentPedsOfType(type: number): number;
 	getPeadheadshotTxdString(handle: number): string;
@@ -3061,7 +3062,7 @@ interface GameVehicleMp {
 
 interface GameWaterMp {
 	getWaterHeight(x: number, y: number, z: number, height: number): number;
-	getWaterHeightNoWaves(x: number, y: number, z: number, height: number): void;
+	getWaterHeightNoWaves(x: number, y: number, z: number, height: number): number;
 	modifyWater(x: number, y: number, radius: number, height: number): void;
 	setWavesIntensity(intensity: number): void;
 	testProbeAgainstAllWater(startX: number, startY: number, startZ: number, endX: number, endY: number, endZ: number,
@@ -3257,8 +3258,8 @@ interface ObjectMpPool extends EntityMpPool<ObjectMp> {
 }
 
 interface PedMpPool extends EntityMpPool<PedMp> {
-	"new"(model: Hash, position: Vector3Mp, heading: number, streamInEventHandler?: (ped: PedMp) => void,
-		dimension?: number): PedMp;
+	"new"(model: RageEnums.Hashes.Ped | Hash, position: Vector3Mp, heading: number,
+		streamInEventHandler?: (ped: PedMp) => void, dimension?: number): PedMp;
 }
 
 interface PickupMpPool extends EntityMpPool<PickupMp> {
@@ -3280,7 +3281,7 @@ interface TextLabelMpPool extends EntityMpPool<TextLabelMp> {
 }
 
 interface VehicleMpPool extends EntityMpPool<VehicleMp> {
-	"new"(model: HashOrString, position: Vector3Mp, options?: {
+	"new"(model: RageEnums.Hashes.Weapon | HashOrString, position: Vector3Mp, options?: {
 		alpha?: number,
 		color?: [ Array2d, Array2d ] | [ RGB, RGB ],
 		dimension?: number,
