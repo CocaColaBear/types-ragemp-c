@@ -1423,7 +1423,7 @@ interface KeysMp {
 	bind(keyCode: number, keyHold: boolean, handler: Function): void;
 	isUp(keyCode: number): boolean;
 	isDown(keyCode: number): boolean;
-	unbind(keyCode: number, handler: Function): void;
+	unbind(keyCode: number, keyHold: boolean, handler?: Function): void;
 }
 
 interface NametagsMp {
