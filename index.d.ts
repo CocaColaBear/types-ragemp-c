@@ -1424,7 +1424,7 @@ interface KeysMp {
 	bind(keyCode: number, keyHold: boolean, handler: Function): void;
 	isUp(keyCode: number): boolean;
 	isDown(keyCode: number): boolean;
-	unbind(keyCode: number, keyHold:boolean, handler?: Function): void;
+	unbind(keyCode: number, keyHold: boolean, handler?: Function): void;
 }
 
 interface NametagsMp {
@@ -3225,6 +3225,7 @@ interface EntityMpPool<TEntity> {
 	forEach(fn: (entity: TEntity) => void): void;
 	forEachInRange(position: Vector3Mp, range: number, fn: (entity: TEntity) => void): void;
 	forEachInDimension(position: Vector3Mp, range: number, dimension: number, fn: (entity: TEntity) => void): void;
+	forEachInStreamRange(fn: (entity: TEntity) => void): void;
 	toArray(): TEntity[];
 }
 
