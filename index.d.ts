@@ -3193,7 +3193,7 @@ interface BrowserMpPool extends EntityMpPool<BrowserMp> {
 }
 
 interface CameraMpPool extends EntityMpPool<CameraMp> {
-	"new"(name: string, position: Vector3Mp, rotation: Vector3Mp, fov: number): CameraMp;
+	"new"(name: string, position?: Vector3Mp, rotation?: Vector3Mp, fov?: number): CameraMp;
 }
 
 interface CheckpointMpPool extends EntityMpPool<CheckpointMp> {
