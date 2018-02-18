@@ -367,7 +367,7 @@ interface PlayerMp extends EntityMp {
 	readonly isLeavingVehicle: boolean;
 	readonly ping: number;
 	readonly seat: boolean;
-	readonly vehicle: boolean;
+	readonly vehicle: EntityMp;
 
 	addVehicleSubtaskAttack(ped2: Handle): void;
 	addVehicleSubtaskAttackCoord(x: number, y: number, z: number): void;
