@@ -7,6 +7,8 @@ Run this through command promt:
 
 ``` bash
 npm install --save-dev github:CocaColaBear/types-ragemp-c#master
+or 
+npm install --save-dev https://github.com/CocaColaBear/types-ragemp-c/tarball/master
 ```
 
 That's all, now you can use ragemp types for **Client-side**!
