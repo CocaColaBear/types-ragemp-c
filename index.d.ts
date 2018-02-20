@@ -1291,7 +1291,7 @@ interface VehicleMp extends EntityMp {
 	setLivery(livery: number): void;
 	setLodMultiplier(multiplier: number): void;
 	setMissionTrainCoords(x: number, y: number, z: number): void;
-	setMod(modType: number, modIndex: number, customTires: boolean): void;
+	setMod(modType: number, modIndex: number): void;
 	setModColor1(paintType: number, color: number, p2: number): void;
 	setModColor2(paintType: number, color: number): void;
 	setModKit(modKit: number): void;
