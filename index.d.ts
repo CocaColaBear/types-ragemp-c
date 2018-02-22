@@ -2204,7 +2204,7 @@ interface GameGraphicsMp {
 	transitionFromBlurred(transitionTime: number): boolean;
 	transitionToBlurred(transitionTime: number): boolean;
 	washDecalsInRange(p0: any, p1: any, p2: any, p3: any, p4: any): void;
-	world3dToScreen2d(worldX: number, worldY: number, worldZ: number, screenX: number, screenY: number): { // TODO: screenX, screenY needed?
+	world3dToScreen2d(worldX: number, worldY: number, worldZ: number): {
 		x: number; y: number;
 	};
 }
