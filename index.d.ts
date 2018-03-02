@@ -3232,7 +3232,6 @@ interface EntityMpPool<TEntity> {
 interface EventMpPool {
 	add(eventName: RageEnums.EventKey | string, callback: (...args: any[]) => void): void;
 	add(events: ({ [name: string]: (...args: any[]) => void; })): void;
-	addCommand(commandName: string, callback: (player: PlayerMp, fullText: string, ...args: string[]) => void): void;
 	call(eventName: string, ...args: any[]): void;
 	callRemote(eventName: string, ...args: any[]): void;
 	remove(eventName: string, handler?: (...args: any[]) => void): void;
