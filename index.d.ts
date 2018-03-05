@@ -1273,7 +1273,7 @@ interface VehicleMp extends EntityMp {
 	setGravity(toggle: boolean): void;
 	setHalt(distance: number, killEngine: boolean, unknown: boolean): void;
 	setHandbrake(toggle: boolean): void;
-	setHandling(...value: any[]): void; // TODO
+	setHandling(typeName: string, value: number | string): void;
 	setHasBeenOwnedByPlayer(owned: boolean): void;
 	setHasStrongAxles(toggle: boolean): void;
 	setHeliBladesFullSpeed(): void;
