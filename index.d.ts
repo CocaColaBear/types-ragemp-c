@@ -367,7 +367,7 @@ interface PlayerMp extends EntityMp {
 	readonly isLeavingVehicle: boolean;
 	readonly ping: number;
 	readonly seat: boolean;
-	readonly vehicle: boolean;
+	readonly vehicle: VehicleMp;
 
 	addVehicleSubtaskAttack(ped2: Handle): void;
 	addVehicleSubtaskAttackCoord(x: number, y: number, z: number): void;
@@ -1273,7 +1273,7 @@ interface VehicleMp extends EntityMp {
 	setGravity(toggle: boolean): void;
 	setHalt(distance: number, killEngine: boolean, unknown: boolean): void;
 	setHandbrake(toggle: boolean): void;
-	setHandling(...value: any[]): void; // TODO
+	setHandling(typeName: string, value: number | string): void;
 	setHasBeenOwnedByPlayer(owned: boolean): void;
 	setHasStrongAxles(toggle: boolean): void;
 	setHeliBladesFullSpeed(): void;
@@ -1291,7 +1291,7 @@ interface VehicleMp extends EntityMp {
 	setLivery(livery: number): void;
 	setLodMultiplier(multiplier: number): void;
 	setMissionTrainCoords(x: number, y: number, z: number): void;
-	setMod(modType: number, modIndex: number, customTires: boolean): void;
+	setMod(modType: number, modIndex: number): void;
 	setModColor1(paintType: number, color: number, p2: number): void;
 	setModColor2(paintType: number, color: number): void;
 	setModKit(modKit: number): void;
@@ -1436,12 +1436,13 @@ interface NametagsMp {
 
 interface RaycastingMp {
 	testPointToPoint(startPos: Vector3Mp, endPos: Vector3Mp, ignoreEntity?: Handle, flags?: number): RaycastResult; // TODO: ignoreEntity
-	testCapsule(startPos: Vector3Mp, endPos: Vector3Mp, radius: number, ignoreEntity?: Handle, flags?: any[]): RaycastResult; // TODO: ignoreEntity
+	testCapsule(startPos: Vector3Mp, endPos: Vector3Mp, radius: number, ignoreEntity?: Handle, flags?: number[]): RaycastResult; // TODO: ignoreEntity
 }
 
 interface StorageMp {
-	flush(): void;
 	data: { [key: string]: any };
+
+	flush(): void;
 }
 
 // -------------------------------------------------------------------------
@@ -2125,7 +2126,7 @@ interface GameGraphicsMp {
 	requestScaleformMovie3(scaleformName: string): number;
 	requestScaleformMovieInstance(scaleformName: string): number;
 	requestStreamedTextureDict(textureDict: string, p1: boolean): void;
-	screen2dToWorld3d(x: number, y: number, useRaycast?: boolean): Vector3Mp;
+	screen2dToWorld3d(screenPosition: Array2d, useRaycast?: boolean): Vector3Mp;
 	set2dLayer(layer: number): void;
 	setBlackout(enable: boolean): void;
 	setDebugLinesAndSpheresDrawingActive(enabled: boolean): void;
@@ -2204,7 +2205,7 @@ interface GameGraphicsMp {
 	transitionFromBlurred(transitionTime: number): boolean;
 	transitionToBlurred(transitionTime: number): boolean;
 	washDecalsInRange(p0: any, p1: any, p2: any, p3: any, p4: any): void;
-	world3dToScreen2d(worldX: number, worldY: number, worldZ: number, screenX: number, screenY: number): { // TODO: screenX, screenY needed?
+	world3dToScreen2d(worldX: number, worldY: number, worldZ: number): {
 		x: number; y: number;
 	};
 }
@@ -3163,9 +3164,8 @@ interface GuiChatMp {
 	show(state: boolean): void;
 }
 
-// TODO
 interface GuiCursorMp {
-	position: boolean;
+	position: Array2d;
 	visible: boolean;
 
 	show(state: boolean, freezeControls: boolean): void;
@@ -3193,7 +3193,7 @@ interface BrowserMpPool extends EntityMpPool<BrowserMp> {
 }
 
 interface CameraMpPool extends EntityMpPool<CameraMp> {
-	"new"(name: string): CameraMp;
+	"new"(name: string, position?: Vector3Mp, rotation?: Vector3Mp, fov?: number): CameraMp;
 }
 
 interface CheckpointMpPool extends EntityMpPool<CheckpointMp> {
@@ -3232,7 +3232,6 @@ interface EntityMpPool<TEntity> {
 interface EventMpPool {
 	add(eventName: RageEnums.EventKey | string, callback: (...args: any[]) => void): void;
 	add(events: ({ [name: string]: (...args: any[]) => void; })): void;
-	addCommand(commandName: string, callback: (player: PlayerMp, fullText: string, ...args: string[]) => void): void;
 	call(eventName: string, ...args: any[]): void;
 	callRemote(eventName: string, ...args: any[]): void;
 	remove(eventName: string, handler?: (...args: any[]) => void): void;
