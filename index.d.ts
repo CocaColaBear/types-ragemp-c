@@ -3143,7 +3143,7 @@ interface GameZoneMp {
 	getHashOfMapAreaAtCoords(x: number, y: number, z: number): string;
 	getZoneAtCoords(x: number, y: number, z: number): number;
 	getZoneFromNameId(zoneName: string): number;
-	getZoneOfName(x: number, y: number, z: number): string;
+	getNameOfZone(x: number, y: number, z: number): string;
 	getZonePopschedule(zoneId: number): number;
 	getZoneScumminess(zoneId: number): number;
 	overridePopscheduleVehicleModel(scheduleId: number, vehicleHash: number): void;
