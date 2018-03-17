@@ -1,4 +1,4 @@
-declare namespace RageEnums {
+declare namespace Client.RageEnums {
 	const enum EventKey {
 		browserCreated = "browserCreated",
 		browserDomReady = "browserDomReady",

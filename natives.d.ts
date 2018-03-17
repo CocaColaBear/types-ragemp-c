@@ -1,4 +1,4 @@
-declare namespace RageEnums {
+declare namespace Client.RageEnums {
 	namespace Natives {
 		const enum Player {
 			GET_PLAYER_PED = "0x6604E096142B4B55",

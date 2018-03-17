@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 // Custom types
 // -------------------------------------------------------------------------
-
+declare namespace Client {
 type Handle = number; // TODO: Temp type. Replace to the Entity, when methods are updated
 type Hash = number; // TODO: Temp type. Replace to HashOrString, when methods are updated
 type HashOrString = Hash;
@@ -3323,4 +3323,5 @@ type RaycastResult = {
 // Vars
 // -------------------------------------------------------------------------
 
-declare const mp: Mp;
+const mp: Mp;
+}
