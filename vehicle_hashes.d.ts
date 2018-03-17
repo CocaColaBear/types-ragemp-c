@@ -1,4 +1,4 @@
-declare namespace RageEnums.Hashes {
+declare namespace Client.RageEnums.Hashes {
 	const enum Vehicle {
 		ADDER = 0xB779A091,
 		AIRBUS = 0x4C80EB0E,

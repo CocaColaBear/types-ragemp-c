@@ -1,4 +1,4 @@
-declare namespace RageEnums.Hashes {
+declare namespace Client.RageEnums.Hashes {
 	const enum Weapon {
 		ADVANCEDRIFLE = 0xAF113F99,
 		APPISTOL = 0x22D8FE39,
