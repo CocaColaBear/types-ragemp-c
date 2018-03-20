@@ -3314,7 +3314,7 @@ type QuaternionMp = {
 }
 
 type RaycastResult = {
-	entity: Handle,
+	entity: EntityMp,
 	position: Vector3Mp,
 	surfaceNormal: Vector3Mp
 }
