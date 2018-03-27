@@ -92,6 +92,7 @@ type GuiMp = {
 	cursor: GuiCursorMp;
 
 	execute(code: string): void;
+	takeScreenshot(name: string, type: RageEnums.ScreenshotType | number, quality: number, compressionQuality: number): void;
 }
 
 // -------------------------------------------------------------------------
