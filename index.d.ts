@@ -42,6 +42,8 @@ type Mp = {
 	storage: StorageMp;
 	Vector3: Vector3Mp;
 	vehicles: VehicleMpPool;
+    trigger(eventName: string, params: string): void;
+    trigger(eventName: string, params: number): void;
 }
 
 type GameMp = {
