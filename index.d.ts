@@ -367,7 +367,7 @@ interface PlayerMp extends EntityMp {
 	readonly isJumping: boolean;
 	readonly isLeavingVehicle: boolean;
 	readonly ping: number;
-	readonly seat: boolean;
+	readonly seat: number;
 	readonly vehicle: VehicleMp;
 
 	addVehicleSubtaskAttack(ped2: Handle): void;
@@ -2072,10 +2072,11 @@ interface GameGraphicsMp {
 		scaleY: number,heading: number, colorR: number, colorG: number, colorB: number, alpha: number): void;
 	drawText(text: string, position: Array3d | Array2d,
 		data?: {
-			font?: number,
-			color?: RGBA,
-			scale?: Array2d,
-			outline?: boolean
+			font: number,
+			centre: boolean,
+			color: RGBA,
+			scale: Array2d,
+			outline: boolean
 		}
 	): void;
 	drawTvChannel(xPos: number, yPos: number, xScale: number, yScale: number, rotation: number, r: number, g: number,
