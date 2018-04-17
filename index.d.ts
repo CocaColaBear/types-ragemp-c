@@ -753,7 +753,7 @@ interface PlayerMp extends EntityMp {
 	setHasReserveParachute(): void;
 	setHeadBlendData(shapeFirstID: number, shapeSecondID: number, shapeThirdID: number, skinFirstID: number,
 		skinSecondID: number, skinThirdID: number, shapeMix: number, skinMix: number, thirdMix: number, isParent: boolean): void;
-	setHeadOverlay(overlayID: number, index: number, opacity: number): void;
+	setHeadOverlay(overlayID: number, index: number, opacity: number, firstColor: number, secondColor: number): void;
 	setHeadOverlayColor(overlayID: number, colorType: number, colorID: number, secondColorID: number): void;
 	setHealthRechargeMultiplier(regenRate: number): void;
 	setHearingRange(value: number): void;
@@ -3316,7 +3316,7 @@ type QuaternionMp = {
 }
 
 type RaycastResult = {
-	entity: Handle,
+	entity: EntityMp,
 	position: Vector3Mp,
 	surfaceNormal: Vector3Mp
 }
