@@ -1,5 +1,5 @@
-declare namespace RageEnums {
-	const enum EventKey {
+declare namespace RageMP.Enums {
+	const enum Event {
 		BROWSER_CREATED = "browserCreated",
 		BROWSER_DOM_READY = "browserDomReady",
 		BROWSER_LOADING_FAILED = "browserLoadingFailed",
