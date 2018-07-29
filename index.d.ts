@@ -1359,6 +1359,8 @@ declare namespace RageMP {
 	}
 
 	interface Camera {
+		readonly handle: Handle;
+
 		animatedShake(p0: string, p1: string, p2: string, p3: number): void;
 		attachTo(entity: Handle, boneIndex: number, xPos: number, yPos: number, zPos: number, xRot: number, yRot: number,
 			zRot: number, p8: boolean, useSoftPinning: boolean, collision: boolean, isPed: boolean, vertexIndex: number,
