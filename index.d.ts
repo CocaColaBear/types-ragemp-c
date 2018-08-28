@@ -16,6 +16,7 @@ declare namespace RageMP {
 	type RGBA = [ number, number, number, number ];
 	type Array3d = [ number, number, number ];
 	type Array2d = [ number, number ];
+	type EventCallback = (...args: any[]) => void;
 
 	// -------------------------------------------------------------------------
 	// Main MP types
@@ -334,6 +335,8 @@ declare namespace RageMP {
 		isVisible(): boolean;
 		markForDeletion(): void;
 		placeOnGroundProperly(): boolean;
+		rotate(rotation: Vector3): void
+		rotateLocal(rotation: Vector3): void;
 		setActivatePhysicsAsSoonAsItIsUnfrozen(toggle: boolean): void;
 		setPhysicsParams(weight: number, p1: number, p2: number, p3: number, p4: number, gravity: number, p6: number,
 			p7: number, p8: number, p9: number, buoyancy: number): void;
@@ -411,6 +414,7 @@ declare namespace RageMP {
 		clone(heading: number, networkHandle: boolean, pedHandle: boolean): Handle;
 		cloneToTarget(ped2: Handle): void;
 		controlMountedWeapon(): boolean;
+		enableDefaultEngineBehaviour(toggle: boolean): void;
 		explodeHead(weaponHash: Hash): void;
 		forceMotionState(motionStateHash: Hash, p2: boolean, p3: boolean, p4: boolean): boolean;
 		forceToOpenParachute(): void;
@@ -1582,12 +1586,6 @@ declare namespace RageMP {
 		animateGameplayCamZoom(p0: number, distance: number): void;
 		clampGameplayCamPitch(minimum: number, maximum: number): void;
 		clampGameplayCamYaw(minimum: number, maximum: number): void;
-		createCam(camName: string, p1: boolean): Handle;
-		createCamera(camHash: number, p1: boolean): Handle;
-		createCameraWithParams(camHash: number, posX: number, posY: number, posZ: number, rotX: number, rotY: number,
-			rotZ: number, fov: number, p8: boolean, p9: any): Handle;
-		createCamWithParams(camName: string, posX: number, posY: number, posZ: number, rotX: number, rotY: number,
-			rotZ: number, fov: number, p8: boolean, p9: any): Handle;
 		createCinematicShot(p0: any, p1: number, p2: any, entity: Handle): void;
 		destroyAllCams(destroy: boolean): void;
 		doScreenFadeIn(duration: number): void;
@@ -2024,8 +2022,6 @@ declare namespace RageMP {
 		callScaleformMovieFunctionStringParams(scaleform: number, functionName: string, param1: string, param2: string,
 			param3: string, param4: string, param5: string): void;
 		callScaleformMovieMethod(scaleform: number, method: string): void;
-		createCheckpoint(type: number, posX1: number, posY1: number, posZ1: number, posX2: number, posY2: number,
-			posZ2: number, radius: number, colorR: number, colorG: number, colorB: number, alpha: number, reserved: number): number;
 		destroyTrackedPoint(point: Handle): void;
 		disableVehicleDistantlights(toggle: boolean): void;
 		doesParticleFxLoopedExist(ptfxHandle: number): boolean;
@@ -2271,10 +2267,6 @@ declare namespace RageMP {
 		createAmbientPickup(pickupHash: Hash, posX: number, posY: number, posZ: number, p4: number, value: number,
 			modelHash: Hash, p7: boolean, p8: boolean): Pickup;
 		createMoneyPickups(x: number, y: number, z: number, value: number, amount: number, model: Hash): void;
-		createObject(modelHash: Hash, x: number, y: number, z: number, networkHandle: boolean,
-			createHandle: boolean,dynamic: boolean): Handle;
-		createObjectNoOffset(modelHash: Hash, x: number, y: number, z: number, networkHandle: boolean,
-			createHandle: boolean, dynamic: boolean): Handle;
 		createPickup(pickupHash: Hash, posX: number, posY: number, posZ: number, p4: number, value: number,
 			p6: boolean, modelHash: Hash): Pickup;
 		createPickupRotate(pickupHash: Hash, posX: number, posY: number, posZ: number, rotX: number, rotY: number,
@@ -2411,8 +2403,6 @@ declare namespace RageMP {
 		clearRelationshipBetweenGroups(relationship: number, group1: Hash, group2: Hash): void;
 		createGroup(unused: number): number;
 		createNmMessage(startImmediately: boolean, messageId: number): void;
-		createPed(pedType: number, modelHash: Hash, x: number, y: number, z: number, heading: number,
-			networkHandle: boolean, pedHandle: boolean): Handle;
 		createRandomPed(posX: number, posY: number, posZ: number): Handle;
 		createSynchronizedScene(x: number, y: number, z: number, roll: number, pitch: number, yaw: number, p6: number): number;
 		detachSynchronizedScene(sceneId: number): void;
@@ -3235,8 +3225,9 @@ declare namespace RageMP {
 	}
 
 	interface EventPool {
-		add(eventName: RageMP.Enums.Event | string, callback: (...args: any[]) => void): void;
-		add(events: ({ [name: string]: (...args: any[]) => void; })): void;
+		add(eventName: RageMP.Enums.Event | string, callback: EventCallback): void;
+		add(events: ({ [name: string]: EventCallback })): void;
+		addDummyHandler(type: string, callback: EventCallback);
 		call(eventName: string, ...args: any[]): void;
 		callRemote(eventName: string, ...args: any[]): void;
 		remove(eventName: string, handler?: (...args: any[]) => void): void;
@@ -3260,6 +3251,7 @@ declare namespace RageMP {
 			dimension?: number,
 			rotation?: Vector3
 		}): Object;
+		newWeak(gameHandle: Handle): Object;
 	}
 
 	interface PedPool extends EntityPool<Ped> {
@@ -3286,7 +3278,7 @@ declare namespace RageMP {
 	}
 
 	interface VehiclePool extends EntityPool<Vehicle> {
-		"new"(model: RageMP.Hashes.Weapon | HashOrString, position: Vector3, options?: {
+		"new"(model: HashOrString, position: Vector3, options?: {
 			alpha?: number,
 			color?: [ Array2d, Array2d ] | [ RGB, RGB ],
 			dimension?: number,

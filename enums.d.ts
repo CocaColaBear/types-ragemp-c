@@ -6,6 +6,7 @@ declare namespace RageMP.Enums {
 		ENTITY_CREATED = "entityCreated",
 		ENTITY_STREAM_IN = "entityStreamIn",
 		ENTITY_STREAM_OUT = "entityStreamOut",
+		EXCEPTION_CAUGHT = "exceptionCaught",
 		GUI_READY = "guiReady",
 		CLICK = "click",
 		PLAYER_CHAT = "playerChat",
