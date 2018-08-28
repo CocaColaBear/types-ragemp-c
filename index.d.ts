@@ -3285,7 +3285,7 @@ interface TextLabelMpPool extends EntityMpPool<TextLabelMp> {
 }
 
 interface VehicleMpPool extends EntityMpPool<VehicleMp> {
-	"new"(model: RageEnums.Hashes.Weapon | HashOrString, position: Vector3Mp, options?: {
+	"new"(model: HashOrString, position: Vector3Mp, options?: {
 		alpha?: number,
 		color?: [ Array2d, Array2d ] | [ RGB, RGB ],
 		dimension?: number,
