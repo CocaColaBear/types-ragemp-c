@@ -513,7 +513,7 @@ interface PlayerMp extends EntityMp {
 	getVehicleIsIn(getLastVehicle: boolean): Handle;
 	getVehicleIsTryingToEnter(): Handle;
 	getVehicleIsUsing(): Handle;
-	getVoiceAttribute(attribute: string): any; // TODO
+	getVoiceAttribute(attribute: any): any; // TODO
 	getWantedCentrePosition(): Vector3Mp;
 	getWantedLevel(): number;
 	giveHelmet(cannotRemove: boolean, helmetFlag: number, textureIndex: number): void;
@@ -864,7 +864,7 @@ interface PlayerMp extends EntityMp {
 	setVisualFieldMinAngle(value: number): void;
 	setVisualFieldMinElevationAngle(angle: number): void;
 	setVisualFieldPeripheralRange(range: number): void;
-	setVoiceAttribute(attribute: string, value: any): void; // TODO
+	setVoiceAttribute(attribute: any, value: any): void; // TODO
 	setWantedCentrePosition(x: number, y: number, z: number): void;
 	setWantedLevel(wantedLevel: number, disableNoMission: boolean): void;
 	setWantedLevelNoDrop(wantedLevel: number, p2: boolean): void;
@@ -1459,8 +1459,8 @@ interface VoiceChatMp {
 	muted: boolean;
 	readonly isAllowed: boolean;
 
-	getPreprocessingParam(param: string): any;
-	setPreprocessingParam(param: string, value: any): void;
+	getPreprocessingParam(param: any): any; // TODO
+	setPreprocessingParam(param: any, value: any): void; // TODO
 }
 
 // -------------------------------------------------------------------------
