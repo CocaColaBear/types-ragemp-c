@@ -44,6 +44,7 @@ declare namespace RageMP {
 		storage: Storage;
 		Vector3: Vector3;
 		vehicles: VehiclePool;
+		voiceChat: VoiceChat;
 	}
 
 	type Game = {
@@ -360,6 +361,9 @@ declare namespace RageMP {
 		heading: number;
 		health: number;
 		name: string;
+		voiceAutoVolume: boolean;
+		voiceVolume: number;
+		voice3d: any; // TODO
 		weapon: Hash;
 		readonly action: string;
 		readonly aimTarget: boolean;
@@ -370,6 +374,7 @@ declare namespace RageMP {
 		readonly isInCover: boolean;
 		readonly isJumping: boolean;
 		readonly isLeavingVehicle: boolean;
+		readonly isVoiceActive: boolean;
 		readonly ping: number;
 		readonly seat: number;
 		readonly vehicle: Vehicle;
@@ -513,6 +518,7 @@ declare namespace RageMP {
 		getVehicleIsIn(getLastVehicle: boolean): Handle;
 		getVehicleIsTryingToEnter(): Handle;
 		getVehicleIsUsing(): Handle;
+		getVoiceAttribute(attribute: any): any; // TODO
 		getWantedCentrePosition(): Vector3;
 		getWantedLevel(): number;
 		giveHelmet(cannotRemove: boolean, helmetFlag: number, textureIndex: number): void;
@@ -863,6 +869,7 @@ declare namespace RageMP {
 		setVisualFieldMinAngle(value: number): void;
 		setVisualFieldMinElevationAngle(angle: number): void;
 		setVisualFieldPeripheralRange(range: number): void;
+		setVoiceAttribute(attribute: any, value: any): void; // TODO
 		setWantedCentrePosition(x: number, y: number, z: number): void;
 		setWantedLevel(wantedLevel: number, disableNoMission: boolean): void;
 		setWantedLevelNoDrop(wantedLevel: number, p2: boolean): void;
@@ -1451,6 +1458,14 @@ declare namespace RageMP {
 		data: { [key: string]: any };
 
 		flush(): void;
+	}
+
+	interface VoiceChat {
+		muted: boolean;
+		readonly isAllowed: boolean;
+
+		getPreprocessingParam(param: any): any; // TODO
+		setPreprocessingParam(param: any, value: any): void; // TODO
 	}
 
 	// -------------------------------------------------------------------------

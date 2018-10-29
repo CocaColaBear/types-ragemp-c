@@ -23,6 +23,8 @@ declare namespace RageMP.Enums {
 		PLAYER_RESURRECT = "playerResurrect",
 		PLAYER_RULE_TRIGGERED = "playerRuleTriggered",
 		PLAYER_SPAWN = "playerSpawn",
+		PLAYER_START_TALKING = "playerStartTalking",
+		PLAYER_STOP_TALKING = "playerStopTalking",
 		PLAYER_WEAPON_SHOT = "playerWeaponShot",
 		RENDER = "render",
 		VEHICLE_DEATH = "vehicleDeath"
