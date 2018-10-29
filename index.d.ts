@@ -42,6 +42,7 @@ type Mp = {
 	storage: StorageMp;
 	Vector3: Vector3Mp;
 	vehicles: VehicleMpPool;
+	voiceChat: VoiceChatMp;
 }
 
 type GameMp = {
@@ -356,6 +357,9 @@ interface PlayerMp extends EntityMp {
 	heading: number;
 	health: number;
 	name: string;
+	voiceAutoVolume: boolean;
+	voiceVolume: number;
+	voice3d: any; // TODO
 	weapon: Hash;
 	readonly action: string;
 	readonly aimTarget: boolean;
@@ -366,6 +370,7 @@ interface PlayerMp extends EntityMp {
 	readonly isInCover: boolean;
 	readonly isJumping: boolean;
 	readonly isLeavingVehicle: boolean;
+	readonly isVoiceActive: boolean;
 	readonly ping: number;
 	readonly seat: number;
 	readonly vehicle: VehicleMp;
@@ -508,6 +513,7 @@ interface PlayerMp extends EntityMp {
 	getVehicleIsIn(getLastVehicle: boolean): Handle;
 	getVehicleIsTryingToEnter(): Handle;
 	getVehicleIsUsing(): Handle;
+	getVoiceAttribute(attribute: string): any; // TODO
 	getWantedCentrePosition(): Vector3Mp;
 	getWantedLevel(): number;
 	giveHelmet(cannotRemove: boolean, helmetFlag: number, textureIndex: number): void;
@@ -858,6 +864,7 @@ interface PlayerMp extends EntityMp {
 	setVisualFieldMinAngle(value: number): void;
 	setVisualFieldMinElevationAngle(angle: number): void;
 	setVisualFieldPeripheralRange(range: number): void;
+	setVoiceAttribute(attribute: string, value: any): void; // TODO
 	setWantedCentrePosition(x: number, y: number, z: number): void;
 	setWantedLevel(wantedLevel: number, disableNoMission: boolean): void;
 	setWantedLevelNoDrop(wantedLevel: number, p2: boolean): void;
@@ -1446,6 +1453,14 @@ interface StorageMp {
 	data: { [key: string]: any };
 
 	flush(): void;
+}
+
+interface VoiceChatMp {
+	muted: boolean;
+	readonly isAllowed: boolean;
+
+	getPreprocessingParam(param: string): any;
+	setPreprocessingParam(param: string, value: any): void;
 }
 
 // -------------------------------------------------------------------------
