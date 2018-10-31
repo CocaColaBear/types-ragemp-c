@@ -346,6 +346,7 @@ declare namespace RageMP {
 	}
 
 	interface Ped extends Entity {
+		spawnPosition: Vector3;
 		// TODO
 	}
 
@@ -1653,6 +1654,8 @@ declare namespace RageMP {
 	}
 
 	interface GameControls {
+		useDefaultVehicleEntering: boolean;
+
 		disableAllControlActions(inputGroup: number): void;
 		disableControlAction(inputGroup: number, control: number, disable: boolean): void;
 		enableAllControlActions(inputGroup: number): void;
@@ -1668,6 +1671,7 @@ declare namespace RageMP {
 		isControlReleased(inputGroup: number, control: number): boolean;
 		isDisabledControlJustPressed(inputGroup: number, control: number): boolean;
 		isDisabledControlJustReleased(inputGroup: number, control: number): boolean;
+		isDisabledControlPressed(inputGroup: number, control: number): boolean;
 		isInputDisabled(inputGroup: number): boolean;
 		isInputJustDisabled(inputGroup: number): boolean;
 		setControlNormal(inputGroup: number, control: number, amount: number): boolean;
@@ -3310,6 +3314,17 @@ declare namespace RageMP {
 
 	type Vector3 = {
 		new(x: number, y: number, z: number): Vector3;
+
+		add(value: number): Vector3;
+		add(vector3: Vector3): Vector3;
+		divide(value: number): Vector3;
+		divide(vector3: Vector3): Vector3;
+		length(): number;
+		multiply(value: number): Vector3;
+		multiply(vector3: Vector3): Vector3;
+		subtract(value: number): Vector3;
+		subtract(vector3: Vector3): Vector3;
+		unit(): Vector3;
 
 		x: number;
 		y: number;
