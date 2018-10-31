@@ -342,6 +342,7 @@ interface ObjectMp extends EntityMp {
 }
 
 interface PedMp extends EntityMp {
+	spawnPosition: Vector3Mp;
 	// TODO
 }
 
@@ -1654,6 +1655,8 @@ interface GameCamMp {
 }
 
 interface GameControlsMp {
+	useDefaultVehicleEntering: boolean;
+
 	disableAllControlActions(inputGroup: number): void;
 	disableControlAction(inputGroup: number, control: number, disable: boolean): void;
 	enableAllControlActions(inputGroup: number): void;
@@ -1669,6 +1672,7 @@ interface GameControlsMp {
 	isControlReleased(inputGroup: number, control: number): boolean;
 	isDisabledControlJustPressed(inputGroup: number, control: number): boolean;
 	isDisabledControlJustReleased(inputGroup: number, control: number): boolean;
+	isDisabledControlPressed(inputGroup: number, control: number): boolean;
 	isInputDisabled(inputGroup: number): boolean;
 	isInputJustDisabled(inputGroup: number): boolean;
 	setControlNormal(inputGroup: number, control: number, amount: number): boolean;
@@ -3321,6 +3325,17 @@ type Vector3Mp = {
 	x: number;
 	y: number;
 	z: number;
+
+	add(value: number): Vector3Mp;
+  add(vector3: Vector3Mp): Vector3Mp;
+	divide(value: number): Vector3Mp;
+	divide(vector3: Vector3Mp): Vector3Mp;
+	length(): number;
+	multiply(value: number): Vector3Mp;
+	multiply(vector3: Vector3Mp): Vector3Mp;
+	subtract(value: number): Vector3Mp;
+	subtract(vector3: Vector3Mp): Vector3Mp;
+	unit(): Vector3Mp;
 }
 
 type QuaternionMp = {
