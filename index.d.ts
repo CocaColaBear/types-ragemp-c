@@ -2130,6 +2130,7 @@ declare namespace RageMP {
 		pushScaleformMovieFunction(scaleform: number, functionName: string): boolean;
 		pushScaleformMovieFunctionFromHudComponent(componentIndex: RageMP.Enums.HudComponent | number, functionName: string): boolean;
 		pushScaleformMovieFunctionN(functionName: string): boolean;
+		popScaleformMovieFunctionVoid(): void;
 		pushScaleformMovieFunctionParameterBool(value: boolean): void;
 		pushScaleformMovieFunctionParameterFloat(value: number): void;
 		pushScaleformMovieFunctionParameterInt(value: number): void;
