@@ -2133,6 +2133,7 @@ interface GameGraphicsMp {
 	pushScaleformMovieFunction(scaleform: number, functionName: string): boolean;
 	pushScaleformMovieFunctionFromHudComponent(componentIndex: RageEnums.HudComponent | number, functionName: string): boolean;
 	pushScaleformMovieFunctionN(functionName: string): boolean;
+	popScaleformMovieFunctionVoid(): void;
 	pushScaleformMovieFunctionParameterBool(value: boolean): void;
 	pushScaleformMovieFunctionParameterFloat(value: number): void;
 	pushScaleformMovieFunctionParameterInt(value: number): void;
