@@ -2834,6 +2834,8 @@ interface GameTimeMp {
 }
 
 interface GameUiMp {
+	messages: GameUiMessageMp
+	
 	activateFrontendMenu(menuhash: Hash, Toggle_Pause: boolean, p2: number): void;
 	addBlipForCoord(x: number, y: number, z: number): BlipMp;
 	addBlipForPickup(pickup: PickupMp): BlipMp;
@@ -2981,6 +2983,14 @@ interface GameUiMp {
 	showLoadingPrompt(busySpinnerType: number): void;
 	showWeaponWheel(forcedShow: boolean): void;
 	toggleStealthRadar(toggle: boolean): void;
+}
+
+interface GameUiMessageMp {
+	showShard(title: string, message: string, titleColor: string, bgColor: string, time: number) : void;
+	showWeaponPurchased(title: string, weaponName: string, weaponHash: Hash, time: number) : void;
+	showPlane(title: string, planeName: string, planeHash: Hash, time: number) : void;
+	showMidsized(title: string, message: string, time: number) : void;
+	showMidsizedShard(title: string, message: string, bgColor: string, useDarkerShard: boolean, condensed: boolean, time: number): void;
 }
 
 interface GameUnkMp {
