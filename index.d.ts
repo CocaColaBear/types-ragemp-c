@@ -3193,7 +3193,7 @@ interface GuiCursorMp {
 	position: Array2d;
 	visible: boolean;
 
-	show(state: boolean, freezeControls: boolean): void;
+	show(freezeControls: boolean, state: boolean): void;
 }
 
 // -------------------------------------------------------------------------
