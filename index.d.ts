@@ -1237,7 +1237,7 @@ interface VehicleMp extends EntityMp {
 	setBikeLeanAngle(x: number, y: number): void;
 	setBoatAnchor(toggle: boolean): void;
 	setBodyHealth(value: number): void;
-	setBreakLights(toggle: boolean): void;
+	setBrakeLights(toggle: boolean): void;
 	setBurnout(toggle: boolean): void;
 	setCanBeTargetted(state: boolean): void;
 	setCanBeUsedByFleeingPeds(toggle: boolean): void;
