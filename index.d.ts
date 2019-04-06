@@ -455,6 +455,7 @@ interface PlayerMp extends EntityMp {
 		thirdMix: number;
 	}): void;
 	getHeadOverlayValue(overlayID: number): number;
+	getInvincible(): boolean;
 	getIsTaskActive(taskNumber: number): boolean;
 	getJackTarget(): Handle;
 	getLastDamageBone(outBone: number): number;
@@ -2517,7 +2518,6 @@ interface GamePlayerMp {
 	forceCleanupForAllThreadsWithThisName(name: string, cleanupFlags: number): void;
 	forceCleanupForThreadWithThisId(id: number, cleanupFlags: number): void;
 	getEntityPlayerIsFreeAimingAt(entity: Handle): boolean;
-	getInvincible(): boolean;
 	getPlayerTargetEntity(entity: Handle): boolean;
 	getTimeSincePlayerDroveAgainstTraffic(): number;
 	getTimeSincePlayerDroveOnPavement(): number;
