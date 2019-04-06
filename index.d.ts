@@ -455,7 +455,6 @@ interface PlayerMp extends EntityMp {
 		thirdMix: number;
 	}): void;
 	getHeadOverlayValue(overlayID: number): number;
-	getInvincible(): boolean;
 	getIsTaskActive(taskNumber: number): boolean;
 	getJackTarget(): Handle;
 	getLastDamageBone(outBone: number): number;
@@ -775,7 +774,6 @@ interface PlayerMp extends EntityMp {
 		duration: number, duration1: number): void;
 	setIntoVehicle(vehicle: Handle, seatIndex: number): void;
 	setInVehicleContext(context: Hash): void;
-	setInvincible(toggle: boolean): void;
 	setKeepTask(toggle: boolean): void;
 	setLegIkMode(mode: number): void;
 	setLockon(toggle: boolean): void;
@@ -2519,6 +2517,7 @@ interface GamePlayerMp {
 	forceCleanupForAllThreadsWithThisName(name: string, cleanupFlags: number): void;
 	forceCleanupForThreadWithThisId(id: number, cleanupFlags: number): void;
 	getEntityPlayerIsFreeAimingAt(entity: Handle): boolean;
+	getInvincible(): boolean;
 	getPlayerTargetEntity(entity: Handle): boolean;
 	getTimeSincePlayerDroveAgainstTraffic(): number;
 	getTimeSincePlayerDroveOnPavement(): number;
@@ -2552,6 +2551,7 @@ interface GamePlayerMp {
 	setDispatchCopsForPlayer(toggle: boolean): void;
 	setHudAnimStopLevel(toggle: boolean): void;
 	setIgnoreLowPriorityShockingEvents(toggle: boolean): void;
+	setInvincible(toggle: boolean): void;
 	setMaxWantedLevel(maxWantedLevel: number): void;
 	setMeleeWeaponDefenseModifier(modifier: number): void;
 	setPlayerClothLockCounter(value: number): void;
