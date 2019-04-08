@@ -775,7 +775,6 @@ interface PlayerMp extends EntityMp {
 		duration: number, duration1: number): void;
 	setIntoVehicle(vehicle: Handle, seatIndex: number): void;
 	setInVehicleContext(context: Hash): void;
-	setInvincible(toggle: boolean): void;
 	setKeepTask(toggle: boolean): void;
 	setLegIkMode(mode: number): void;
 	setLockon(toggle: boolean): void;
@@ -2552,6 +2551,7 @@ interface GamePlayerMp {
 	setDispatchCopsForPlayer(toggle: boolean): void;
 	setHudAnimStopLevel(toggle: boolean): void;
 	setIgnoreLowPriorityShockingEvents(toggle: boolean): void;
+	setInvincible(toggle: boolean): void;
 	setMaxWantedLevel(maxWantedLevel: number): void;
 	setMeleeWeaponDefenseModifier(modifier: number): void;
 	setPlayerClothLockCounter(value: number): void;
