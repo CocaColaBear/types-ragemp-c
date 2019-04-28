@@ -1196,7 +1196,7 @@ interface VehicleMp extends EntityMp {
 	isHighDetail(): boolean;
 	isInBurnout(): boolean;
 	isModel(model: Hash): boolean;
-	isNeaonLightEnabled(index: number): boolean;
+	isNeonLightEnabled(index: number): boolean;
 	isOnAllWheels(): boolean;
 	isSearchlightOn(): boolean;
 	isSeatFree(seatIndex: number): boolean;
