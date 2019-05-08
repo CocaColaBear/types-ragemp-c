@@ -1185,7 +1185,7 @@ interface VehicleMp extends EntityMp {
 	isAttachedToTowTruck(vehicle: Handle): boolean;
 	isAttachedToTrailer(): boolean;
 	isBig(): boolean;
-	isBumberBrokenOff(front: boolean): boolean;
+	isBumperBrokenOff(front: boolean): boolean;
 	isCargobobHookActive(): boolean;
 	isCargobobMagnetActive(): boolean;
 	isDamaged(): boolean;
