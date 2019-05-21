@@ -3084,6 +3084,7 @@ interface GameVehicleMp {
 	stopPlaybackRecordedVehicle(p0: any): void;
 	switchTrainTrack(intersectionId: number, state: boolean): any;
 	unpausePlaybackRecordedVehicle(p0: any): void;
+	defaultEngineBehaviour: boolean;
 }
 
 interface GameWaterMp {
