@@ -1328,7 +1328,7 @@ interface VehicleMp extends EntityMp {
 	setSiren(toggle: boolean): void;
 	setSteerBias(value: number): void;
 	setStrong(toggle: boolean): void;
-	setTaxiLight(state: boolean): void;
+	setTaxiLights(state: boolean): void;
 	setTimedExplosion(ped: Handle, toggle: boolean): void;
 	setTowTruckCraneHeight(height: number): void;
 	setTrainCruiseSpeed(speed: number): void;
@@ -3084,6 +3084,7 @@ interface GameVehicleMp {
 	stopPlaybackRecordedVehicle(p0: any): void;
 	switchTrainTrack(intersectionId: number, state: boolean): any;
 	unpausePlaybackRecordedVehicle(p0: any): void;
+	defaultEngineBehaviour: boolean;
 }
 
 interface GameWaterMp {
