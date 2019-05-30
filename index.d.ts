@@ -86,6 +86,7 @@ type GameMp = {
 	invoke(hash: string, ...args: any[]): any;
 	joaat(text: string): Hash;
 	joaat(textArray: string[]): Hash[];
+	wait(ms: number): void;
 }
 
 type GuiMp = {
@@ -2799,7 +2800,6 @@ interface GameSystemMp {
 	vdist2(x1: number, y1: number, z1: number, x2: number, y2: number, z2: number): number;
 	vmag(p0: number, p1: number, p2: number): number;
 	vmag2(p0: number, p1: number, p2: number): number;
-	wait(ms: number): void;
 }
 
 interface GameTimeMp {
