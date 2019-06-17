@@ -1938,9 +1938,9 @@ interface GameGameplayMp {
 	getGroundZFor3dCoord(x: number, y: number, z: number, groundZ: number, unk: boolean): number;
 	getHashKey(value: string): Hash;
 	getHeadingFromVector2d(dx: number, dy: number): number;
-	getModelDimensions(modelHash: Hash, minimum: Vector3Mp, maximum: Vector3Mp): {
-		minimum: Vector3Mp;
-		maximum: Vector3Mp;
+	getModelDimensions(modelHash: Hash): {
+		min: Vector3Mp;
+		max: Vector3Mp;
 	};
 	getProfileSetting(profileSetting: number): number;
 	getRandomFloatInRange(startRange: number, endRange: number): number;
