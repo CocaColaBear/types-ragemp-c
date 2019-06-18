@@ -2508,31 +2508,32 @@ interface GamePedMp {
 }
 
 interface GamePlayerMp {
-	arePlayerFlashingStarsAboutToDrop(): boolean;
-	arePlayerStarsGreyedOut(): boolean;
-	canPlayerStartMission(): boolean;
-	disablePlayerFiring(toggle: boolean): void;
-	disablePlayerVehicleRewards(): void;
+	areFlashingStarsAboutToDrop(): boolean;
+	areStarsGreyedOut(): boolean;
+	canStartMission(): boolean;
+	disableFiring(toggle: boolean): void;
+	disableVehicleRewards(): void;
 	displaySystemSigninUi(unk: boolean): void;
 	enableSpecialAbility(toggle: boolean): void;
 	forceCleanup(cleanupFlags: number): void;
 	forceCleanupForAllThreadsWithThisName(name: string, cleanupFlags: number): void;
 	forceCleanupForThreadWithThisId(id: number, cleanupFlags: number): void;
-	getEntityPlayerIsFreeAimingAt(entity: Handle): boolean;
-	getPlayerTargetEntity(entity: Handle): boolean;
-	getTimeSincePlayerDroveAgainstTraffic(): number;
-	getTimeSincePlayerDroveOnPavement(): number;
-	getTimeSincePlayerHitPed(): number;
-	getTimeSincePlayerHitVehicle(): number;
+	getEntityIsFreeAimingAt(entity: Handle): boolean;
+	getTargetEntity(entity: Handle): boolean;
+	getTimeSinceDroveAgainstTraffic(): number;
+	getTimeSinceDroveOnPavement(): number;
+	getTimeSinceHitPed(): number;
+	getTimeSinceHitVehicle(): number;
 	getWantedLevelRadius(): boolean;
 	getWantedLevelThreshold(wantedLevel: number): number;
-	giveAchievementToPlayer(achievement: number): boolean;
+	giveAchievementTo(achievement: number): boolean;
 	hasAchievementBeenPassed(achievement: number): boolean;
 	hasForceCleanupOccurred(cleanupFlags: number): boolean;
 	intToParticipantindex(value: number): number;
-	intToPlayerindex(value: number): Handle;
-	isPlayerFreeAimingAtEntity(entity: Handle): boolean;
-	isPlayerTargettingEntity(entity: Handle): boolean;
+	intToindex(value: number): Handle;
+	isFreeAiming(): boolean;
+	isFreeAimingAtEntity(entity: Handle): boolean;
+	isTargettingEntity(entity: Handle): boolean;
 	isSpecialAbilityActive(): boolean;
 	isSpecialAbilityEnabled(): boolean;
 	isSpecialAbilityMeterFull(): boolean;
@@ -2542,29 +2543,30 @@ interface GamePlayerMp {
 	reportCrime(crimeType: number, wantedLvlThresh: number): void;
 	reserveEntityExplodesOnHighExplosionCombo(p1: number): void;
 	resetWantedLevelDifficulty(): void;
-	restorePlayerStamina(p1: number): void;
-	setAirDragMultiplierForPlayersVehicle(multiplier: number): void;
+	restoreStamina(p1: number): void;
+	setAirDragMultiplierForsVehicle(multiplier: number): void;
 	setAllRandomPedsFlee(toggle: boolean): void;
 	setAllRandomPedsFleeThisFrame(): void;
 	setAreasGeneratorOrientation(): void;
 	setAutoGiveParachuteWhenEnterPlane(toggle: boolean): void;
+	setCanDoDriveBy(toggle: boolean): void;
 	setDisableAmbientMeleeMove(toggle: boolean): void;
-	setDispatchCopsForPlayer(toggle: boolean): void;
+	setDispatchCopsFor(toggle: boolean): void;
 	setHudAnimStopLevel(toggle: boolean): void;
 	setIgnoreLowPriorityShockingEvents(toggle: boolean): void;
 	setInvincible(toggle: boolean): void;
 	setMaxWantedLevel(maxWantedLevel: number): void;
 	setMeleeWeaponDefenseModifier(modifier: number): void;
-	setPlayerClothLockCounter(value: number): void;
-	setPlayerClothPackageIndex(index: number): void;
-	setPlayerTargetingMode(targetMode: number): void;
+	setClothLockCounter(value: number): void;
+	setClothPackageIndex(index: number): void;
+	setTargetingMode(targetMode: number): void;
 	setPoliceRadarBlips(toggle: boolean): void;
-	setRunSprintMultiplierForPlayer(multiplier: number): void;
+	setRunSprintMultiplierFor(multiplier: number): void;
 	setSpecialAbilityMultiplier(multiplier: number): void;
-	setSwimMultiplierForPlayer(multiplier: number): void;
+	setSwimMultiplierFor(multiplier: number): void;
 	setWantedLevelDifficulty(difficulty: number): void;
 	setWantedLevelMultiplier(multiplier: number): void;
-	simulatePlayerInputGait(amount: number,gaitType: number,speed: number,p4: boolean,p5: boolean): void;
+	simulateInputGait(amount: number,gaitType: number,speed: number,p4: boolean,p5: boolean): void;
 	specialAbilityChargeAbsolute(p1: number,p2: boolean): void;
 	specialAbilityChargeContinuous(p1: boolean): void;
 	specialAbilityChargeLarge(p1: boolean,p2: boolean): void;
@@ -2579,7 +2581,7 @@ interface GamePlayerMp {
 	specialAbilityReset(): void;
 	specialAbilityUnlock(playerModel: Hash): void;
 	startFiringAmnesty(duration: number): void;
-	startPlayerTeleport(x: number,y: number,z: number,heading: number,p5: boolean,p6: boolean,p7: boolean): void;
+	startTeleport(x: number,y: number,z: number,heading: number,p5: boolean,p6: boolean,p7: boolean): void;
 }
 
 interface GameRecorderMp {
