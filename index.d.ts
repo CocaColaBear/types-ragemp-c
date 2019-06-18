@@ -764,7 +764,6 @@ interface PlayerMp extends EntityMp {
 		skinSecondID: number, skinThirdID: number, shapeMix: number, skinMix: number, thirdMix: number, isParent: boolean): void;
 	setHeadOverlay(overlayID: number, index: number, opacity: number, firstColor: number, secondColor: number): void;
 	setHeadOverlayColor(overlayID: number, colorType: number, colorID: number, secondColorID: number): void;
-	setHealthRechargeMultiplier(regenRate: number): void;
 	setHearingRange(value: number): void;
 	setHelmet(canWearHelmet: boolean): void;
 	setHelmetFlag(helmetFlag: number): void;
@@ -2552,6 +2551,7 @@ interface GamePlayerMp {
 	setCanDoDriveBy(toggle: boolean): void;
 	setDisableAmbientMeleeMove(toggle: boolean): void;
 	setDispatchCopsFor(toggle: boolean): void;
+	setHealthRechargeMultiplier(regenRate: number): void;
 	setHudAnimStopLevel(toggle: boolean): void;
 	setIgnoreLowPriorityShockingEvents(toggle: boolean): void;
 	setInvincible(toggle: boolean): void;
