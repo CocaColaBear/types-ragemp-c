@@ -1281,7 +1281,7 @@ interface VehicleMp extends EntityMp {
 	setFrictionOverride(friction: number): void;
 	setFullbeam(toggle: boolean): void;
 	setGravity(toggle: boolean): void;
-	setHalt(distance: number, killEngine: boolean, unknown: boolean): void;
+	setHalt(distance: number, killEngine: number, unknown: boolean): void;
 	setHandbrake(toggle: boolean): void;
 	setHandling(typeName: string, value: number | string): void;
 	setHasBeenOwnedByPlayer(owned: boolean): void;
