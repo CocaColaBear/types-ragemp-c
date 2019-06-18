@@ -130,7 +130,7 @@ interface BlipMp extends EntityMp {
 	setBright(toggle: boolean): void;
 	setCategory(index: number): void;
 	setColour(color: number): void;
-	setCoords(posX: number, posY: number, posZ: number): void;
+	setCoords(position: Vector3Mp): void;
 	setDisplay(displayId: number): void;
 	setFade(opacity: number, duration: number): void;
 	setFlashes(toggle: boolean): void;
