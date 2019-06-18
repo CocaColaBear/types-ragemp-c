@@ -289,7 +289,7 @@ interface EntityMp {
 	setCollision(toggle: boolean, keepPhysics: boolean): void;
 	setCoords(xPos: number, yPos: number, zPos: number, xAxis: boolean, yAxis: boolean, zAxis: boolean, clearArea: boolean): void;
 	setCoords2(xPos: number, yPos: number, zPos: number, xAxis: number, yAxis: number, zAxis: number, clearArea: boolean): void;
-	setCoordsNoOffset(xPos: number, yPos: number, zPos: number, xAxis: number, yAxis: number, zAxis: number): void;
+	setCoordsNoOffset(xPos: number, yPos: number, zPos: number, xAxis: boolean, yAxis: boolean, zAxis: boolean): void;
 	setDynamic(toggle: boolean): void;
 	setHasGravity(toggle: boolean): void;
 	setHeading(heading: number): void;
