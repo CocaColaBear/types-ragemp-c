@@ -1274,7 +1274,7 @@ interface VehicleMp extends EntityMp {
 	setEngineTorqueMultiplier(value: number): void;
 	setExclusiveDriver(ped: Handle, p1: number): void;
 	setExplodesOnHighExplosionDamage(toggle: boolean): void;
-	setExtra(extraId: number, toggle: boolean): void;
+	setExtra(extraId: number, toggle: number): void;
 	setExtraColours(pearlescentColor: number, wheelColor: number): void;
 	setFixed(): void;
 	setForwardSpeed(speed: number): void;
