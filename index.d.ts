@@ -324,7 +324,7 @@ interface CheckpointMp extends EntityMp {
 }
 
 interface ColshapeMp extends EntityMp {
-	// TODO
+	triggered: boolean;
 }
 
 interface MarkerMp extends EntityMp {
