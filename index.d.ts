@@ -101,8 +101,15 @@ type GuiMp = {
 // Entity MP types
 // -------------------------------------------------------------------------
 
-interface BlipMp extends EntityMp {
+interface BlipMp {
+	dimension: number;
+	handle: number;
+	id: number;
+	remoteId: number;
+	type: string;
+
 	addTextComponentSubstringName(): void;
+	destroy(): void;
 	doesExist(): boolean;
 	endTextCommandSetName(): void;
 	getAlpha(): number;
@@ -116,6 +123,8 @@ interface BlipMp extends EntityMp {
 	getInfoIdType(): number;
 	getNextInfoId(): BlipMp;
 	getSprite(): number;
+	getVariable(value: string): any;
+	hasVariable(value: string): boolean;
 	hideNumberOn(): void;
 	isFlashing(): boolean;
 	isMissionCreator(): boolean;
@@ -123,7 +132,6 @@ interface BlipMp extends EntityMp {
 	isShortRange(): boolean;
 	pulse(): void;
 	setAlpha(alpha: number): void;
-	setAlpha(alphaLevel: string, skin: boolean): void;
 	setAsFriendly(toggle: boolean): void;
 	setAsMissionCreator(toggle: boolean): void;
 	setAsShortRange(toggle: boolean): void;
@@ -140,6 +148,7 @@ interface BlipMp extends EntityMp {
 	setHighDetail(toggle: boolean): void;
 	setNameFromTextFile(gxtEntry: string): void;
 	setNameToPlayerName(player: PlayerMp): void;
+	setPosition(posX: number, posY: number, posZ: number): void;
 	setPriority(priority: number): void;
 	setRotation(rotation: number): void;
 	setRoute(enabled: boolean): void;
