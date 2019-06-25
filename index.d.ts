@@ -101,8 +101,15 @@ type GuiMp = {
 // Entity MP types
 // -------------------------------------------------------------------------
 
-interface BlipMp extends EntityMp {
+interface BlipMp {
+	dimension: number;
+	handle: number;
+	id: number;
+	remoteId: number;
+	type: string;
+
 	addTextComponentSubstringName(): void;
+	destroy(): void;
 	doesExist(): boolean;
 	endTextCommandSetName(): void;
 	getAlpha(): number;
@@ -116,6 +123,8 @@ interface BlipMp extends EntityMp {
 	getInfoIdType(): number;
 	getNextInfoId(): BlipMp;
 	getSprite(): number;
+	getVariable(value: string): any;
+	hasVariable(value: string): boolean;
 	hideNumberOn(): void;
 	isFlashing(): boolean;
 	isMissionCreator(): boolean;
@@ -123,14 +132,13 @@ interface BlipMp extends EntityMp {
 	isShortRange(): boolean;
 	pulse(): void;
 	setAlpha(alpha: number): void;
-	setAlpha(alphaLevel: string, skin: boolean): void;
 	setAsFriendly(toggle: boolean): void;
 	setAsMissionCreator(toggle: boolean): void;
 	setAsShortRange(toggle: boolean): void;
 	setBright(toggle: boolean): void;
 	setCategory(index: number): void;
 	setColour(color: number): void;
-	setCoords(posX: number, posY: number, posZ: number): void;
+	setCoords(position: Vector3Mp): void;
 	setDisplay(displayId: number): void;
 	setFade(opacity: number, duration: number): void;
 	setFlashes(toggle: boolean): void;
@@ -140,6 +148,7 @@ interface BlipMp extends EntityMp {
 	setHighDetail(toggle: boolean): void;
 	setNameFromTextFile(gxtEntry: string): void;
 	setNameToPlayerName(player: PlayerMp): void;
+	setPosition(posX: number, posY: number, posZ: number): void;
 	setPriority(priority: number): void;
 	setRotation(rotation: number): void;
 	setRoute(enabled: boolean): void;
@@ -289,7 +298,7 @@ interface EntityMp {
 	setCollision(toggle: boolean, keepPhysics: boolean): void;
 	setCoords(xPos: number, yPos: number, zPos: number, xAxis: boolean, yAxis: boolean, zAxis: boolean, clearArea: boolean): void;
 	setCoords2(xPos: number, yPos: number, zPos: number, xAxis: number, yAxis: number, zAxis: number, clearArea: boolean): void;
-	setCoordsNoOffset(xPos: number, yPos: number, zPos: number, xAxis: number, yAxis: number, zAxis: number): void;
+	setCoordsNoOffset(xPos: number, yPos: number, zPos: number, xAxis: boolean, yAxis: boolean, zAxis: boolean): void;
 	setDynamic(toggle: boolean): void;
 	setHasGravity(toggle: boolean): void;
 	setHeading(heading: number): void;
@@ -324,7 +333,7 @@ interface CheckpointMp extends EntityMp {
 }
 
 interface ColshapeMp extends EntityMp {
-	// TODO
+	triggered: boolean;
 }
 
 interface MarkerMp extends EntityMp {
@@ -764,7 +773,6 @@ interface PlayerMp extends EntityMp {
 		skinSecondID: number, skinThirdID: number, shapeMix: number, skinMix: number, thirdMix: number, isParent: boolean): void;
 	setHeadOverlay(overlayID: number, index: number, opacity: number, firstColor: number, secondColor: number): void;
 	setHeadOverlayColor(overlayID: number, colorType: number, colorID: number, secondColorID: number): void;
-	setHealthRechargeMultiplier(regenRate: number): void;
 	setHearingRange(value: number): void;
 	setHelmet(canWearHelmet: boolean): void;
 	setHelmetFlag(helmetFlag: number): void;
@@ -1274,14 +1282,14 @@ interface VehicleMp extends EntityMp {
 	setEngineTorqueMultiplier(value: number): void;
 	setExclusiveDriver(ped: Handle, p1: number): void;
 	setExplodesOnHighExplosionDamage(toggle: boolean): void;
-	setExtra(extraId: number, toggle: boolean): void;
+	setExtra(extraId: number, toggle: number): void;
 	setExtraColours(pearlescentColor: number, wheelColor: number): void;
 	setFixed(): void;
 	setForwardSpeed(speed: number): void;
 	setFrictionOverride(friction: number): void;
 	setFullbeam(toggle: boolean): void;
 	setGravity(toggle: boolean): void;
-	setHalt(distance: number, killEngine: boolean, unknown: boolean): void;
+	setHalt(distance: number, killEngine: number, unknown: boolean): void;
 	setHandbrake(toggle: boolean): void;
 	setHandling(typeName: string, value: number | string): void;
 	setHasBeenOwnedByPlayer(owned: boolean): void;
@@ -1938,9 +1946,9 @@ interface GameGameplayMp {
 	getGroundZFor3dCoord(x: number, y: number, z: number, groundZ: number, unk: boolean): number;
 	getHashKey(value: string): Hash;
 	getHeadingFromVector2d(dx: number, dy: number): number;
-	getModelDimensions(modelHash: Hash, minimum: Vector3Mp, maximum: Vector3Mp): {
-		minimum: Vector3Mp;
-		maximum: Vector3Mp;
+	getModelDimensions(modelHash: Hash): {
+		min: Vector3Mp;
+		max: Vector3Mp;
 	};
 	getProfileSetting(profileSetting: number): number;
 	getRandomFloatInRange(startRange: number, endRange: number): number;
@@ -2508,31 +2516,32 @@ interface GamePedMp {
 }
 
 interface GamePlayerMp {
-	arePlayerFlashingStarsAboutToDrop(): boolean;
-	arePlayerStarsGreyedOut(): boolean;
-	canPlayerStartMission(): boolean;
-	disablePlayerFiring(toggle: boolean): void;
-	disablePlayerVehicleRewards(): void;
+	areFlashingStarsAboutToDrop(): boolean;
+	areStarsGreyedOut(): boolean;
+	canStartMission(): boolean;
+	disableFiring(toggle: boolean): void;
+	disableVehicleRewards(): void;
 	displaySystemSigninUi(unk: boolean): void;
 	enableSpecialAbility(toggle: boolean): void;
 	forceCleanup(cleanupFlags: number): void;
 	forceCleanupForAllThreadsWithThisName(name: string, cleanupFlags: number): void;
 	forceCleanupForThreadWithThisId(id: number, cleanupFlags: number): void;
-	getEntityPlayerIsFreeAimingAt(entity: Handle): boolean;
-	getPlayerTargetEntity(entity: Handle): boolean;
-	getTimeSincePlayerDroveAgainstTraffic(): number;
-	getTimeSincePlayerDroveOnPavement(): number;
-	getTimeSincePlayerHitPed(): number;
-	getTimeSincePlayerHitVehicle(): number;
+	getEntityIsFreeAimingAt(entity: Handle): boolean;
+	getTargetEntity(entity: Handle): boolean;
+	getTimeSinceDroveAgainstTraffic(): number;
+	getTimeSinceDroveOnPavement(): number;
+	getTimeSinceHitPed(): number;
+	getTimeSinceHitVehicle(): number;
 	getWantedLevelRadius(): boolean;
 	getWantedLevelThreshold(wantedLevel: number): number;
-	giveAchievementToPlayer(achievement: number): boolean;
+	giveAchievementTo(achievement: number): boolean;
 	hasAchievementBeenPassed(achievement: number): boolean;
 	hasForceCleanupOccurred(cleanupFlags: number): boolean;
 	intToParticipantindex(value: number): number;
-	intToPlayerindex(value: number): Handle;
-	isPlayerFreeAimingAtEntity(entity: Handle): boolean;
-	isPlayerTargettingEntity(entity: Handle): boolean;
+	intToindex(value: number): Handle;
+	isFreeAiming(): boolean;
+	isFreeAimingAtEntity(entity: Handle): boolean;
+	isTargettingEntity(entity: Handle): boolean;
 	isSpecialAbilityActive(): boolean;
 	isSpecialAbilityEnabled(): boolean;
 	isSpecialAbilityMeterFull(): boolean;
@@ -2542,29 +2551,31 @@ interface GamePlayerMp {
 	reportCrime(crimeType: number, wantedLvlThresh: number): void;
 	reserveEntityExplodesOnHighExplosionCombo(p1: number): void;
 	resetWantedLevelDifficulty(): void;
-	restorePlayerStamina(p1: number): void;
-	setAirDragMultiplierForPlayersVehicle(multiplier: number): void;
+	restoreStamina(p1: number): void;
+	setAirDragMultiplierForsVehicle(multiplier: number): void;
 	setAllRandomPedsFlee(toggle: boolean): void;
 	setAllRandomPedsFleeThisFrame(): void;
 	setAreasGeneratorOrientation(): void;
 	setAutoGiveParachuteWhenEnterPlane(toggle: boolean): void;
+	setCanDoDriveBy(toggle: boolean): void;
 	setDisableAmbientMeleeMove(toggle: boolean): void;
-	setDispatchCopsForPlayer(toggle: boolean): void;
+	setDispatchCopsFor(toggle: boolean): void;
+	setHealthRechargeMultiplier(regenRate: number): void;
 	setHudAnimStopLevel(toggle: boolean): void;
 	setIgnoreLowPriorityShockingEvents(toggle: boolean): void;
 	setInvincible(toggle: boolean): void;
 	setMaxWantedLevel(maxWantedLevel: number): void;
 	setMeleeWeaponDefenseModifier(modifier: number): void;
-	setPlayerClothLockCounter(value: number): void;
-	setPlayerClothPackageIndex(index: number): void;
-	setPlayerTargetingMode(targetMode: number): void;
+	setClothLockCounter(value: number): void;
+	setClothPackageIndex(index: number): void;
+	setTargetingMode(targetMode: number): void;
 	setPoliceRadarBlips(toggle: boolean): void;
-	setRunSprintMultiplierForPlayer(multiplier: number): void;
+	setRunSprintMultiplierFor(multiplier: number): void;
 	setSpecialAbilityMultiplier(multiplier: number): void;
-	setSwimMultiplierForPlayer(multiplier: number): void;
+	setSwimMultiplierFor(multiplier: number): void;
 	setWantedLevelDifficulty(difficulty: number): void;
 	setWantedLevelMultiplier(multiplier: number): void;
-	simulatePlayerInputGait(amount: number,gaitType: number,speed: number,p4: boolean,p5: boolean): void;
+	simulateInputGait(amount: number,gaitType: number,speed: number,p4: boolean,p5: boolean): void;
 	specialAbilityChargeAbsolute(p1: number,p2: boolean): void;
 	specialAbilityChargeContinuous(p1: boolean): void;
 	specialAbilityChargeLarge(p1: boolean,p2: boolean): void;
@@ -2579,7 +2590,7 @@ interface GamePlayerMp {
 	specialAbilityReset(): void;
 	specialAbilityUnlock(playerModel: Hash): void;
 	startFiringAmnesty(duration: number): void;
-	startPlayerTeleport(x: number,y: number,z: number,heading: number,p5: boolean,p6: boolean,p7: boolean): void;
+	startTeleport(x: number,y: number,z: number,heading: number,p5: boolean,p6: boolean,p7: boolean): void;
 }
 
 interface GameRecorderMp {
