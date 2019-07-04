@@ -3296,8 +3296,7 @@ interface ObjectMpPool extends EntityMpPool<ObjectMp> {
 }
 
 interface PedMpPool extends EntityMpPool<PedMp> {
-	"new"(model: RageEnums.Hashes.Ped | Hash, position: Vector3Mp, heading: number,
-		streamInEventHandler?: (ped: PedMp) => void, dimension?: number): PedMp;
+	"new"(model: RageEnums.Hashes.Ped | Hash, position: Vector3Mp, heading: number, dimension?: number): PedMp;
 }
 
 interface PickupMpPool extends EntityMpPool<PickupMp> {
