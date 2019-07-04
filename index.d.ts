@@ -354,6 +354,8 @@ interface ObjectMp extends EntityMp {
 
 interface PedMp extends EntityMp {
 	spawnPosition: Vector3Mp;
+	taskPlayAnim(animDictionary: string, animationName: string, speed: number, speedMultiplier: number, duration: number,
+		flag: number, playbackRate: number, lockX: boolean, lockY: boolean, lockZ: boolean): void;
 	// TODO
 }
 
