@@ -3355,7 +3355,7 @@ type Vector3Mp = {
 }
 
 type QuaternionMp = {
-	new(x: number, y: number, z: number, w: number): Vector3Mp;
+	new(x: number, y: number, z: number, w: number): QuaternionMp;
 
 	x: number;
 	y: number;
