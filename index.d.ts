@@ -17,10 +17,10 @@ type Array3d = [ number, number, number ];
 type Array2d = [ number, number ];
 
 // -------------------------------------------------------------------------
-// Main MP types
+// Main MP interfaces
 // -------------------------------------------------------------------------
 
-type Mp = {
+interface Mp {
 	blips: BlipMpPool;
 	browsers: BrowserMpPool;
 	cameras: CameraMpPool;
@@ -45,7 +45,7 @@ type Mp = {
 	voiceChat: VoiceChatMp;
 }
 
-type GameMp = {
+interface GameMp {
 	app: GameAppMp;
 	audio: GameAudioMp;
 	brain: GameBrainMp;
@@ -89,7 +89,7 @@ type GameMp = {
 	wait(ms: number): void;
 }
 
-type GuiMp = {
+interface GuiMp {
 	chat: GuiChatMp;
 	cursor: GuiCursorMp;
 
@@ -225,7 +225,12 @@ interface EntityMp {
 	getPhysicsHeading(): number;
 	getPitch(): number;
 	getPopulationType(): number;
-	getQuaternion(x: number, y: number, z: number, w: number): QuaternionMp;
+	getQuaternion(x: number, y: number, z: number, w: number): {
+		x: number;
+		y: number;
+		z: number;
+		w: number;
+	};
 	getRoll(): number;
 	getRotation(rotationOrder: number): Vector3Mp;
 	getRotationVelocity(): Vector3Mp;
@@ -3335,7 +3340,7 @@ interface VehicleMpPool extends EntityMpPool<VehicleMp> {
 // Additional MP types
 // -------------------------------------------------------------------------
 
-type Vector3Mp = {
+interface Vector3Mp {
 	new(x: number, y: number, z: number): Vector3Mp;
 
 	x: number;
@@ -3354,16 +3359,7 @@ type Vector3Mp = {
 	unit(): Vector3Mp;
 }
 
-type QuaternionMp = {
-	new(x: number, y: number, z: number, w: number): QuaternionMp;
-
-	x: number;
-	y: number;
-	z: number;
-	w: number;
-}
-
-type RaycastResult = {
+interface RaycastResult {
 	entity: EntityMp,
 	position: Vector3Mp,
 	surfaceNormal: Vector3Mp
