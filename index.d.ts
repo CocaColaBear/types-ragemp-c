@@ -2332,9 +2332,9 @@ interface GameObjectMp {
 		zOffset: number): Vector3Mp;
 	getPickupCoords(p0: any): number;
 	getSafePickupCoords(x: number, y: number, z: number, p3: any, p4: any): Vector3Mp;
-	getStateOfClosestDoorOfType(type: Hash, x: number, y: number, z: number, locked: boolean, heading: number): {
-		locked: boolean;
-		heading: boolean;
+	getStateOfClosestDoorOfType(type: Hash, x: number, y: number, z: number, locked: number, heading: number): {
+		locked: number;
+		heading: number;
 	};
 	hasClosestObjectOfTypeBeenBroken(p0: number, p1: number, p2: number, p3: number, modelHash: Hash,
 		p5: any): boolean;
