@@ -2166,7 +2166,7 @@ interface GameGraphicsMp {
 	requestScaleformMovie3(scaleformName: string): number;
 	requestScaleformMovieInstance(scaleformName: string): number;
 	requestStreamedTextureDict(textureDict: string, p1: boolean): void;
-	screen2dToWorld3d(screenPosition: Array2d, useRaycast?: boolean): Vector3Mp;
+	screen2dToWorld3d(vector2: Vector3Mp): Vector3Mp;
 	set2dLayer(layer: number): void;
 	setBlackout(enable: boolean): void;
 	setDebugLinesAndSpheresDrawingActive(enabled: boolean): void;
