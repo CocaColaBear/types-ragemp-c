@@ -83,6 +83,7 @@ interface GameMp {
 	weapon: GameWeaponMp;
 	worldprobe: GameWorldprobeMp;
 	zone: GameZoneMp;
+	gxt: GameGxtMp;
 
 	invoke(hash: string, ...args: any[]): any;
 	joaat(text: string): Hash;
@@ -3194,6 +3195,13 @@ interface GameZoneMp {
 	overridePopscheduleVehicleModel(scheduleId: number, vehicleHash: number): void;
 	overridePopscheduleVehicleModel(scheduleId: number, vehicleHash: string): void;
 	setZoneEnabled(zoneId: number, toggle: boolean): void;
+}
+
+interface GameGxtMp {
+	add(labelNameOrHash: HashOrString, newLabelValue:any): void;
+	get(labelNameOrHash: HashOrString): any;
+	getDefault(labelNameOrHash: HashOrString): any;
+	reset(): void;
 }
 
 // -------------------------------------------------------------------------
