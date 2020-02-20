@@ -43,6 +43,7 @@ interface Mp {
 	Vector3: Vector3Mp;
 	vehicles: VehicleMpPool;
 	voiceChat: VoiceChatMp;
+	console: ConsoleMp;
 }
 
 interface GameMp {
@@ -3364,6 +3365,16 @@ interface RaycastResult {
 	entity: EntityMp,
 	position: Vector3Mp,
 	surfaceNormal: Vector3Mp
+}
+
+interface ConsoleMp {
+	logInfo(message: string, save: boolean, saveAsync: boolean): void;
+	logWarning(message: string, save: boolean, saveAsync: boolean): void;
+	logError(message: string, save: boolean, saveAsync: boolean): void;
+	logFatal(message: string, save: boolean, saveAsync: boolean): void;
+	clear(): void;
+	reset(): void;
+	verbosity: string;
 }
 
 // -------------------------------------------------------------------------
