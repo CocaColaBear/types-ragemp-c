@@ -3367,12 +3367,12 @@ interface RaycastResult {
 }
 
 interface ConsoleMp {
-	logInfo(message: string, save: boolean, saveAsync: boolean): any;
-	logWarning(message: string, save: boolean, saveAsync: boolean): any;
-	logError(message: string, save: boolean, saveAsync: boolean): any;
-	logFatal(message: string, save: boolean, saveAsync: boolean): any;
-	clear(): any;
-	reset(): any;
+	logInfo(message: string, save: boolean, saveAsync: boolean): void;
+	logWarning(message: string, save: boolean, saveAsync: boolean): void;
+	logError(message: string, save: boolean, saveAsync: boolean): void;
+	logFatal(message: string, save: boolean, saveAsync: boolean): void;
+	clear(): void;
+	reset(): void;
 	verbosity: string;
 }
 
