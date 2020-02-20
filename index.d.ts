@@ -3278,6 +3278,7 @@ interface EventMpPool {
 	add(eventName: RageEnums.EventKey | string, callback: (...args: any[]) => void): void;
 	add(events: ({ [name: string]: (...args: any[]) => void; })): void;
 	call(eventName: string, ...args: any[]): void;
+	callRemoteUnreliable(eventName: string, ...args: any[]): void;
 	callRemote(eventName: string, ...args: any[]): void;
 	remove(eventName: string, handler?: (...args: any[]) => void): void;
 	remove(eventNames: string[]): void;
