@@ -3198,7 +3198,7 @@ interface GameZoneMp {
 }
 
 interface GameGxtMp {
-	add(labelNameOrHash: HashOrString, newLabelValue:string): void;
+	set(labelNameOrHash: HashOrString, newLabelValue:string): void;
 	get(labelNameOrHash: HashOrString): string;
 	getDefault(labelNameOrHash: HashOrString): string;
 	reset(): void;
