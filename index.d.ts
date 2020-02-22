@@ -3243,7 +3243,7 @@ interface GameZoneMp {
 
 interface GuiChatMp {
 	colors: boolean;
-	safe: boolean;
+	safeMode: boolean;
 
 	activate(state: boolean): void;
 	push(text: string): void;
