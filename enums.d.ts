@@ -3,11 +3,14 @@ declare namespace RageEnums {
 		BROWSER_CREATED = "browserCreated",
 		BROWSER_DOM_READY = "browserDomReady",
 		BROWSER_LOADING_FAILED = "browserLoadingFailed",
+		CLICK = "click",
+		CONSOLE_COMMAND = "consoleCommand",
 		ENTITY_CREATED = "entityCreated",
 		ENTITY_STREAM_IN = "entityStreamIn",
 		ENTITY_STREAM_OUT = "entityStreamOut",
 		GUI_READY = "guiReady",
-		CLICK = "click",
+		INCOMING_DAMAGE = "incomingDamage",
+		OUTGOING_DAMAGE = "outgoingDamage",
 		PLAYER_CHAT = "playerChat",
 		PLAYER_CREATE_WAYPOINT = "playerCreateWaypoint",
 		PLAYER_COMMAND = "playerCommand",
@@ -403,5 +406,12 @@ declare namespace RageEnums {
 		VEHICLE_ROCKET_BOOST = 340,
 		VEHICLE_PARACHUTE = 341,
 		VEHICLE_BIKE_WINGS = 342
+	}
+
+	const enum ConsoleVerbosity {
+		ERROR = "error",
+		FATAL = "fatal",
+		INFO = "info",
+		WARNING = "warning"
 	}
 }
