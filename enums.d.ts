@@ -5,6 +5,8 @@ declare namespace RageEnums {
 		BROWSER_LOADING_FAILED = "browserLoadingFailed",
 		CLICK = "click",
 		CONSOLE_COMMAND = "consoleCommand",
+		DUMMY_ENTITY_DESTROYED = "dummyEntityDestroyed",
+		ENTITY_CONTROLLER_CHANGE = "entityControllerChange",
 		ENTITY_CREATED = "entityCreated",
 		ENTITY_STREAM_IN = "entityStreamIn",
 		ENTITY_STREAM_OUT = "entityStreamOut",
