@@ -1400,6 +1400,8 @@ interface BrowserMp {
 	execute(code: string): void;
 	markAsChat(): void;
 	reload(ignoreCache: boolean): void;
+	call(eventName: string, ...args: any[]): void;
+	executeCached(code: string): void;
 }
 
 interface CameraMp {
