@@ -5,7 +5,7 @@
 
 Run this through command promt:
 
-# 0.3.7 Version:
+# 0.3.7 (Current) Version:
 
 ``` bash
 npm install --save-dev github:CocaColaBear/types-ragemp-c#master
