@@ -3232,9 +3232,9 @@ interface GameZoneMp {
 }
 
 interface GameGxtMp {
-	add(labelNameOrHash: HashOrString, newLabelValue:string): void;
-	get(labelNameOrHash: HashOrString): string;
-	getDefault(labelNameOrHash: HashOrString): string;
+	set(labelNameOrHash: string, newLabelValue:string): void;
+	get(labelNameOrHash: string): string;
+	getDefault(labelNameOrHash: string): string;
 	reset(): void;
 }
 
