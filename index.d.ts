@@ -367,7 +367,7 @@ interface PedMp extends EntityMp {
 	setHairColor(colorID: number, highlightColorID: number): void;
 	setEyeColor(index: number): void;
 	setHeadBlendData(shapeFirstID: number, shapeSecondID: number, shapeThirdID: number, skinFirstID: number, skinSecondID: number,
-		skinThirdID: number, shapeMix: number, skinMix: number, thirdMix: number, isParent: boolean);
+		skinThirdID: number, shapeMix: number, skinMix: number, thirdMix: number, isParent: boolean): void;
 	setFaceFeature(index: number, scale: number): void;
 	// TODO
 }
