@@ -3188,7 +3188,7 @@ interface GameWeaponMp {
 	setFlashLightFadeDistance(distance: number): void;
 	setPedAmmoToDrop(p0: any, p1: any): void;
 	setWeaponObjectTintIndex(weapon: EntityMp, tint: number): void;
-	unequipEmptyWeapons(): void;
+	unequipEmptyWeapons: boolean;
 }
 
 interface GameWorldprobeMp {
