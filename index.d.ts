@@ -298,7 +298,7 @@ interface EntityMp {
 		p6: number): boolean;
 	processAttachments(): void;
 	resetAlpha(): void;
-	setAlpha(alphaLevel: number, skin: boolean): void;
+	setAlpha(alphaLevel: number/*skin: boolean*/): void; // TODO: Check this
 	setAlwaysPrerender(toggle: boolean): void;
 	setAnimCurrentTime(animDict: string, animName: string, time: number): void;
 	setAnimSpeed(animDict: string, animName: string, speedMultiplier: number): void;
