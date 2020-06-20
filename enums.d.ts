@@ -19,6 +19,7 @@ declare namespace RageEnums {
 		PLAYER_JOIN = "playerJoin",
 		PLAYER_QUIT = "playerQuit",
 		PLAYER_REACH_WAYPOINT = "playerReachWaypoint",
+		PLAYER_READY = "playerReady",
 		PLAYER_RESURRECT = "playerResurrect",
 		PLAYER_RULE_TRIGGERED = "playerRuleTriggered",
 		PLAYER_SPAWN = "playerSpawn",
