@@ -2118,7 +2118,7 @@ interface GameGraphicsMp {
 	drawText(text: string, position: Array3d | Array2d,
 		data?: {
 			font: number,
-			centre: boolean,
+			centre?: boolean,
 			color: RGBA,
 			scale: Array2d,
 			outline: boolean
