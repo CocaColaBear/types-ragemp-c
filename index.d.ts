@@ -3181,8 +3181,9 @@ interface GameWorldprobeMp {
 			materialHash: number;
 			entityHit: EntityMp;
 	};
-	startShapeTestBox(x1: number, y1: number, z1: number, x2: number, y2: number, z2: number, rotX: number, rotY: number,
-		rotZ: number, p9: any, p10: any, ignoreEntity: EntityMp, p12: any): number;
+	startShapeTestBox(x: number, y: number, z: number, sizeX: number, sizeY: number, sizeZ: number, rotationX: number,
+		rotationY: number, rotationZ: number, rotationOrder: number, flags: number, ignoreEntity: EntityMp | number,
+		p12: number): number;
 	startShapeTestCapsule(x1: number, y1: number, z1: number, x2: number, y2: number, z2: number, radius: number,
 		flags: number, ignoreEntity: EntityMp, p9: number): number;
 	startShapeTestLosProbe(x1: number, y1: number, z1: number, x2: number, y2: number, z2: number, flags: number,
