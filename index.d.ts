@@ -42,6 +42,8 @@ interface Mp {
 	players: PlayerMpPool;
 	raycasting: RaycastingMp;
 	storage: StorageMp;
+	system: SystemMp;
+	user: UserMp;
 	Vector3: Vector3Mp;
 	vehicles: VehicleMpPool;
 	voiceChat: VoiceChatMp;
@@ -93,6 +95,7 @@ interface GameMp {
 	joaat(text: string): Hash;
 	joaat(textArray: string[]): Hash[];
 	wait(ms: number): void;
+	waitAsync(ms: number): Promise<void>;
 }
 
 interface GuiMp {
@@ -408,9 +411,9 @@ interface PlayerMp extends EntityMp {
 	readonly isInCover: boolean;
 	readonly isJumping: boolean;
 	readonly isLeavingVehicle: boolean;
+	readonly isTypingInTextChat: boolean;
 	readonly isVoiceActive: boolean;
 	readonly ping: number;
-	readonly seat: number;
 	readonly vehicle: VehicleMp;
 
 	addVehicleSubtaskAttack(ped2: Handle): void;
@@ -1145,6 +1148,8 @@ interface VehicleMp extends EntityMp {
 		pearlescentColor: number;
 		wheelColor: number;
 	};
+	getHandling(typeName: string): number | string;
+	getDefaultHandling(typeName: string): number | string;
 	getHeliEngineHealth(): number;
 	getHeliMainRotorHealth(): number;
 	getHeliTailRotorHealth(): number;
@@ -1400,6 +1405,7 @@ interface BrowserMp {
 	markAsChat(): void;
 	reload(ignoreCache: boolean): void;
 	call(eventName: string, ...args: any[]): void;
+	callProc(procName: string, ...args: any[]): Promise<any>;
 	executeCached(code: string): void;
 }
 
@@ -1489,8 +1495,20 @@ interface KeysMp {
 interface NametagsMp {
 	enabled: boolean;
 
-	set(...value: any[]): void; // TODO
-	update(...value: any[]): void; // TODO
+	set(style: {
+		font: number;
+		outline: boolean;
+		offset: number;
+		veh_offset: number;
+		color: RGBA;
+		size: number;
+
+		hbar?: {
+			size: [number, number];
+			color: [0, 0, 0, 0];
+			bg_color: RGBA;
+		}
+	}): void;
 }
 
 interface RaycastingMp {
@@ -1504,12 +1522,35 @@ interface StorageMp {
 	flush(): void;
 }
 
+interface SystemMp {
+	isFullscreen: boolean;
+	isFocused: boolean;
+	notify(args: {
+		title: string,
+		text: string,
+		attribute: string,
+		duration: number,
+		silent: boolean
+	}): void;
+}
+
+interface UserMp {
+	preferences: UserPreferencesMp;
+}
+
+interface UserPreferencesMp {
+	lowQualityAssets: boolean;
+	language: string;
+}
+
 interface VoiceChatMp {
+	minVad: number;
 	muted: boolean;
 	readonly isAllowed: boolean;
+	readonly lastVad: number;
 
-	getPreprocessingParam(param: any): any; // TODO
-	setPreprocessingParam(param: any, value: any): void; // TODO
+	getPreprocessingParam(param: number): any; // TODO
+	setPreprocessingParam(param: number, value: any): void; // TODO
 }
 
 // -------------------------------------------------------------------------
@@ -2884,6 +2925,9 @@ interface GameTimeMp {
 	pauseClock(toggle: boolean): void;
 	setClockDate(day: number, month: number, year: number): void;
 	setClockTime(hour: number, minute: number, second: number): void;
+
+	// RAGE.MP extensions
+	serverTickCount: number;
 }
 
 interface GameUiMp {
@@ -3136,7 +3180,14 @@ interface GameVehicleMp {
 	stopPlaybackRecordedVehicle(p0: any): void;
 	switchTrainTrack(intersectionId: number, state: boolean): any;
 	unpausePlaybackRecordedVehicle(p0: any): void;
+
+	// RAGE.MP extensions
+	repairOnExtraToggle: boolean;
 	defaultEngineBehaviour: boolean;
+
+	addModelOverride(model: string, replaceToModel: string): void;
+	clearModelOverrides(): void;
+	removeModelOverride(model: string): void;
 }
 
 interface GameWaterMp {
@@ -3303,6 +3354,7 @@ interface ColshapeMpPool extends EntityMpPool<ColshapeMp> {
 interface EntityMpPool<TEntity> {
 	readonly length: number;
 	readonly size: number;
+	streamed: TEntity[];
 
 	apply(fn: (...args: any[]) => void, ...args: any[]): void;
 	at(index: number): TEntity;
@@ -3314,17 +3366,62 @@ interface EntityMpPool<TEntity> {
 	forEachInRange(position: Vector3Mp, range: number, fn: (entity: TEntity) => void): void;
 	forEachInDimension(position: Vector3Mp, range: number, dimension: number, fn: (entity: TEntity) => void): void;
 	forEachInStreamRange(fn: (entity: TEntity) => void): void;
-	getClosest(position: Vector3Mp, amount?:number): TEntity[];
+	getClosest(position: Vector3Mp): TEntity
+	getClosest(position: Vector3Mp, limit: number): TEntity[]
 	toArray(): TEntity[];
 }
 
 interface EventMpPool {
 	addDataHandler(keyName: string, callback: (...args: any[]) => void): void;
+
+	add(eventName: RageEnums.EventKey.BROWSER_CREATED, callback: (browser: BrowserMp) => void): void;
+	add(eventName: RageEnums.EventKey.BROWSER_DOM_READY, callback: (browser: BrowserMp) => void): void;
+	add(eventName: RageEnums.EventKey.BROWSER_LOADING_FAILED, callback: (browser: BrowserMp) => void): void;
+	add(eventName: RageEnums.EventKey.CLICK, callback: (x: number, y: number, upOrDown: string, leftOrRight: string, relativeX: number, relativeY: number, worldPosition: Vector3MpLike, hitEntity: number) => void): void;
+	add(eventName: RageEnums.EventKey.CONSOLE_COMMAND, callback: (command: string) => void): void;
+	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_CREATED, callback: (dummyType: number, dummy: DummyEntity) => void): void;
+	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_DESTROYED, callback: (dummyType: number, dummy: DummyEntity) => void): void;
+	add(eventName: RageEnums.EventKey.ENTITY_CONTROLLER_CHANGE, callback: (entity: EntityMp, newController: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.ENTITY_CREATED, callback: (entity: EntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.ENTITY_STREAM_IN, callback: (entity: EntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.ENTITY_STREAM_OUT, callback: (entity: EntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.GUI_READY, callback: () => void): void;
+	add(eventName: RageEnums.EventKey.INCOMING_DAMAGE, callback: (sourceEntity: EntityMp, sourcePlayer: PlayerMp, targetEntity: EntityMp, weapon: number, boneIndex: number, damage: number) => void): void;
+	add(eventName: RageEnums.EventKey.OUTGOING_DAMAGE, callback: (sourceEntity: EntityMp, targetEntity: EntityMp, targetPlayer: PlayerMp, weapon: number, boneIndex: number, damage: number) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_CHAT, callback: (text: string) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_CREATE_WAYPOINT, callback: (position: Vector3Mp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_COMMAND, callback: (command: string) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_DEATH, callback: (player: PlayerMp, reason: number, killer: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_ENTER_CHECKPOINT, callback: (checkpoint: CheckpointMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_ENTER_COLSHAPE, callback: (colshape: ColshapeMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_ENTER_VEHICLE, callback: (vehicle: VehicleMp, seat: number) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_EXIT_CHECKPOINT, callback: (checkpoint: CheckpointMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_EXIT_COLSHAPE, callback: (colshape: ColshapeMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_JOIN, callback: (player: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_LEAVE_VEHICLE, callback: (vehicle: VehicleMp, seat: number) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_QUIT, callback: (player: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_REACH_WAYPOINT, callback: (...args: any[]) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_READY, callback: () => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_REMOVE_WAYPOINT, callback: (...args: any[]) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_RESURRECT, callback: () => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_RULE_TRIGGERED, callback: (rule: string, counter: number) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_SPAWN, callback: (player: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_START_TALKING, callback: (player: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_STOP_TALKING, callback: (player: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_WEAPON_SHOT, callback: (targetPosition: Vector3Mp, targetEntity?: undefined | EntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.RENDER, callback: (nametags: [PlayerMp, number, number, number][]) => void): void;
+	add(eventName: RageEnums.EventKey.VEHICLE_DEATH, callback: (vehicle: VehicleMp) => void): void;
+
 	add(eventName: RageEnums.EventKey | string, callback: (...args: any[]) => void): void;
 	add(events: ({ [name: string]: (...args: any[]) => void; })): void;
+	addProc(procName: string, callback: (...args: any[]) => void): void;
+	addProc(procs: ({ [name: string]: (...args: any[]) => void; })): void;
 	call(eventName: string, ...args: any[]): void;
+	callRemoteProc(procName: string, ...args: any[]): Promise<any>;
 	callRemoteUnreliable(eventName: string, ...args: any[]): void;
 	callRemote(eventName: string, ...args: any[]): void;
+	cancelPendingRpc(procName?: string): void;
+	hasPendingRpc(procName?: string): boolean;
 	remove(eventName: string, handler?: (...args: any[]) => void): void;
 	remove(eventNames: string[]): void;
 }
@@ -3350,7 +3447,7 @@ interface ObjectMpPool extends EntityMpPool<ObjectMp> {
 		dimension?: number,
 		rotation?: Vector3Mp
 	}): ObjectMp;
-	newWeak(...args: any): ObjectMp; // TODO
+	newWeak(handle: number): ObjectMp;
 }
 
 interface PedMpPool extends EntityMpPool<PedMp> {
@@ -3391,8 +3488,16 @@ interface VehicleMpPool extends EntityMpPool<VehicleMp> {
 // Additional MP types
 // -------------------------------------------------------------------------
 
+interface Vector3MpLike {
+	x: number;
+	y: number;
+	z: number;
+}
+
 interface Vector3Mp {
-	new(x: number, y: number, z: number): Vector3Mp;
+	new(vector: Vector3MpLike): Vector3Mp;
+	new(vector: [number, number, number]): Vector3Mp;
+	new(x?: number, y?: number, z?: number): Vector3Mp;
 
 	x: number;
 	y: number;
@@ -3400,13 +3505,25 @@ interface Vector3Mp {
 
 	add(value: number): Vector3Mp;
   add(vector3: Vector3Mp): Vector3Mp;
+  angleTo(number: Vector3Mp): number;
+	clone(): Vector3Mp;
+	cross(vector3: Vector3MpLike): Vector3Mp;
 	divide(value: number): Vector3Mp;
 	divide(vector3: Vector3Mp): Vector3Mp;
+	dot(vector3: Vector3MpLike): number;
+	equals(vector3: Vector3MpLike): boolean;
 	length(): number;
+	negative(): Vector3Mp;
+	max(): Vector3Mp;
+	min(): Vector3Mp;
 	multiply(value: number): Vector3Mp;
 	multiply(vector3: Vector3Mp): Vector3Mp;
 	subtract(value: number): Vector3Mp;
 	subtract(vector3: Vector3Mp): Vector3Mp;
+	toAngles(): [number, number];
+	toArray(): [number, number, number];
+	toArray(limit: number): number[];
+	toString(): string;
 	unit(): Vector3Mp;
 }
 
