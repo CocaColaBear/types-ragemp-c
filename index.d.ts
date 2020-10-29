@@ -42,6 +42,8 @@ interface Mp {
 	players: PlayerMpPool;
 	raycasting: RaycastingMp;
 	storage: StorageMp;
+	system: SystemMp;
+	user: UserMp;
 	Vector3: Vector3Mp;
 	vehicles: VehicleMpPool;
 	voiceChat: VoiceChatMp;
@@ -93,6 +95,7 @@ interface GameMp {
 	joaat(text: string): Hash;
 	joaat(textArray: string[]): Hash[];
 	wait(ms: number): void;
+	waitAsync(ms: number): Promise<void>;
 }
 
 interface GuiMp {
@@ -374,47 +377,7 @@ interface ObjectMp extends EntityMp {
 	slide(toX: number, toY: number, toZ: number, speedX: number, speedY: number, speedZ: number, collision: boolean): boolean;
 }
 
-interface PedMp extends EntityMp {
-	spawnPosition: Vector3Mp;
-	taskPlayAnim(animDictionary: string, animationName: string, speed: number, speedMultiplier: number, duration: number,
-		flag: number, playbackRate: number, lockX: boolean, lockY: boolean, lockZ: boolean): void;
-	// TODO
-}
-
-interface PickupMp extends EntityMp {
-	
-}
-
-interface PlayerMp extends EntityMp {
-	armour: number;
-	eyeColour: number;
-	hairColour: number;
-	hairHighlightColour: number;
-	heading: number;
-	health: number;
-	name: string;
-	p2pEnabled: boolean;
-	p2pConnected: boolean;
-	voiceAutoVolume: boolean;
-	voiceVolume: number;
-	voice3d: any; // TODO
-	weapon: Hash;
-	readonly action: string;
-	readonly aimTarget: boolean;
-	readonly ip: string;
-	readonly isAiming: boolean;
-	readonly isClimbing: boolean;
-	readonly isEnteringVehicle: boolean;
-	readonly isInCover: boolean;
-	readonly isJumping: boolean;
-	readonly isLeavingVehicle: boolean;
-	readonly isVoiceActive: boolean;
-	readonly ping: number;
-	readonly seat: number;
-	readonly vehicle: VehicleMp;
-
-	addVehicleSubtaskAttack(ped2: Handle): void;
-	addVehicleSubtaskAttackCoord(x: number, y: number, z: number): void;
+interface PedBaseMp extends EntityMp {
 	applyBlood(boneIndex: number, xRot: number, yRot: number, zRot: number, woundType: string): void;
 	applyBloodByZone(p1: any, p2: number, p3: number, p4: any): void;
 	applyBloodDamageByZone(p1: any, p2: number, p3: number, p4: any): void;
@@ -425,10 +388,7 @@ interface PlayerMp extends EntityMp {
 	applyDamageTo(damageAmount: number, p2: boolean): void;
 	canInCombatSeeTarget(target: Handle): boolean;
 	canKnockOffVehicle(): boolean;
-	call(eventName: string, ...args: any[]): void;
-	canPedHear(ped: Handle): boolean;
 	canRagdoll(): boolean;
-	changePed(ped: Handle, b2: boolean, b3: boolean): void;
 	clearAllProps(): void;
 	clearAlternateMovementAnim(stance: number, p2: number): void;
 	clearBloodDamage(): void;
@@ -439,22 +399,14 @@ interface PlayerMp extends EntityMp {
 	clearDrivebyTaskUnderneathDrivingTask(): void;
 	clearFacialDecorations(): void;
 	clearFacialIdleAnimOverride(): void;
-	clearHasDamagedAtLeastOneNonAnimalPed(): void;
-	clearHasDamagedAtLeastOnePed(): void;
 	clearLastDamageBone(): void;
-	clearParachuteModelOverride(): void;
-	clearParachutePackModelOverride(): void;
-	clearParachuteVariationOverride(): void;
 	clearProp(propId: number): void;
-	clearSecondaryTask(): void;
 	clearTasks(): void;
 	clearTasksImmediately(): void;
-	clearWantedLevel(): void;
 	clearWetness(): void;
 	clone(heading: number, networkHandle: boolean, pedHandle: boolean): Handle;
 	cloneToTarget(ped2: Handle): void;
 	controlMountedWeapon(): boolean;
-	explodeHead(weaponHash: Hash): void;
 	forceMotionState(motionStateHash: Hash, p2: boolean, p3: boolean, p4: boolean): boolean;
 	forceToOpenParachute(): void;
 	getAccuracy(): number;
@@ -468,7 +420,6 @@ interface PlayerMp extends EntityMp {
 	getCombatMovement(): number;
 	getCombatRange(): number;
 	getConfigFlag(flagId: number, p2: boolean): boolean;
-	getCurrentStealthNoise(): number;
 	getDeadPickupCoords(p1: number, p2: number): Vector3Mp;
 	getDecorationsState(): number;
 	getDefensiveAreaPosition(p1: boolean): Vector3Mp;
@@ -477,9 +428,7 @@ interface PlayerMp extends EntityMp {
 	getEnveffScale(): number;
 	getExtractedDisplacement(worldSpace: boolean): Vector3Mp;
 	getFloodInvincibility(p1: boolean): void;
-	getGroup(): number;
 	getGroupIndex(): number;
-	getHasReserveParachute(): boolean;
 	getHeadBlendData(headBlendData: {
 		shapeFirst: number;
 		shapeSecond: number;
@@ -492,16 +441,13 @@ interface PlayerMp extends EntityMp {
 		thirdMix: number;
 	}): void;
 	getHeadOverlayValue(overlayID: number): number;
-	getInvincible(): boolean;
 	getIsTaskActive(taskNumber: number): boolean;
 	getJackTarget(): Handle;
 	getLastDamageBone(outBone: number): number;
-	getMaxArmour(): number;
 	getMaxHealth(): number;
 	getMeleeTargetFor(): Handle;
 	getMoney(): number;
 	getMount(): Handle;
-	getName(): string;
 	getNavmeshRouteDistanceRemaining(p1: any, p2: any): any;
 	getNearbyPeds(sizeAndPeds: number, ignore: number): number;
 	getNearbyVehicles(sizeAndVehs: number): number;
@@ -511,16 +457,8 @@ interface PlayerMp extends EntityMp {
 	getNumberOfTextureVariations(componentId: number, drawableId: number): number;
 	getPaletteVariation(componentId: number): number;
 	getParachuteLandingType(): number;
-	getParachutePackTintIndex(tintIndex: number): number;
-	getParachuteSmokeTrailColor(r: number, g: number, b: number): {
-		r: number;
-		g: number;
-		b: number;
-	};
 	getParachuteState(): number;
 	getParachuteTintIndex(tintIndex: number): number;
-	getPed(): Handle;
-	getPedScriptIndex(): Handle;
 	getPhoneGestureAnimCurrentTime(): number;
 	getPhoneGestureAnimTotalTime(): number;
 	getPlayerIsFollowing(): Handle;
@@ -530,43 +468,22 @@ interface PlayerMp extends EntityMp {
 	getRelationshipBetweens(ped2: Handle): void;
 	getRelationshipGroupDefaultHash(): Hash;
 	getRelationshipGroupHash(): Hash;
-	getReserveParachuteTintIndex(tintIndex: number): number;
 	getResetFlag(flagId: number): boolean;
-	getRgbColour(r: number, g: number, b: number): {
-		r: number;
-		g: number;
-		b: number;
-	};
 	getScriptTaskStatus(taskHash: Hash): number;
 	getSeatIsTryingToEnter(): number;
 	getSequenceProgress(): number;
 	getsJacker(): Handle;
 	getSourceOfDeath(): Handle;
-	getSprintStaminaRemaining(): number;
-	getSprintTimeRemaining(): number;
-	getTeam(): number;
 	getTextureVariation(componentId: number): number;
 	getTimeOfDeath(): number;
 	getType(): number;
-	getUnderwaterTimeRemaining(): number;
 	getVehicleIsIn(getLastVehicle: boolean): Handle;
 	getVehicleIsTryingToEnter(): Handle;
 	getVehicleIsUsing(): Handle;
-	getVoiceAttribute(attribute: any): any; // TODO
-	getWantedCentrePosition(): Vector3Mp;
-	getWantedLevel(): number;
 	giveHelmet(cannotRemove: boolean, helmetFlag: number, textureIndex: number): void;
 	giveNmMessage(): void;
-	giveRagdollControl(toggle: boolean): void;
 	giveWeapon(weapon: RageEnums.Hashes.Weapon | Hash, ammo: number, equipNow: boolean): void;
-	hasBeenSpottedInStolenVehicle(): boolean;
-	hasDamagedAtLeastOneNonAnimalPed(): boolean;
-	hasDamagedAtLeastOnePed(): boolean;
 	hasHeadBlendFinished(): boolean;
-	hasLeftTheWorld(): boolean;
-	hasTeleportFinished(): boolean;
-	hasUseScenarioTask(): boolean;
-	hideBloodDamageByZone(p1: any, p2: boolean): void;
 	isActiveInScenario(): boolean;
 	isAimingFromCover(): boolean;
 	isBeingArrested(atArresting: boolean): boolean;
@@ -574,7 +491,6 @@ interface PlayerMp extends EntityMp {
 	isBeingStealthKilled(): boolean;
 	isBeingStunned(p1: number): boolean;
 	isComponentVariationValid(componentId: number, drawableId: number, textureId: number): boolean;
-	isControlOn(): boolean;
 	isConversationDead(): boolean;
 	isCuffed(): boolean;
 	isDead(): boolean;
@@ -588,8 +504,6 @@ interface PlayerMp extends EntityMp {
 	isFalling(): boolean;
 	isFatallyInjured(): boolean;
 	isFleeing(): boolean;
-	isFreeAiming(): boolean;
-	isFreeForAmbientTask(): boolean;
 	isGettingIntoAVehicle(): boolean;
 	isGettingUp(): boolean;
 	isGoingIntoCover(): boolean;
@@ -633,20 +547,15 @@ interface PlayerMp extends EntityMp {
 	isOnVehicle(): boolean;
 	isPerformingStealthKill(): boolean;
 	isPlantingBomb(): boolean;
-	isPlaying(): boolean;
 	isPlayingPhoneGestureAnim(): boolean;
-	isPressingHorn(): boolean;
 	isProne(): boolean;
 	isPropValid(componentId: number, drawableId: number, TextureId: number): boolean;
 	isRagdoll(): boolean;
-	isReadyForCutscene(): boolean;
 	isReloading(): boolean;
-	isRidingTrain(): boolean;
 	isRunning(): boolean;
 	isRunningArrestTask(): boolean;
 	isRunningMobilePhoneTask():boolean;
 	isRunningRagdollTask(): boolean;
-	isScriptControlOn(): boolean;
 	isScriptedScenarioUsingConditionalAnim(animDict: string, anim: string): boolean;
 	isShooting(): boolean;
 	isShootingInArea(x1: number, y1: number, z1: number, x2: number, y2: number, z2: number, p7: boolean, p8: boolean): boolean;
@@ -658,7 +567,6 @@ interface PlayerMp extends EntityMp {
 	isStrafing(): boolean;
 	isSwimming(): boolean;
 	isSwimmingUnderWater(): boolean;
-	isTargettingAnything(): boolean;
 	isTracked(): boolean;
 	isTrackedVisible(): boolean;
 	isTryingToEnterALockedVehicle(): boolean;
@@ -667,7 +575,6 @@ interface PlayerMp extends EntityMp {
 	isUsingScenario(scenario: string): boolean;
 	isVaulting(): boolean;
 	isWalking(): boolean;
-	isWantedLevelGreater(wantedLevel: number): boolean;
 	isWearingHelmet(): boolean;
 	knockOffProp(p1: boolean, p2: boolean, p3: boolean, p4: boolean): void;
 	knockOffVehicle(): void;
@@ -682,13 +589,10 @@ interface PlayerMp extends EntityMp {
 	removePreferredCoverSet(): void;
 	removeWeapon(weapon: RageEnums.Hashes.Weapon | Hash): void;
 	removeAllWeapons(): void;
-	resetArrestState(): void;
-	resetInputGait(): void;
 	resetInVehicleContext(): void;
 	resetLastVehicle(): void;
 	resetMovementClipset(p1: number): void;
 	resetRagdollTimer(): void;
-	resetStamina(): void;
 	resetStrafeClipset(): void;
 	resetVisibleDamage(): void;
 	resetWeaponMovementClipset(): void;
@@ -713,7 +617,6 @@ interface PlayerMp extends EntityMp {
 	setCanArmIk(toggle: boolean): void;
 	setCanAttackFriendly(toggle: boolean, p2: boolean): void;
 	setCanBeDraggedOut(toggle: boolean): void;
-	setCanBeHassledByGangs(toggle: boolean): void;
 	setCanBeKnockedOffVehicle(state: number): void;
 	setCanBeShotInVehicle(toggle: boolean): void;
 	setCanBeTargetedWhenInjured(toggle: boolean): void;
@@ -722,10 +625,8 @@ interface PlayerMp extends EntityMp {
 	setCanBeTargettedByPlayer(player: Handle, toggle: boolean): void;
 	setCanBeTargettedByTeam(team: number, toggle: boolean): void;
 	setCanCowerInCover(toggle: boolean): void;
-	setCanDoDriveBy(toggle: boolean): void;
 	setCanEvasiveDive(toggle: boolean): void;
 	setCanHeadIk(toggle: boolean): void;
-	setCanLeaveParachuteSmokeTrail(enabled: boolean): void;
 	setCanLegIk(toggle: boolean): void;
 	setCanPeekInCover(toggle: boolean): void;
 	setCanPlayAmbientAnims(toggle: boolean): void;
@@ -739,9 +640,7 @@ interface PlayerMp extends EntityMp {
 	setCanTeleportToGroupLeader(groupHandle: number, toggle: boolean): void;
 	setCanTorsoIk(toggle: boolean): void;
 	setCanUseAutoConversationLookat(toggle: boolean): void;
-	setCanUseCover(toggle: boolean): void;
 	setCapsule(value: number): void;
-	setClothPinFrames(toggle: boolean): void;
 	setCombatAbility(p1: number): void;
 	setCombatAttributes(attributeIndex: number, enabled: boolean): void;
 	setCombatFloat(combatType: number, p2: number): void;
@@ -749,7 +648,6 @@ interface PlayerMp extends EntityMp {
 	setCombatRange(p1: number): void;
 	setComponentVariation(componentId: number, drawableId: number, textureId: number, paletteId: number): void;
 	setConfigFlag(flagId: number, value: boolean): void;
-	setControl(toggle: boolean, possiblyFlags: number): void;
 	setCoordsKeepVehicle(posX: number, posY: number, posZ: number): void;
 	setCoordsNoGang(posX: number, posY: number, posZ: number): void;
 	setCowerHash(p1: string): void;
@@ -778,7 +676,6 @@ interface PlayerMp extends EntityMp {
 	setEnableScuba(toggle: boolean): void;
 	setEnableWeaponBlocking(toggle: boolean): void;
 	setEnveffScale(value: number): void;
-	setEveryoneIgnore(toggle: boolean): void;
 	setExclusivePhoneRelationships(): Handle;
 	setEyeColor(index: number): void;
 	setFaceFeature(index: number, scale: number): void;
@@ -786,16 +683,12 @@ interface PlayerMp extends EntityMp {
 	setFacialIdleAnimOverride(animName: string, animDict: string): void;
 	setFiringPattern(patternHash: Hash): void;
 	setFleeAttributes(attributes: number, p2: boolean): void;
-	setForcedAim(toggle: boolean): void;
-	setForcedZoom(toggle: boolean): void;
-	setForceSkipAimIntro(toggle: boolean): void;
 	setGeneratesDeadBodyEvents(toggle: boolean): void;
 	setGestureGroup(p1: any): void;
 	setGetOutUpsideDownVehicle(toggle: boolean): void;
 	setGravity(toggle: boolean): void;
 	setGroupMemberPassengerIndex(index: number): void;
 	setHairColor(colorID: number, highlightColorID: number): void;
-	setHasReserveParachute(): void;
 	setHeadBlendData(shapeFirstID: number, shapeSecondID: number, shapeThirdID: number, skinFirstID: number,
 		skinSecondID: number, skinThirdID: number, shapeMix: number, skinMix: number, thirdMix: number, isParent: boolean): void;
 	setHeadOverlay(overlayID: number, index: number, opacity: number, firstColor: number, secondColor: number): void;
@@ -813,20 +706,13 @@ interface PlayerMp extends EntityMp {
 	setInVehicleContext(context: Hash): void;
 	setKeepTask(toggle: boolean): void;
 	setLegIkMode(mode: number): void;
-	setLockon(toggle: boolean): void;
-	setLockonRangeOverride(range: number): void;
 	setLodMultiplier(multiplier: number): void;
-	setMaxArmour(value: number): void;
 	setMaxHealth(value: number): void;
 	setMaxMoveBlendRatio(value: number): void;
 	setMaxTimeInWater(value: number): void;
 	setMaxTimeUnderwater(value: number): void;
-	setMayNotEnterAnyVehicle(): void;
-	setMayOnlyEnterThisVehicle(vehicle: Handle): void;
-	setMeleeWeaponDamageModifier(modifier: number): void;
 	setMinGroundTimeForStungun(ms: number): void;
 	setMinMoveBlendRatio(value: number): void;
-	setModel(model: Hash): void;
 	setModelIsSuppressed(toggle: boolean): void;
 	setMoney(amount: number): void;
 	setMotionBlur(toggle: boolean): void;
@@ -836,15 +722,9 @@ interface PlayerMp extends EntityMp {
 	setMoveRateOverride(value: number): void;
 	setNameDebug(name: string): void;
 	setNeverLeavesGroup(toggle: boolean): void;
-	setNoiseMultiplier(multiplier: number): void;
-	setParachuteModelOverride(model: Hash): void;
-	setParachutePackModelOverride(model: Hash): void;
-	setParachutePackTintIndex(tintIndex: number): void;
-	setParachuteSmokeTrailColor(r: number, g: number, b: number): void;
 	setParachuteTaskTarget(x: number, y: number, z: number): void;
 	setParachuteTaskThrust(thrust: number): void;
 	setParachuteTintIndex(tintIndex: number): void;
-	setParachuteVariationOverride(p1: number, p2: any, p3: any, p4: boolean): void;
 	setPathAvoidFire(avoidFire: boolean): void;
 	setPathCanDropFromHeight(Toggle: boolean): void;
 	setPathCanUseClimbovers(Toggle: boolean): void;
@@ -853,7 +733,6 @@ interface PlayerMp extends EntityMp {
 	setPathsWidthPlant(mayEnterWater: boolean): void;
 	setPinnedDown(pinned: boolean, i: number): void;
 	setPlaysHeadOnHornAnimWhenDiesInVehicle(toggle: boolean): void;
-	setPoliceIgnore(toggle: boolean): void;
 	setPreferredCoverSet(itemSet: any): void;
 	setPrimaryLookat(lookAt: Handle): void;
 	setPropIndex(componentId: number, drawableId: number, TextureId: number, attach: boolean): void;
@@ -864,7 +743,6 @@ interface PlayerMp extends EntityMp {
 	setRandomProps(): void;
 	setRelationshipGroupDefaultHash(hash: Hash): void;
 	setRelationshipGroupHash(hash: Hash): void;
-	setReserveParachuteTintIndex(tintIndex: number): void;
 	setResetFlag(flagId: number, doReset: boolean): void;
 	setResetFlagPreferRearSeats(flags: number): void;
 	setResetRagdollFlag(flag: number): void;
@@ -872,13 +750,9 @@ interface PlayerMp extends EntityMp {
 	setSeeingRange(value: number): void;
 	setShootRate(shootRate: number): void;
 	setShootsAtCoord(x: number, y: number, z: number, toggle: boolean): void;
-	setSimulateAiming(toggle: boolean): void;
-	setSneakingNoiseMultiplier(multiplier: number): void;
 	setSphereDefensiveArea(x: number, y: number, z: number, radius: number, p5: boolean, p6: boolean): void;
-	setSprint(toggle: boolean): void;
 	setStayInVehicleWhenJacked(toggle: boolean): void;
 	setStealthMovement(p1: boolean, action: string): void;
-	setStealthPerceptionModifier(value: number): void;
 	setSteersAroundObjects(toggle: boolean): void;
 	setSteersAroundPeds(toggle: boolean): void;
 	setSteersAroundVehicles(toggle: boolean): void;
@@ -888,26 +762,16 @@ interface PlayerMp extends EntityMp {
 	setTargetLossResponse(responseType: number): void;
 	setTaskVehicleChaseBehaviorFlag(flag: number, set: boolean): void;
 	setTaskVehicleChaseIdealPursuitDistance(distance: number): void;
-	setTeam(team: number): void;
 	setToInformRespectedFriends(radius: number, maxFriends: number): void;
 	setToLoadCover(toggle: boolean): void;
 	setToRagdoll(time1: number, time2: number, ragdollType: number, p4: boolean, p5: boolean, p6: boolean): boolean;
 	setUsingActionMode(p1: boolean, p2: any, action: string): void;
-	setVehicleDamageModifier(damageAmount: number): void;
-	setVehicleDefenseModifier(modifier: number): void;
 	setVisualFieldCenterAngle(angle: number): void;
 	setVisualFieldMaxAngle(value: number): void;
 	setVisualFieldMaxElevationAngle(angle: number): void;
 	setVisualFieldMinAngle(value: number): void;
 	setVisualFieldMinElevationAngle(angle: number): void;
 	setVisualFieldPeripheralRange(range: number): void;
-	setVoiceAttribute(attribute: any, value: any): void; // TODO
-	setWantedCentrePosition(x: number, y: number, z: number): void;
-	setWantedLevel(wantedLevel: number, disableNoMission: boolean): void;
-	setWantedLevelNoDrop(wantedLevel: number, p2: boolean): void;
-	setWantedLevelNow(p1: boolean): void;
-	setWeaponDamageModifier(damageAmount: number): void;
-	setWeaponDefenseModifier(modifier: number): void;
 	setWeaponMovementClipset(clipSet: string): void;
 	setWetnessEnabledThisFrame(): void;
 	setWetnessHeight(height: number): void;
@@ -956,9 +820,6 @@ interface PlayerMp extends EntityMp {
 	taskGoToCoordWhileAimingAtCoord(x: number, y: number, z: number, aimAtX: number, aimAtY: number, aimAtZ: number,
 		moveSpeed: number, p8: boolean, p9: number, p10: number, p11: boolean, flags: any, p13: boolean,
 		firingPattern: Hash): void;
-	taskGotoOffset(p1: any, p2: any, x: number, y: number, z: number, duration: number): void;
-	taskGoToWhileAimingAtEntity(entityToWalkTo: Handle, entityToAimAt: Handle, speed: number, shootatEntity: boolean,
-		p5: number, p6: number, p7: boolean, p8: boolean, firingPattern: Hash): void;
 	taskGuardCurrentPosition(p1: number, p2: number, p3: number): void;
 	taskGuardSphereDefensiveArea(p1: number, p2: number, p3: number, p4: number, p5: number, p6: any, p7: number,
 		p8: number, p9: number, p10: number): void;
@@ -1049,7 +910,6 @@ interface PlayerMp extends EntityMp {
 		minDistance: number, p7: number, p8: boolean): void;
 	taskVehiclePark(vehicle: Handle, x: number, y: number, z: number, heading: number, mode: number, radius: number,
 		keepEngineOn: boolean): void;
-	taskVehicleShootAt(target: Handle, p2: number): void;
 	taskVehicleTempAction(vehicle: Handle, action: number, time: number): void;
 	taskWanderInArea(x: number, y: number, z: number, radius: number, minimalLength: number, timeBetweenWalks: number): void;
 	taskWanderStandard(p1: number, p2: number): void;
@@ -1060,10 +920,153 @@ interface PlayerMp extends EntityMp {
 	updateHeadBlendData(shapeMix: number, skinMix: number, thirdMix: number): void;
 	updateTaskAimGunScriptedTarget(p1: Handle, p2: number, p3: number, p4: number, p5: boolean): void;
 	updateTaskHandsUpDuration(duration: number): void;
-	updateTaskSweepAim(entity: Handle): void;
 	wasKilledByStealth(): boolean;
 	wasKilledByTakedown(): boolean;
 	wasSkeletonUpdated(): boolean;
+}
+
+interface PedMp extends PedBaseMp {
+	spawnPosition: Vector3Mp;
+}
+
+interface PickupMp extends EntityMp {
+	
+}
+
+interface PlayerMp extends PedBaseMp {
+	armour: number;
+	eyeColour: number;
+	hairColour: number;
+	hairHighlightColour: number;
+	heading: number;
+	health: number;
+	name: string;
+	p2pEnabled: boolean;
+	p2pConnected: boolean;
+	voiceAutoVolume: boolean;
+	voiceVolume: number;
+	voice3d: any; // TODO
+	weapon: Hash;
+	readonly action: string;
+	readonly aimTarget: boolean;
+	readonly ip: string;
+	readonly isAiming: boolean;
+	readonly isClimbing: boolean;
+	readonly isEnteringVehicle: boolean;
+	readonly isInCover: boolean;
+	readonly isJumping: boolean;
+	readonly isLeavingVehicle: boolean;
+	readonly isTypingInTextChat: boolean;
+	readonly isVoiceActive: boolean;
+	readonly ping: number;
+	readonly vehicle: VehicleMp;
+
+	addVehicleSubtaskAttack(ped2: Handle): void;
+	addVehicleSubtaskAttackCoord(x: number, y: number, z: number): void;
+	call(eventName: string, ...args: any[]): void;
+	canPedHear(ped: Handle): boolean;
+	changePed(ped: Handle, b2: boolean, b3: boolean): void;
+	clearHasDamagedAtLeastOneNonAnimalPed(): void;
+	clearHasDamagedAtLeastOnePed(): void;
+	clearParachuteModelOverride(): void;
+	clearParachutePackModelOverride(): void;
+	clearParachuteVariationOverride(): void;
+	clearSecondaryTask(): void;
+	clearWantedLevel(): void;
+	explodeHead(weaponHash: Hash): void;
+	getCurrentStealthNoise(): number;
+	getGroup(): number;
+	getHasReserveParachute(): boolean;
+	getInvincible(): boolean;
+	getMaxArmour(): number;
+	getName(): string;
+	getParachutePackTintIndex(tintIndex: number): number;
+	getParachuteSmokeTrailColor(r: number, g: number, b: number): {
+		r: number;
+		g: number;
+		b: number;
+	};
+	getPed(): Handle;
+	getPedScriptIndex(): Handle;
+	getReserveParachuteTintIndex(tintIndex: number): number;
+	getRgbColour(r: number, g: number, b: number): {
+		r: number;
+		g: number;
+		b: number;
+	};
+	getSprintStaminaRemaining(): number;
+	getSprintTimeRemaining(): number;
+	getTeam(): number;
+	getUnderwaterTimeRemaining(): number;
+	getVoiceAttribute(attribute: any): any; // TODO
+	getWantedCentrePosition(): Vector3Mp;
+	getWantedLevel(): number;
+	giveRagdollControl(toggle: boolean): void;
+	hasBeenSpottedInStolenVehicle(): boolean;
+	hasDamagedAtLeastOneNonAnimalPed(): boolean;
+	hasDamagedAtLeastOnePed(): boolean;
+	hasLeftTheWorld(): boolean;
+	hasTeleportFinished(): boolean;
+	hasUseScenarioTask(): boolean;
+	hideBloodDamageByZone(p1: any, p2: boolean): void;
+	isControlOn(): boolean;
+	isFreeAiming(): boolean;
+	isFreeForAmbientTask(): boolean;
+	isPlaying(): boolean;
+	isPressingHorn(): boolean;
+	isReadyForCutscene(): boolean;
+	isRidingTrain(): boolean;
+	isScriptControlOn(): boolean;
+	isTargettingAnything(): boolean;
+	isWantedLevelGreater(wantedLevel: number): boolean;
+	resetArrestState(): void;
+	resetInputGait(): void;
+	resetStamina(): void;
+	setCanBeHassledByGangs(toggle: boolean): void;
+	setCanDoDriveBy(toggle: boolean): void;
+	setCanLeaveParachuteSmokeTrail(enabled: boolean): void;
+	setCanUseCover(toggle: boolean): void;
+	setClothPinFrames(toggle: boolean): void;
+	setControl(toggle: boolean, possiblyFlags: number): void;
+	setEveryoneIgnore(toggle: boolean): void;
+	setForcedAim(toggle: boolean): void;
+	setForcedZoom(toggle: boolean): void;
+	setForceSkipAimIntro(toggle: boolean): void;
+	setHasReserveParachute(): void;
+	setLockon(toggle: boolean): void;
+	setLockonRangeOverride(range: number): void;
+	setMaxArmour(value: number): void;
+	setMayNotEnterAnyVehicle(): void;
+	setMayOnlyEnterThisVehicle(vehicle: Handle): void;
+	setMeleeWeaponDamageModifier(modifier: number): void;
+	setModel(model: Hash): void;
+	setNoiseMultiplier(multiplier: number): void;
+	setParachuteModelOverride(model: Hash): void;
+	setParachutePackModelOverride(model: Hash): void;
+	setParachutePackTintIndex(tintIndex: number): void;
+	setParachuteSmokeTrailColor(r: number, g: number, b: number): void;
+	setParachuteVariationOverride(p1: number, p2: any, p3: any, p4: boolean): void;
+	setPoliceIgnore(toggle: boolean): void;
+	setReserveParachuteTintIndex(tintIndex: number): void;
+	setSimulateAiming(toggle: boolean): void;
+	setSneakingNoiseMultiplier(multiplier: number): void;
+	setSprint(toggle: boolean): void;
+	setStealthPerceptionModifier(value: number): void;
+	setTeam(team: number): void;
+	setVehicleDamageModifier(damageAmount: number): void;
+	setVehicleDefenseModifier(modifier: number): void;
+	setVoiceAttribute(attribute: any, value: any): void; // TODO
+	setWantedCentrePosition(x: number, y: number, z: number): void;
+	setWantedLevel(wantedLevel: number, disableNoMission: boolean): void;
+	setWantedLevelNoDrop(wantedLevel: number, p2: boolean): void;
+	setWantedLevelNow(p1: boolean): void;
+	setWeaponDamageModifier(damageAmount: number): void;
+	setWeaponDefenseModifier(modifier: number): void;
+	taskGotoOffset(p1: any, p2: any, x: number, y: number, z: number, duration: number): void;
+	taskGoToWhileAimingAtEntity(entityToWalkTo: Handle, entityToAimAt: Handle, speed: number, shootatEntity: boolean,
+	 p5: number, p6: number, p7: boolean, p8: boolean, firingPattern: Hash): void;
+	taskVehicleShootAt(target: Handle, p2: number): void;
+	updateTaskSweepAim(entity: Handle): void;
 }
 
 interface TextLabelMp extends EntityMp {
@@ -1145,6 +1148,8 @@ interface VehicleMp extends EntityMp {
 		pearlescentColor: number;
 		wheelColor: number;
 	};
+	getHandling(typeName: string): number | string;
+	getDefaultHandling(typeName: string): number | string;
 	getHeliEngineHealth(): number;
 	getHeliMainRotorHealth(): number;
 	getHeliTailRotorHealth(): number;
@@ -1400,6 +1405,7 @@ interface BrowserMp {
 	markAsChat(): void;
 	reload(ignoreCache: boolean): void;
 	call(eventName: string, ...args: any[]): void;
+	callProc(procName: string, ...args: any[]): Promise<any>;
 	executeCached(code: string): void;
 }
 
@@ -1489,8 +1495,20 @@ interface KeysMp {
 interface NametagsMp {
 	enabled: boolean;
 
-	set(...value: any[]): void; // TODO
-	update(...value: any[]): void; // TODO
+	set(style: {
+		font: number;
+		outline: boolean;
+		offset: number;
+		veh_offset: number;
+		color: RGBA;
+		size: number;
+
+		hbar?: {
+			size: [number, number];
+			color: [0, 0, 0, 0];
+			bg_color: RGBA;
+		}
+	}): void;
 }
 
 interface RaycastingMp {
@@ -1504,12 +1522,35 @@ interface StorageMp {
 	flush(): void;
 }
 
+interface SystemMp {
+	isFullscreen: boolean;
+	isFocused: boolean;
+	notify(args: {
+		title: string,
+		text: string,
+		attribute: string,
+		duration: number,
+		silent: boolean
+	}): void;
+}
+
+interface UserMp {
+	preferences: UserPreferencesMp;
+}
+
+interface UserPreferencesMp {
+	lowQualityAssets: boolean;
+	language: string;
+}
+
 interface VoiceChatMp {
+	minVad: number;
 	muted: boolean;
 	readonly isAllowed: boolean;
+	readonly lastVad: number;
 
-	getPreprocessingParam(param: any): any; // TODO
-	setPreprocessingParam(param: any, value: any): void; // TODO
+	getPreprocessingParam(param: number): any; // TODO
+	setPreprocessingParam(param: number, value: any): void; // TODO
 }
 
 // -------------------------------------------------------------------------
@@ -2884,6 +2925,9 @@ interface GameTimeMp {
 	pauseClock(toggle: boolean): void;
 	setClockDate(day: number, month: number, year: number): void;
 	setClockTime(hour: number, minute: number, second: number): void;
+
+	// RAGE.MP extensions
+	serverTickCount: number;
 }
 
 interface GameUiMp {
@@ -3136,7 +3180,14 @@ interface GameVehicleMp {
 	stopPlaybackRecordedVehicle(p0: any): void;
 	switchTrainTrack(intersectionId: number, state: boolean): any;
 	unpausePlaybackRecordedVehicle(p0: any): void;
+
+	// RAGE.MP extensions
+	repairOnExtraToggle: boolean;
 	defaultEngineBehaviour: boolean;
+
+	addModelOverride(model: string, replaceToModel: string): void;
+	clearModelOverrides(): void;
+	removeModelOverride(model: string): void;
 }
 
 interface GameWaterMp {
@@ -3294,15 +3345,16 @@ interface CheckpointMpPool extends EntityMpPool<CheckpointMp> {
 
 interface ColshapeMpPool extends EntityMpPool<ColshapeMp> {
 	newCircle(x: number, y: number, range: number, dimension?: number): ColshapeMp;
-	newCuboid(x: number, y: number, z: number, width: number, depth: number, height: number): ColshapeMp;
-	newRectangle(x: number, y: number, width: number, height: number): ColshapeMp;
+	newCuboid(x: number, y: number, z: number, width: number, depth: number, height: number, dimension?: number): ColshapeMp;
+	newRectangle(x: number, y: number, width: number, height: number, dimension?: number): ColshapeMp;
 	newSphere(x: number, y: number, z: number, range: number, dimension?: number): ColshapeMp;
-	newTube(x: number, y: number, z: number, range: number, height: number): ColshapeMp;
+	newTube(x: number, y: number, z: number, range: number, height: number, dimension?: number): ColshapeMp;
 }
 
 interface EntityMpPool<TEntity> {
 	readonly length: number;
 	readonly size: number;
+	streamed: TEntity[];
 
 	apply(fn: (...args: any[]) => void, ...args: any[]): void;
 	at(index: number): TEntity;
@@ -3314,17 +3366,62 @@ interface EntityMpPool<TEntity> {
 	forEachInRange(position: Vector3Mp, range: number, fn: (entity: TEntity) => void): void;
 	forEachInDimension(position: Vector3Mp, range: number, dimension: number, fn: (entity: TEntity) => void): void;
 	forEachInStreamRange(fn: (entity: TEntity) => void): void;
-	getClosest(position: Vector3Mp, amount?:number): TEntity[];
+	getClosest(position: Vector3Mp): TEntity
+	getClosest(position: Vector3Mp, limit: number): TEntity[]
 	toArray(): TEntity[];
 }
 
 interface EventMpPool {
 	addDataHandler(keyName: string, callback: (...args: any[]) => void): void;
+
+	add(eventName: RageEnums.EventKey.BROWSER_CREATED, callback: (browser: BrowserMp) => void): void;
+	add(eventName: RageEnums.EventKey.BROWSER_DOM_READY, callback: (browser: BrowserMp) => void): void;
+	add(eventName: RageEnums.EventKey.BROWSER_LOADING_FAILED, callback: (browser: BrowserMp) => void): void;
+	add(eventName: RageEnums.EventKey.CLICK, callback: (x: number, y: number, upOrDown: string, leftOrRight: string, relativeX: number, relativeY: number, worldPosition: Vector3MpLike, hitEntity: number) => void): void;
+	add(eventName: RageEnums.EventKey.CONSOLE_COMMAND, callback: (command: string) => void): void;
+	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_CREATED, callback: (dummyType: number, dummy: DummyEntity) => void): void;
+	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_DESTROYED, callback: (dummyType: number, dummy: DummyEntity) => void): void;
+	add(eventName: RageEnums.EventKey.ENTITY_CONTROLLER_CHANGE, callback: (entity: EntityMp, newController: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.ENTITY_CREATED, callback: (entity: EntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.ENTITY_STREAM_IN, callback: (entity: EntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.ENTITY_STREAM_OUT, callback: (entity: EntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.GUI_READY, callback: () => void): void;
+	add(eventName: RageEnums.EventKey.INCOMING_DAMAGE, callback: (sourceEntity: EntityMp, sourcePlayer: PlayerMp, targetEntity: EntityMp, weapon: number, boneIndex: number, damage: number) => void): void;
+	add(eventName: RageEnums.EventKey.OUTGOING_DAMAGE, callback: (sourceEntity: EntityMp, targetEntity: EntityMp, targetPlayer: PlayerMp, weapon: number, boneIndex: number, damage: number) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_CHAT, callback: (text: string) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_CREATE_WAYPOINT, callback: (position: Vector3Mp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_COMMAND, callback: (command: string) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_DEATH, callback: (player: PlayerMp, reason: number, killer: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_ENTER_CHECKPOINT, callback: (checkpoint: CheckpointMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_ENTER_COLSHAPE, callback: (colshape: ColshapeMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_ENTER_VEHICLE, callback: (vehicle: VehicleMp, seat: number) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_EXIT_CHECKPOINT, callback: (checkpoint: CheckpointMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_EXIT_COLSHAPE, callback: (colshape: ColshapeMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_JOIN, callback: (player: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_LEAVE_VEHICLE, callback: (vehicle: VehicleMp, seat: number) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_QUIT, callback: (player: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_REACH_WAYPOINT, callback: (...args: any[]) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_READY, callback: () => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_REMOVE_WAYPOINT, callback: (...args: any[]) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_RESURRECT, callback: () => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_RULE_TRIGGERED, callback: (rule: string, counter: number) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_SPAWN, callback: (player: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_START_TALKING, callback: (player: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_STOP_TALKING, callback: (player: PlayerMp) => void): void;
+	add(eventName: RageEnums.EventKey.PLAYER_WEAPON_SHOT, callback: (targetPosition: Vector3Mp, targetEntity?: undefined | EntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.RENDER, callback: (nametags: [PlayerMp, number, number, number][]) => void): void;
+	add(eventName: RageEnums.EventKey.VEHICLE_DEATH, callback: (vehicle: VehicleMp) => void): void;
+
 	add(eventName: RageEnums.EventKey | string, callback: (...args: any[]) => void): void;
 	add(events: ({ [name: string]: (...args: any[]) => void; })): void;
+	addProc(procName: string, callback: (...args: any[]) => void): void;
+	addProc(procs: ({ [name: string]: (...args: any[]) => void; })): void;
 	call(eventName: string, ...args: any[]): void;
+	callRemoteProc(procName: string, ...args: any[]): Promise<any>;
 	callRemoteUnreliable(eventName: string, ...args: any[]): void;
 	callRemote(eventName: string, ...args: any[]): void;
+	cancelPendingRpc(procName?: string): void;
+	hasPendingRpc(procName?: string): boolean;
 	remove(eventName: string, handler?: (...args: any[]) => void): void;
 	remove(eventNames: string[]): void;
 }
@@ -3350,7 +3447,7 @@ interface ObjectMpPool extends EntityMpPool<ObjectMp> {
 		dimension?: number,
 		rotation?: Vector3Mp
 	}): ObjectMp;
-	newWeak(...args: any): ObjectMp; // TODO
+	newWeak(handle: number): ObjectMp;
 }
 
 interface PedMpPool extends EntityMpPool<PedMp> {
@@ -3391,8 +3488,16 @@ interface VehicleMpPool extends EntityMpPool<VehicleMp> {
 // Additional MP types
 // -------------------------------------------------------------------------
 
+interface Vector3MpLike {
+	x: number;
+	y: number;
+	z: number;
+}
+
 interface Vector3Mp {
-	new(x: number, y: number, z: number): Vector3Mp;
+	new(vector: Vector3MpLike): Vector3Mp;
+	new(vector: [number, number, number]): Vector3Mp;
+	new(x?: number, y?: number, z?: number): Vector3Mp;
 
 	x: number;
 	y: number;
@@ -3400,13 +3505,25 @@ interface Vector3Mp {
 
 	add(value: number): Vector3Mp;
   add(vector3: Vector3Mp): Vector3Mp;
+  angleTo(number: Vector3Mp): number;
+	clone(): Vector3Mp;
+	cross(vector3: Vector3MpLike): Vector3Mp;
 	divide(value: number): Vector3Mp;
 	divide(vector3: Vector3Mp): Vector3Mp;
+	dot(vector3: Vector3MpLike): number;
+	equals(vector3: Vector3MpLike): boolean;
 	length(): number;
+	negative(): Vector3Mp;
+	max(): Vector3Mp;
+	min(): Vector3Mp;
 	multiply(value: number): Vector3Mp;
 	multiply(vector3: Vector3Mp): Vector3Mp;
 	subtract(value: number): Vector3Mp;
 	subtract(vector3: Vector3Mp): Vector3Mp;
+	toAngles(): [number, number];
+	toArray(): [number, number, number];
+	toArray(limit: number): number[];
+	toString(): string;
 	unit(): Vector3Mp;
 }
 
