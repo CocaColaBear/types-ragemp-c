@@ -365,6 +365,7 @@ interface ObjectMp extends EntityMp {
 	isWeak: boolean;
 	notifyStreaming: boolean;
 	streamingRange: number;
+	rotation: Vector3Mp;
 
 	hasBeenBroken(): boolean;
 	isVisible(): boolean;
@@ -3362,13 +3363,18 @@ interface EntityMpPool<TEntity> {
 	atRemoteId(remoteId: number): TEntity;
 	exists(entity: TEntity | number): boolean;
 	forEach(fn: (entity: TEntity) => void): void;
-	forEachFast(fn: (entity: TEntity) => void): void;
 	forEachInRange(position: Vector3Mp, range: number, fn: (entity: TEntity) => void): void;
 	forEachInDimension(position: Vector3Mp, range: number, dimension: number, fn: (entity: TEntity) => void): void;
 	forEachInStreamRange(fn: (entity: TEntity) => void): void;
 	getClosest(position: Vector3Mp): TEntity
 	getClosest(position: Vector3Mp, limit: number): TEntity[]
 	toArray(): TEntity[];
+	toArrayFast(): TEntity[];
+
+	/**
+		@deprecated (1.1+) considering optimizations applied to the reimplemented mp.Pool.forEach in this update without side effects, it's not longer required; for now it's an alias to forEach.
+	*/
+	forEachFast(fn: (entity: TEntity) => void): void;
 }
 
 interface EventMpPool {
