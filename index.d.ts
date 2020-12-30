@@ -928,6 +928,15 @@ interface PedBaseMp extends EntityMp {
 
 interface PedMp extends PedBaseMp {
 	spawnPosition: Vector3Mp;
+	/**
+	 * Set head overlay for ped (does not take values to set the overlay color).
+	 * 
+	 * https://wiki.rage.mp/index.php?title=Player::setHeadOverlay
+	 * @param overlayID ID overlay ranges from 0 to 12.
+	 * @param index Index from 0 to _GET_NUM_OVERLAY_VALUES(overlayID)-1.
+	 * @param opacity Opacity from 0.0 to 1.0.
+	 */
+	setHeadOverlay(overlayID: number, index: number, opacity: number): void;
 }
 
 interface PickupMp extends EntityMp {
