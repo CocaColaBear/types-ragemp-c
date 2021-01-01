@@ -351,7 +351,17 @@ interface ColshapeMp extends EntityMp {
 }
 
 interface DummyEntityMp {
-	readonly dimension: number;
+	// TODO (temporary solution):
+	// Since this is a very abstract concept, it is not at all a familiar essence, but it has most of its properties.
+	// The easiest option is, of course, to inherit the EntityMpPool interface, but this will add
+	// non-existent methods and parameters associated with the dimension and position.
+	// It is proposed in the future to introduce a more abstract concept than an entity, which will have only an ID, a type and several basic
+	// methods such as deletion, enumeration and transformation into an array. The same goes for the entity pool.
+
+	readonly dummyType: number;
+  readonly id: number;
+  readonly remoteId: number;
+  readonly type: string;
 
 	getVariable(value: string): any;
 }
@@ -3441,8 +3451,20 @@ interface EventMpPool {
 	remove(eventNames: string[]): void;
 }
 
-interface DummyEntityMpPool extends EntityMpPool<DummyEntityMp> {
-	forEachByType(dummyEntityType: number, fn: (entity: DummyEntityMp) => void): void;
+interface DummyEntityMpPool {
+	// TODO (temporary solution, see interface DummyEntityMp).
+
+	readonly length: number;
+	readonly size: number;
+
+	apply(fn: (...args: any[]) => void, ...args: any[]): void;
+	at(index: number): DummyEntityMp;
+	atRemoteId(remoteId: number): DummyEntityMp;
+	exists(entity: DummyEntityMp | number): boolean;
+	forEach(fn: (entity: DummyEntityMp) => void): void;
+	forEachByType(dummyType: number, fn: (entity: DummyEntityMp) => void): void;
+	toArray(): DummyEntityMp[];
+	toArrayFast(): DummyEntityMp[];
 }
 
 interface MarkerMpPool extends EntityMpPool<MarkerMp> {
