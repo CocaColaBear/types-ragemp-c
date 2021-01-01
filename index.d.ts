@@ -350,7 +350,7 @@ interface ColshapeMp extends EntityMp {
 	triggered: boolean;
 }
 
-interface DummyEntity {
+interface DummyEntityMp {
 	readonly dimension: number;
 
 	getVariable(value: string): any;
@@ -3385,8 +3385,8 @@ interface EventMpPool {
 	add(eventName: RageEnums.EventKey.BROWSER_LOADING_FAILED, callback: (browser: BrowserMp) => void): void;
 	add(eventName: RageEnums.EventKey.CLICK, callback: (x: number, y: number, upOrDown: string, leftOrRight: string, relativeX: number, relativeY: number, worldPosition: Vector3MpLike, hitEntity: number) => void): void;
 	add(eventName: RageEnums.EventKey.CONSOLE_COMMAND, callback: (command: string) => void): void;
-	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_CREATED, callback: (dummyType: number, dummy: DummyEntity) => void): void;
-	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_DESTROYED, callback: (dummyType: number, dummy: DummyEntity) => void): void;
+	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_CREATED, callback: (dummyType: number, dummy: DummyEntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_DESTROYED, callback: (dummyType: number, dummy: DummyEntityMp) => void): void;
 	add(eventName: RageEnums.EventKey.ENTITY_CONTROLLER_CHANGE, callback: (entity: EntityMp, newController: PlayerMp) => void): void;
 	add(eventName: RageEnums.EventKey.ENTITY_CREATED, callback: (entity: EntityMp) => void): void;
 	add(eventName: RageEnums.EventKey.ENTITY_STREAM_IN, callback: (entity: EntityMp) => void): void;
@@ -3432,8 +3432,8 @@ interface EventMpPool {
 	remove(eventNames: string[]): void;
 }
 
-interface DummyEntityMpPool extends EntityMpPool<DummyEntity> {
-	forEachByType(fn: (dummyEntity: DummyEntity) => void): void;
+interface DummyEntityMpPool extends EntityMpPool<DummyEntityMp> {
+	forEachByType(fn: (dummyEntity: DummyEntityMp) => void): void;
 }
 
 interface MarkerMpPool extends EntityMpPool<MarkerMp> {
