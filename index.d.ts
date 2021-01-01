@@ -3442,7 +3442,7 @@ interface EventMpPool {
 }
 
 interface DummyEntityMpPool extends EntityMpPool<DummyEntityMp> {
-	forEachByType(fn: (dummyEntity: DummyEntityMp) => void): void;
+	forEachByType(dummyEntityType: number, fn: (entity: DummyEntityMp) => void): void;
 }
 
 interface MarkerMpPool extends EntityMpPool<MarkerMp> {
