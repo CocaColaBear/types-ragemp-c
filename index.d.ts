@@ -350,8 +350,18 @@ interface ColshapeMp extends EntityMp {
 	triggered: boolean;
 }
 
-interface DummyEntity {
-	readonly dimension: number;
+interface DummyEntityMp {
+	// TODO (temporary solution):
+	// Since this is a very abstract concept, it is not at all a familiar essence, but it has most of its properties.
+	// The easiest option is, of course, to inherit the EntityMpPool interface, but this will add
+	// non-existent methods and parameters associated with the dimension and position.
+	// It is proposed in the future to introduce a more abstract concept than an entity, which will have only an ID, a type and several basic
+	// methods such as deletion, enumeration and transformation into an array. The same goes for the entity pool.
+
+	readonly dummyType: number;
+	readonly id: number;
+	readonly remoteId: number;
+	readonly type: string;
 
 	getVariable(value: string): any;
 }
@@ -3385,8 +3395,8 @@ interface EventMpPool {
 	add(eventName: RageEnums.EventKey.BROWSER_LOADING_FAILED, callback: (browser: BrowserMp) => void): void;
 	add(eventName: RageEnums.EventKey.CLICK, callback: (x: number, y: number, upOrDown: string, leftOrRight: string, relativeX: number, relativeY: number, worldPosition: Vector3MpLike, hitEntity: number) => void): void;
 	add(eventName: RageEnums.EventKey.CONSOLE_COMMAND, callback: (command: string) => void): void;
-	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_CREATED, callback: (dummyType: number, dummy: DummyEntity) => void): void;
-	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_DESTROYED, callback: (dummyType: number, dummy: DummyEntity) => void): void;
+	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_CREATED, callback: (dummyType: number, dummy: DummyEntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.DUMMY_ENTITY_DESTROYED, callback: (dummyType: number, dummy: DummyEntityMp) => void): void;
 	add(eventName: RageEnums.EventKey.ENTITY_CONTROLLER_CHANGE, callback: (entity: EntityMp, newController: PlayerMp) => void): void;
 	add(eventName: RageEnums.EventKey.ENTITY_CREATED, callback: (entity: EntityMp) => void): void;
 	add(eventName: RageEnums.EventKey.ENTITY_STREAM_IN, callback: (entity: EntityMp) => void): void;
@@ -3432,8 +3442,20 @@ interface EventMpPool {
 	remove(eventNames: string[]): void;
 }
 
-interface DummyEntityMpPool extends EntityMpPool<DummyEntity> {
-	forEachByType(fn: (dummyEntity: DummyEntity) => void): void;
+interface DummyEntityMpPool extends EntityMpPool<DummyEntityMp> {
+	// TODO (temporary solution, see interface DummyEntityMp).
+
+	readonly length: number;
+	readonly size: number;
+
+	apply(fn: (...args: any[]) => void, ...args: any[]): void;
+	at(index: number): DummyEntityMp;
+	atRemoteId(remoteId: number): DummyEntityMp;
+	exists(entity: DummyEntityMp | number): boolean;
+	forEach(fn: (entity: DummyEntityMp) => void): void;
+	forEachByType(dummyType: number, fn: (entity: DummyEntityMp) => void): void;
+	toArray(): DummyEntityMp[];
+	toArrayFast(): DummyEntityMp[];
 }
 
 interface MarkerMpPool extends EntityMpPool<MarkerMp> {
