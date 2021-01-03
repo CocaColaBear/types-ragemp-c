@@ -3443,19 +3443,7 @@ interface EventMpPool {
 }
 
 interface DummyEntityMpPool extends EntityMpPool<DummyEntityMp> {
-	// TODO (temporary solution, see interface DummyEntityMp).
-
-	readonly length: number;
-	readonly size: number;
-
-	apply(fn: (...args: any[]) => void, ...args: any[]): void;
-	at(index: number): DummyEntityMp;
-	atRemoteId(remoteId: number): DummyEntityMp;
-	exists(entity: DummyEntityMp | number): boolean;
-	forEach(fn: (entity: DummyEntityMp) => void): void;
 	forEachByType(dummyType: number, fn: (entity: DummyEntityMp) => void): void;
-	toArray(): DummyEntityMp[];
-	toArrayFast(): DummyEntityMp[];
 }
 
 interface MarkerMpPool extends EntityMpPool<MarkerMp> {
