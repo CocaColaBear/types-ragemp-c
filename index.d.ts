@@ -1506,7 +1506,7 @@ interface NametagsMp {
 
 		hbar?: {
 			size: [number, number];
-			color: [0, 0, 0, 0];
+			color: RGBA;
 			bg_color: RGBA;
 		}
 	}): void;
