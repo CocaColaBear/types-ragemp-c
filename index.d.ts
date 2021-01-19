@@ -1562,6 +1562,7 @@ interface VoiceChatMp {
 
 	getPreprocessingParam(param: number): any; // TODO
 	setPreprocessingParam(param: number, value: any): void; // TODO
+	cleanupAndReload(p0: boolean, p1: boolean, p2: boolean, p3: boolean): void;
 }
 
 // -------------------------------------------------------------------------
