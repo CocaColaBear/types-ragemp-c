@@ -184,7 +184,7 @@ interface EntityMp {
 		boneIndex: number, isRel: number, p9: boolean, highForce: boolean, p11: boolean, p12: boolean): void;
 	applyForceToCenterOfMass(forceType: number, x: number, y: number, z: number, p4: boolean, isRel: boolean,
 		highForce: boolean, p7: boolean): void;
-	attachTo(entity: Handle, boneIndex: number, xPos: number, yPos: number, zPos: number, xRot: number, yRot: number, 
+	attachTo(entity: Handle, boneIndex: number, xPos: number, yPos: number, zPos: number, xRot: number, yRot: number,
 		zRot: number, p8: boolean, useSoftPinning: boolean, collision: boolean, isPed: boolean, vertexIndex: number,
 		fixedRot: boolean): void;
 	attachToPhysically(entity: Handle, boneIndex1: number, boneIndex2: number, xPos1: number, yPos1: number,
@@ -941,7 +941,7 @@ interface PedMp extends PedBaseMp {
 }
 
 interface PickupMp extends EntityMp {
-	
+
 }
 
 interface PlayerMp extends PedBaseMp {
@@ -1091,7 +1091,7 @@ interface VehicleMp extends EntityMp {
 	gear: number;
 	rpm: number;
 	steeringAngle: number;
-	
+
 	addUpsidedownCheck(): void;
 	areAllWindowsIntact(): boolean;
 	attachToCargobob(cargobob: Handle, p1: number, x: number, y: number, z: number): void;
@@ -1562,6 +1562,7 @@ interface VoiceChatMp {
 
 	getPreprocessingParam(param: number): any; // TODO
 	setPreprocessingParam(param: number, value: any): void; // TODO
+	cleanupAndReload(p0: boolean, p1: boolean, p2: boolean): void;
 }
 
 // -------------------------------------------------------------------------
@@ -2333,6 +2334,7 @@ interface GameGraphicsMp {
 	world3dToScreen2d(worldX: number, worldY: number, worldZ: number): {
 		x: number; y: number;
 	};
+	setLightsState(id: number, toggle: boolean): void;
 }
 
 interface GameInteriorMp {

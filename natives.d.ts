@@ -27207,7 +27207,7 @@ declare namespace RageEnums.Natives {
 		* @param {Any} p0
 		* @returns {Void} Void
 		*/
-		_0xD8295AF639FD9CB8 = "0xD8295AF639FD9CB8",
+		_SWITCH_IN_PLAYER = "0xD8295AF639FD9CB8",
 		/**
 		* @returns {Any} Any
 		*/
@@ -35521,5 +35521,5 @@ declare namespace RageEnums.Natives {
 		*/
 		SET_ZONE_ENABLED = "0xBA5ECEEA120E5611"
 	}
-	
+
 }
