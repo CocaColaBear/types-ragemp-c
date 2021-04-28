@@ -15,74 +15,11 @@ declare namespace RageEnums {
 		PROLOGUE_VAULT_ALARMS = 'PROLOGUE_VAULT_ALARMS'
 	}
 
-	const enum EventKey {
-		BROWSER_CREATED = "browserCreated",
-		BROWSER_DOM_READY = "browserDomReady",
-		BROWSER_LOADING_FAILED = "browserLoadingFailed",
-		CLICK = "click",
-		CONSOLE_COMMAND = "consoleCommand",
-		DUMMY_ENTITY_CREATED = "dummyEntityCreated",
-		DUMMY_ENTITY_DESTROYED = "dummyEntityDestroyed",
-		ENTITY_CONTROLLER_CHANGE = "entityControllerChange",
-		ENTITY_CREATED = "entityCreated",
-		ENTITY_STREAM_IN = "entityStreamIn",
-		ENTITY_STREAM_OUT = "entityStreamOut",
-		GUI_READY = "guiReady",
-		INCOMING_DAMAGE = "incomingDamage",
-		OUTGOING_DAMAGE = "outgoingDamage",
-		PLAYER_CHAT = "playerChat",
-		PLAYER_CREATE_WAYPOINT = "playerCreateWaypoint",
-		PLAYER_COMMAND = "playerCommand",
-		PLAYER_DEATH = "playerDeath",
-		PLAYER_ENTER_CHECKPOINT = "playerEnterCheckpoint",
-		PLAYER_ENTER_COLSHAPE = "playerEnterColshape",
-		PLAYER_ENTER_VEHICLE = "playerEnterVehicle",
-		PLAYER_EXIT_CHECKPOINT = "playerExitCheckpoint",
-		PLAYER_EXIT_COLSHAPE = "playerExitColshape",
-		PLAYER_JOIN = "playerJoin",
-		PLAYER_LEAVE_VEHICLE = "playerLeaveVehicle",
-		PLAYER_QUIT = "playerQuit",
-		PLAYER_REACH_WAYPOINT = "playerReachWaypoint",
-		PLAYER_READY = "playerReady",
-		PLAYER_REMOVE_WAYPOINT = "playerRemoveWaypoint",
-		PLAYER_RESURRECT = "playerResurrect",
-		PLAYER_RULE_TRIGGERED = "playerRuleTriggered",
-		PLAYER_SPAWN = "playerSpawn",
-		PLAYER_START_TALKING = "playerStartTalking",
-		PLAYER_STOP_TALKING = "playerStopTalking",
-		PLAYER_WEAPON_SHOT = "playerWeaponShot",
-		RENDER = "render",
-		VEHICLE_DEATH = "vehicleDeath"
-	}
-	
-	const enum HudComponent {
-		HUD = 0,
-		WANTED_STARS = 1,
-		WEAPON_ICON = 2,
-		CASH = 3,
-		MP_CASH = 4,
-		MP_MESSAGE = 5,
-		VEHICLE_NAME = 6,
-		AREA_NAME = 7,
-		VEHICLE_CLASS = 8,
-		STREET_NAME = 9,
-		HELP_TEXT = 10,
-		FLOATING_HELP_TEXT_1 = 11,
-		FLOATING_HELP_TEXT_2 = 12,
-		CASH_CHANGE = 13,
-		RETICLE = 14,
-		SUBTITLE_TEXT = 15,
-		RADIO_STATIONS = 16,
-		SAVING_GAME = 17,
-		GAME_STREAM = 18,
-		WEAPON_WHEEL = 19,
-		WEAPON_WHEEL_STATS = 20
-	}
-
-	const enum ScreenshotType {
-		JPG = 0,
-		PNG = 1,
-		BMP = 2
+	const enum ConsoleVerbosity {
+		ERROR = "error",
+		FATAL = "fatal",
+		INFO = "info",
+		WARNING = "warning"
 	}
 
 	const enum Controls {
@@ -431,10 +368,73 @@ declare namespace RageEnums {
 		VEHICLE_BIKE_WINGS = 342
 	}
 
-	const enum ConsoleVerbosity {
-		ERROR = "error",
-		FATAL = "fatal",
-		INFO = "info",
-		WARNING = "warning"
+	const enum EventKey {
+		BROWSER_CREATED = "browserCreated",
+		BROWSER_DOM_READY = "browserDomReady",
+		BROWSER_LOADING_FAILED = "browserLoadingFailed",
+		CLICK = "click",
+		CONSOLE_COMMAND = "consoleCommand",
+		DUMMY_ENTITY_CREATED = "dummyEntityCreated",
+		DUMMY_ENTITY_DESTROYED = "dummyEntityDestroyed",
+		ENTITY_CONTROLLER_CHANGE = "entityControllerChange",
+		ENTITY_CREATED = "entityCreated",
+		ENTITY_STREAM_IN = "entityStreamIn",
+		ENTITY_STREAM_OUT = "entityStreamOut",
+		GUI_READY = "guiReady",
+		INCOMING_DAMAGE = "incomingDamage",
+		OUTGOING_DAMAGE = "outgoingDamage",
+		PLAYER_CHAT = "playerChat",
+		PLAYER_CREATE_WAYPOINT = "playerCreateWaypoint",
+		PLAYER_COMMAND = "playerCommand",
+		PLAYER_DEATH = "playerDeath",
+		PLAYER_ENTER_CHECKPOINT = "playerEnterCheckpoint",
+		PLAYER_ENTER_COLSHAPE = "playerEnterColshape",
+		PLAYER_ENTER_VEHICLE = "playerEnterVehicle",
+		PLAYER_EXIT_CHECKPOINT = "playerExitCheckpoint",
+		PLAYER_EXIT_COLSHAPE = "playerExitColshape",
+		PLAYER_JOIN = "playerJoin",
+		PLAYER_LEAVE_VEHICLE = "playerLeaveVehicle",
+		PLAYER_QUIT = "playerQuit",
+		PLAYER_REACH_WAYPOINT = "playerReachWaypoint",
+		PLAYER_READY = "playerReady",
+		PLAYER_REMOVE_WAYPOINT = "playerRemoveWaypoint",
+		PLAYER_RESURRECT = "playerResurrect",
+		PLAYER_RULE_TRIGGERED = "playerRuleTriggered",
+		PLAYER_SPAWN = "playerSpawn",
+		PLAYER_START_TALKING = "playerStartTalking",
+		PLAYER_STOP_TALKING = "playerStopTalking",
+		PLAYER_WEAPON_SHOT = "playerWeaponShot",
+		RENDER = "render",
+		VEHICLE_DEATH = "vehicleDeath"
+	}
+	
+	const enum HudComponent {
+		HUD = 0,
+		WANTED_STARS = 1,
+		WEAPON_ICON = 2,
+		CASH = 3,
+		MP_CASH = 4,
+		MP_MESSAGE = 5,
+		VEHICLE_NAME = 6,
+		AREA_NAME = 7,
+		VEHICLE_CLASS = 8,
+		STREET_NAME = 9,
+		HELP_TEXT = 10,
+		FLOATING_HELP_TEXT_1 = 11,
+		FLOATING_HELP_TEXT_2 = 12,
+		CASH_CHANGE = 13,
+		RETICLE = 14,
+		SUBTITLE_TEXT = 15,
+		RADIO_STATIONS = 16,
+		SAVING_GAME = 17,
+		GAME_STREAM = 18,
+		WEAPON_WHEEL = 19,
+		WEAPON_WHEEL_STATS = 20
+	}
+
+	const enum ScreenshotType {
+		JPG = 0,
+		PNG = 1,
+		BMP = 2
 	}
 }
