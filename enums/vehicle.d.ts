@@ -450,4 +450,29 @@ declare namespace RageEnums.Vehicle {
 		BOBBLE_HAND = 'bobble_hand',
 		CHASSIS_CONTROL = 'chassis_Control',
 	}
+
+	const enum Classes {
+		COMPACTS,
+		SEDANS,
+		SUVS,
+		COUPES,
+		MUSCLE,
+		SPORTS_CLASSIC,
+		SPORTS,
+		SUPER,
+		MOTORCYCLES,
+		OFF_ROAD,
+		INDUSTRIAl,
+		UTILITY,
+		VANS,
+		CYCLES,
+		BOATS,
+		HELICOPTERS,
+		PLANES,
+		SERVICE,
+		EMERGENCY,
+		MILITARY,
+		COMMERCIAl,
+		TRAINS
+	}
 }
