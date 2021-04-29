@@ -5,23 +5,6 @@
 /// <reference path="weapon_hashes.d.ts" />
 /// <reference path="cause_of_death.d.ts" />
 
-// v2
-/// <reference path="enums/alarms.d.ts" />
-/// <reference path="enums/clothes.d.ts" />
-/// <reference path="enums/console.d.ts" />
-/// <reference path="enums/controls.d.ts" />
-/// <reference path="enums/event.d.ts" />
-/// <reference path="enums/explosions.d.ts" />
-/// <reference path="enums/hud.d.ts" />
-/// <reference path="enums/inputGroup.d.ts" />
-/// <reference path="enums/markers.d.ts" />
-/// <reference path="enums/notification.d.ts" />
-/// <reference path="enums/pickups.d.ts" />
-/// <reference path="enums/props.d.ts" />
-/// <reference path="enums/screenshot.d.ts" />
-/// <reference path="enums/vehicle.d.ts" />
-/// <reference path="enums/weather.d.ts" />
-
 // -------------------------------------------------------------------------
 // Custom types
 // -------------------------------------------------------------------------
