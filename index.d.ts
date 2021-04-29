@@ -20,6 +20,7 @@
 /// <reference path="enums/props.d.ts" />
 /// <reference path="enums/screenshot.d.ts" />
 /// <reference path="enums/vehicle.d.ts" />
+/// <reference path="enums/weather.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
