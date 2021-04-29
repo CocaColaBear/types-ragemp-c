@@ -12,6 +12,7 @@
 /// <reference path="enums/controls.d.ts" />
 /// <reference path="enums/event.d.ts" />
 /// <reference path="enums/explosions.d.ts" />
+/// <reference path="enums/hud.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
