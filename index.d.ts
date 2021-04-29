@@ -5,6 +5,10 @@
 /// <reference path="weapon_hashes.d.ts" />
 /// <reference path="cause_of_death.d.ts" />
 
+// v2
+/// <reference path="enums/alarms.d.ts" />
+
+
 // -------------------------------------------------------------------------
 // Custom types
 // -------------------------------------------------------------------------
