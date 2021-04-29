@@ -19,6 +19,7 @@
 /// <reference path="enums/pickups.d.ts" />
 /// <reference path="enums/props.d.ts" />
 /// <reference path="enums/screenshot.d.ts" />
+/// <reference path="enums/vehicle.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
