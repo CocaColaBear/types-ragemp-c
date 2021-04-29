@@ -18,6 +18,7 @@
 /// <reference path="enums/notification.d.ts" />
 /// <reference path="enums/pickups.d.ts" />
 /// <reference path="enums/props.d.ts" />
+/// <reference path="enums/screenshot.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types

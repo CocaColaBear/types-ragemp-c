@@ -1,10 +1,4 @@
 declare namespace RageEnums {
-	const enum ScreenshotType {
-		JPG = 0,
-		PNG = 1,
-		BMP = 2
-	}
-
 	const enum VehicleBones {
 		CHASSIS = 'chassis',
 		CHASSIS_LOWLOD = 'chassis_lowlod',
