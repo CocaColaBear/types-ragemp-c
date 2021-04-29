@@ -16,6 +16,7 @@
 /// <reference path="enums/inputGroup.d.ts" />
 /// <reference path="enums/markers.d.ts" />
 /// <reference path="enums/notification.d.ts" />
+/// <reference path="enums/pickups.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
