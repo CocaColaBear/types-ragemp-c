@@ -10,6 +10,7 @@
 /// <reference path="enums/clothes.d.ts" />
 /// <reference path="enums/console.d.ts" />
 /// <reference path="enums/controls.d.ts" />
+/// <reference path="enums/event.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
