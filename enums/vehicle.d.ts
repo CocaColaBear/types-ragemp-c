@@ -475,4 +475,17 @@ declare namespace RageEnums.Vehicle {
 		COMMERCIAl,
 		TRAINS
 	}
+	
+	const enum Flags {
+		PRESSINGHORN = 1,
+		SHOOTING = 2,
+		SIRENACTIVE = 4,
+		VEHICLEDEAD = 8,
+		AIMING = 16,
+		DRIVER = 32,
+		HASAIMDATA = 64,
+		BURNOUT = 128,
+		EXITINGFVEHICLE = 256,
+		PLAYERDEAD = 512
+	}
 }
