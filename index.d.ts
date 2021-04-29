@@ -14,6 +14,7 @@
 /// <reference path="enums/explosions.d.ts" />
 /// <reference path="enums/hud.d.ts" />
 /// <reference path="enums/inputGroup.d.ts" />
+/// <reference path="enums/markers.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
