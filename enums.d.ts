@@ -1,11 +1,4 @@
 declare namespace RageEnums {
-	const enum ConsoleVerbosity {
-		ERROR = "error",
-		FATAL = "fatal",
-		INFO = "info",
-		WARNING = "warning"
-	}
-
 	const enum Controls {
 		/**
 		 * V (Back on Xbox)
