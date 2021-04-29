@@ -13,6 +13,7 @@
 /// <reference path="enums/event.d.ts" />
 /// <reference path="enums/explosions.d.ts" />
 /// <reference path="enums/hud.d.ts" />
+/// <reference path="enums/inputGroup.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
