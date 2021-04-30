@@ -1301,7 +1301,7 @@ interface VehicleMp extends EntityMp {
 	setCreatesMoneyPickupsWhenExploded(toggle: boolean): void;
 	setCustomPrimaryColour(r: number, g: number, b: number): void;
 	setCustomSecondaryColour(r: number, g: number, b: number): void;
-	setDamage(xOffset: number, yOffset: number, zOffset: number, damage: number, radius: number, p5: boolean): void;
+	setDamage(xOffset: number, yOffset: number, zOffset: number, damage: number, radius: number, focusOnModel: boolean): void;
 	setDeformationFixed(): void;
 	setDirtLevel(dirtLevel: number): void;
 	setDisablePetrolTankDamage(toggle: boolean): void;
