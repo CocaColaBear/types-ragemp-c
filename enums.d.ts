@@ -1,4 +1,5 @@
 /// <reference path="enums/alarms.d.ts" />
+/// <reference path="enums/causeOfDeath.d.ts" />
 /// <reference path="enums/clothes.d.ts" />
 /// <reference path="enums/console.d.ts" />
 /// <reference path="enums/controls.d.ts" />

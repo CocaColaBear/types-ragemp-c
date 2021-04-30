@@ -2,8 +2,6 @@
 /// <reference path="natives.d.ts" />
 /// <reference path="ped_hashes.d.ts" />
 /// <reference path="vehicle_hashes.d.ts" />
-/// <reference path="weapon_hashes.d.ts" />
-/// <reference path="cause_of_death.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
