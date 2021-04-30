@@ -9,6 +9,7 @@
 /// <reference path="enums/inputGroup.d.ts" />
 /// <reference path="enums/markers.d.ts" />
 /// <reference path="enums/notification.d.ts" />
+/// <reference path="enums/ped.d.ts" />
 /// <reference path="enums/pickups.d.ts" />
 /// <reference path="enums/props.d.ts" />
 /// <reference path="enums/screenshot.d.ts" />

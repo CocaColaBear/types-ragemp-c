@@ -1,6 +1,5 @@
 /// <reference path="enums.d.ts" />
 /// <reference path="natives.d.ts" />
-/// <reference path="ped_hashes.d.ts" />
 /// <reference path="vehicle_hashes.d.ts" />
 
 // -------------------------------------------------------------------------
