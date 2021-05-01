@@ -173,10 +173,10 @@ interface EntityMp {
 	dimension: number;
 	model: number;
 	position: Vector3Mp;
-  readonly handle: any;
-  readonly id: number;
-  readonly remoteId: number;
-  readonly type: string;
+	readonly handle: any;
+	readonly id: number;
+	readonly remoteId: number;
+	readonly type: string;
 
 	applyForceTo(forceType: number, x: number, y: number, z: number, xRot: number, yRot: number, zRot: number,
 		boneIndex: number, isRel: number, p9: boolean, highForce: boolean, p11: boolean, p12: boolean): void;
@@ -240,6 +240,21 @@ interface EntityMp {
 		w: number;
 	};
 	getRoll(): number;
+	/**
+	 * @param {number} - Int (specifies which axis rotates before the other axis in a certain order)
+	 *
+	 * Rotation Orders
+	 * <pre>
+	 * 0: ZYX
+	 * 1: YZX
+	 * 2: ZXY
+	 * 3: XZY
+	 * 4: YXZ
+	 * 5: XYZ
+	 * </pre>
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Entity::getRotation|Entity::getRotation}
+	 * */
 	getRotation(rotationOrder: number): Vector3Mp;
 	getRotationVelocity(): Vector3Mp;
 	getScript(script: Handle): Handle;
@@ -1527,6 +1542,11 @@ interface RaycastingMp {
 
 interface StorageMp {
 	data: { [key: string]: any };
+	/** Keeps data saved over resource reloads, but is cleared on reconnect.
+	 *
+	 *  {@link https://wiki.rage.mp/index.php?title=Storage.sessionData|Storage.sessionData}
+	 */
+	sessionData: unknown;
 
 	flush(): void;
 }
@@ -2733,10 +2753,46 @@ interface GameRopeMp {
 
 interface GameScriptMp {
 	doesScriptExist(scriptName: string): boolean;
-	getEventAtIndex(p0: number, eventIndex: number): number;
-	getEventdata(p0: number, eventIndex: number, eventData: number, p3: number): number;
-	getEventExists(p0: number, eventIndex: number): boolean;
-	getNumberOfEvents(p0: number): number;
+	/**
+	 * Event Group Type:
+	 *
+	 * **0** - CEventGroupScriptAI
+	 *
+	 * **1** - CEventGroupScriptNetwork
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Script::getEventAtIndex|Script::getEventAtIndex}
+	 * */
+	getEventAtIndex(eventGroup: number, eventIndex: number): number;
+	/**
+	 * Event Group Type:
+	 *
+	 * **0** - CEventGroupScriptAI
+	 *
+	 * **1** - CEventGroupScriptNetwork
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Script::getEventData|Script::getEventData}
+	 * */
+	getEventdata(eventGroup: number, eventIndex: number, eventData: number, eventDataSize: number): number;
+	/**
+	 * Event Group Type:
+	 *
+	 * **0** - CEventGroupScriptAI
+	 *
+	 * **1** - CEventGroupScriptNetwork
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Script::getEventData|Script::getEventData}
+	 * */
+	getEventExists(eventGroup: number, eventIndex: number): boolean;
+	/**
+	 * Event Group Type:
+	 *
+	 * **0** - CEventGroupScriptAI
+	 *
+	 * **1** - CEventGroupScriptNetwork
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Script::getNumberOfEvents|Script::getNumberOfEvents}
+	 * */
+	getNumberOfEvents(eventGroup: number): number;
 	getNumberOfInstancesOfStreamedScript(scriptHash: Hash): number;
 	getThreadName(threadId: number): string;
 	hasScriptLoaded(scriptName: string): boolean;
@@ -3520,8 +3576,8 @@ interface Vector3Mp {
 	z: number;
 
 	add(value: number): Vector3Mp;
-  add(vector3: Vector3Mp): Vector3Mp;
-  angleTo(number: Vector3Mp): number;
+	add(vector3: Vector3Mp): Vector3Mp;
+	angleTo(number: Vector3Mp): number;
 	clone(): Vector3Mp;
 	cross(vector3: Vector3MpLike): Vector3Mp;
 	divide(value: number): Vector3Mp;
