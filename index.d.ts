@@ -3299,7 +3299,7 @@ interface GameWeaponMp {
 	isWeaponValid(weaponHash: Hash): boolean;
 	removeAllProjectilesOfType(weaponhash: Hash, p1: boolean): void;
 	removeWeaponAsset(weaponHash: Hash): void;
-	removeWeaponComponentFromWeaponObject(p0: any, p1: any): void;
+	removeWeaponComponentFromWeaponObject(weaponObject: Handle, componentHash: Hash): void;
 	requestWeaponAsset(weaponHash: Hash, p1: number, p2: number): void;
 	requestWeaponHighDetailModel(weaponObject: Handle): void;
 	setFlashLightFadeDistance(distance: number): void;
