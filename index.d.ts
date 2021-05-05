@@ -1173,7 +1173,7 @@ interface VehicleMp extends EntityMp {
 	getLandingGearState(): number;
 	getLastPedInSeat(seatIndex: number): Handle;
 	getLayoutHash(): Hash;
-	getLightsState(lightsOn: boolean, highbeamsOn: boolean): {
+	getLightsState(lightsOn: number, highbeamsOn: number): {
 		lightsOn: boolean;
 		highbeamsOn: boolean;
 	};
