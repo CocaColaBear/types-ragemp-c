@@ -1524,8 +1524,8 @@ interface NametagsMp {
 }
 
 interface RaycastingMp {
-	testPointToPoint(startPos: Vector3Mp, endPos: Vector3Mp, ignoreEntity?: Handle, flags?: number): RaycastResult; // TODO: ignoreEntity
-	testCapsule(startPos: Vector3Mp, endPos: Vector3Mp, radius: number, ignoreEntity?: Handle, flags?: number[]): RaycastResult; // TODO: ignoreEntity
+	testPointToPoint(startPos: Vector3Mp, endPos: Vector3Mp, ignoreEntity?: EntityMp, flags?: number): RaycastResult; // TODO: ignoreEntity
+	testCapsule(startPos: Vector3Mp, endPos: Vector3Mp, radius: number, ignoreEntity?: EntityMp, flags?: number[]): RaycastResult; // TODO: ignoreEntity
 }
 
 interface StorageMp {
