@@ -2212,10 +2212,10 @@ interface GameGraphicsMp {
 	drawText(text: string, position: Array3d | Array2d,
 		data?: {
 			font: number,
-			centre: boolean,
 			color: RGBA,
 			scale: Array2d,
-			outline: boolean
+			outline: boolean,
+			centre?: boolean,
 		}
 	): void;
 	drawTvChannel(xPos: number, yPos: number, xScale: number, yScale: number, rotation: number, r: number, g: number,
