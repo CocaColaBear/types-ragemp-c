@@ -12,11 +12,11 @@ declare namespace RageEnums {
 		/**
 		 * ![](https://wiki.rage.mp//images/thumb/7/76/Markers_2.png/200px-Markers_2.png)
 		 */
-		THICK_CEVRON_UP = 2,
+		THICK_CHEVRON_UP = 2,
 		/**
 		 * ![](https://wiki.rage.mp//images/thumb/6/67/Markers_3.png/200px-Markers_3.png)
 		 */
-		THIN_CEVRON_UP = 3,
+		THIN_CHEVRON_UP = 3,
 		/**
 		 * ![](https://wiki.rage.mp//images/thumb/8/84/Markers_4.png/200px-Markers_4.png)
 		 */
@@ -36,11 +36,11 @@ declare namespace RageEnums {
 		/**
 		 * ![](https://wiki.rage.mp//images/thumb/c/c2/Markers_8.png/200px-Markers_8.png)
 		 */
-		LOST_MC_DARK = 8,
+		LOST_MC_TRANSPARENT = 8,
 		/**
 		 * ![](https://wiki.rage.mp//images/thumb/6/68/Markers_9.png/200px-Markers_9.png)
 		 */
-		LOST_MC_LIGHT = 9,
+		LOST_MC = 9,
 		/**
 		 * ![](https://wiki.rage.mp//images/thumb/7/70/Markers_10.png/200px-Markers_10.png)
 		 */
@@ -92,7 +92,7 @@ declare namespace RageEnums {
 		/**
 		 * ![](https://wiki.rage.mp//images/thumb/d/dd/Markers_22.png/200px-Markers_22.png)
 		 */
-		TRIPLE__CHEVRON_UP = 22,
+		TRIPLE_CHEVRON_UP = 22,
 		/**
 		 * ![](https://wiki.rage.mp//images/thumb/8/8a/Markers_23.png/200px-Markers_23.png)
 		 */
@@ -108,7 +108,7 @@ declare namespace RageEnums {
 		/**
 		 * ![](https://wiki.rage.mp//images/thumb/c/ca/Markers_26.png/200px-Markers_26.png)
 		 */
-		HORIZONTAL_CIRCLE_ARROW = 26,
+		HORIZONTAL_CIRCLE_SKINNY_ARROW = 26,
 		/**
 		 * ![](https://wiki.rage.mp//images/thumb/5/54/Markers_27.png/200px-Markers_27.png)
 		 */
@@ -129,5 +129,53 @@ declare namespace RageEnums {
 		 * ![](https://wiki.rage.mp//images/thumb/d/d0/Markers_31.png/200px-Markers_31.png)
 		 */
 		WOLF_HEAD = 31,
+		/**
+		 * ![](https://docs.fivem.net//markers/32.png)
+		 */
+		QUESTION_MARK = 32,
+		/**
+		 * ![](https://docs.fivem.net//markers/33.png)
+		 */
+		PLANE = 33,
+		/**
+		 * ![](https://docs.fivem.net//markers/34.png)
+		 */
+		HELICOPTER = 34,
+		/**
+		 * ![](https://docs.fivem.net//markers/35.png)
+		 */
+		BOAT = 35,
+		/**
+		 * ![](https://docs.fivem.net//markers/35.png)
+		 */
+		CAR = 36,
+		/**
+		 * ![](https://docs.fivem.net//markers/37.png)
+		 */
+		MOTORCYCLE = 37,
+		/**
+		 * ![](https://docs.fivem.net//markers/38.png)
+		 */
+		BIKE = 38,
+		/**
+		 * ![](https://docs.fivem.net//markers/39.png)
+		 */
+		TRUCK = 39,
+		/**
+		 * ![](https://docs.fivem.net//markers/40.png)
+		 */
+		PARACHUTE = 40,
+		/**
+		 * ![](https://docs.fivem.net//markers/41.png)
+		 */
+		JETPACK = 41,
+		/**
+		 * ![](https://docs.fivem.net//markers/42.png)
+		 */
+		SAWBLADE = 42,
+		/**
+		 * ![](https://docs.fivem.net//markers/43.png)
+		 */
+		CUBE = 43,
 	}
 }
