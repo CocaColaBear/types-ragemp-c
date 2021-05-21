@@ -28198,10 +28198,10 @@ declare namespace RageEnums.Natives {
 		*/
 		_0x3BAB9A4E4F2FF5C7 = "0x3BAB9A4E4F2FF5C7",
 		/**
-		* @param {Bool} p0
+		* @param {Bool} state - 0 will make the ped slowly fall asleep, 1 will slowly wake the ped up.
 		* @returns {Void} Void
 		*/
-		_0x3CA6050692BC61B0 = "0x3CA6050692BC61B0",
+		SET_PAUSE_MENU_PED_SLEEP_STATE = "0x3CA6050692BC61B0",
 		/**
 		* @param {Any} p0
 		* @param {Bool} p1
