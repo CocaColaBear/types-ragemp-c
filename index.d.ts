@@ -1,9 +1,5 @@
 /// <reference path="enums.d.ts" />
 /// <reference path="natives.d.ts" />
-/// <reference path="ped_hashes.d.ts" />
-/// <reference path="vehicle_hashes.d.ts" />
-/// <reference path="weapon_hashes.d.ts" />
-/// <reference path="cause_of_death.d.ts" />
 
 // -------------------------------------------------------------------------
 // Custom types
@@ -176,10 +172,10 @@ interface EntityMp {
 	dimension: number;
 	model: number;
 	position: Vector3Mp;
-  readonly handle: any;
-  readonly id: number;
-  readonly remoteId: number;
-  readonly type: string;
+	readonly handle: any;
+	readonly id: number;
+	readonly remoteId: number;
+	readonly type: string;
 
 	applyForceTo(forceType: number, x: number, y: number, z: number, xRot: number, yRot: number, zRot: number,
 		boneIndex: number, isRel: number, p9: boolean, highForce: boolean, p11: boolean, p12: boolean): void;
@@ -243,6 +239,21 @@ interface EntityMp {
 		w: number;
 	};
 	getRoll(): number;
+	/**
+	 * @param {number} - Int (specifies which axis rotates before the other axis in a certain order)
+	 *
+	 * Rotation Orders
+	 * <pre>
+	 * 0: ZYX
+	 * 1: YZX
+	 * 2: ZXY
+	 * 3: XZY
+	 * 4: YXZ
+	 * 5: XYZ
+	 * </pre>
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Entity::getRotation|Entity::getRotation}
+	 * */
 	getRotation(rotationOrder: number): Vector3Mp;
 	getRotationVelocity(): Vector3Mp;
 	getScript(script: Handle): Handle;
@@ -939,6 +950,17 @@ interface PedBaseMp extends EntityMp {
 
 interface PedMp extends PedBaseMp {
 	spawnPosition: Vector3Mp;
+	taskPlayAnim(animDictionary: string, animationName: string, speed: number, speedMultiplier: number, duration: number,
+	             flag: number, playbackRate: number, lockX: boolean, lockY: boolean, lockZ: boolean): void;
+	setHeadOverlay(overlayID: number, index: number, opacity: number): void;
+	setHeadOverlayColor(overlayID: number, colorType: number, colorID: number, secondColorID: number): void;
+	setComponentVariation(componentId: number, drawableId: number, textureId: number, paletteId: number): void;
+	setHairColor(colorID: number, highlightColorID: number): void;
+	setEyeColor(index: number): void;
+	setHeadBlendData(shapeFirstID: number, shapeSecondID: number, shapeThirdID: number, skinFirstID: number, skinSecondID: number,
+	                 skinThirdID: number, shapeMix: number, skinMix: number, thirdMix: number, isParent: boolean): void;
+	setFaceFeature(index: number, scale: number): void;
+	// TODO
 }
 
 interface PickupMp extends EntityMp {
@@ -1303,7 +1325,7 @@ interface VehicleMp extends EntityMp {
 	setCreatesMoneyPickupsWhenExploded(toggle: boolean): void;
 	setCustomPrimaryColour(r: number, g: number, b: number): void;
 	setCustomSecondaryColour(r: number, g: number, b: number): void;
-	setDamage(xOffset: number, yOffset: number, zOffset: number, damage: number, radius: number, p5: boolean): void;
+	setDamage(xOffset: number, yOffset: number, zOffset: number, damage: number, radius: number, focusOnModel: boolean): void;
 	setDeformationFixed(): void;
 	setDirtLevel(dirtLevel: number): void;
 	setDisablePetrolTankDamage(toggle: boolean): void;
@@ -1530,6 +1552,11 @@ interface RaycastingMp {
 
 interface StorageMp {
 	data: { [key: string]: any };
+	/** Keeps data saved over resource reloads, but is cleared on reconnect.
+	 *
+	 *  {@link https://wiki.rage.mp/index.php?title=Storage.sessionData|Storage.sessionData}
+	 */
+	sessionData: unknown;
 
 	flush(): void;
 }
@@ -1759,26 +1786,26 @@ interface GameCamMp {
 interface GameControlsMp {
 	useDefaultVehicleEntering: boolean;
 
-	disableAllControlActions(inputGroup: number): void;
-	disableControlAction(inputGroup: number, control: number, disable: boolean): void;
-	enableAllControlActions(inputGroup: number): void;
-	enableControlAction(inputGroup: number, control: number, enable: boolean): void;
-	getControlActionName(inputGroup: number, control: number, p2: boolean): string;
-	getControlNormal(inputGroup: number, control: number): number;
-	getControlValue(inputGroup: number, control: number): number;
-	getDisabledControlNormal(inputGroup: number, control: number): number;
-	isControlEnabled(inputGroup: number, control: number): boolean;
-	isControlJustPressed(inputGroup: number, control: number): boolean;
-	isControlJustReleased(inputGroup: number, control: number): boolean;
-	isControlPressed(inputGroup: number, control: number): boolean;
-	isControlReleased(inputGroup: number, control: number): boolean;
-	isDisabledControlJustPressed(inputGroup: number, control: number): boolean;
-	isDisabledControlJustReleased(inputGroup: number, control: number): boolean;
-	isDisabledControlPressed(inputGroup: number, control: number): boolean;
-	isInputDisabled(inputGroup: number): boolean;
-	isInputJustDisabled(inputGroup: number): boolean;
-	setControlNormal(inputGroup: number, control: number, amount: number): boolean;
-	setInputExclusive(inputGroup: number, control: number): void;
+	disableAllControlActions(inputGroup: number | RageEnums.InputGroup): void;
+	disableControlAction(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls, disable: boolean): void;
+	enableAllControlActions(inputGroup: number | RageEnums.InputGroup): void;
+	enableControlAction(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls, enable: boolean): void;
+	getControlActionName(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls, p2: boolean): string;
+	getControlNormal(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): number;
+	getControlValue(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): number;
+	getDisabledControlNormal(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): number;
+	isControlEnabled(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): boolean;
+	isControlJustPressed(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): boolean;
+	isControlJustReleased(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): boolean;
+	isControlPressed(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): boolean;
+	isControlReleased(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): boolean;
+	isDisabledControlJustPressed(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): boolean;
+	isDisabledControlJustReleased(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): boolean;
+	isDisabledControlPressed(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): boolean;
+	isInputDisabled(inputGroup: number | RageEnums.InputGroup): boolean;
+	isInputJustDisabled(inputGroup: number | RageEnums.InputGroup): boolean;
+	setControlNormal(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls, amount: number): boolean;
+	setInputExclusive(inputGroup: number | RageEnums.InputGroup, control: number | RageEnums.Controls): void;
 	setPadShake(p0: number, duration: number, frequency: number): void;
 	setPlayerpadShakesWhenControllerDisabled(toggle: boolean): void;
 	stopPadShake(p0: any): void;
@@ -2196,10 +2223,10 @@ interface GameGraphicsMp {
 	drawText(text: string, position: Array3d | Array2d,
 		data?: {
 			font: number,
-			centre: boolean,
 			color: RGBA,
 			scale: Array2d,
-			outline: boolean
+			outline: boolean,
+			centre?: boolean,
 		}
 	): void;
 	drawTvChannel(xPos: number, yPos: number, xScale: number, yScale: number, rotation: number, r: number, g: number,
@@ -2736,10 +2763,46 @@ interface GameRopeMp {
 
 interface GameScriptMp {
 	doesScriptExist(scriptName: string): boolean;
-	getEventAtIndex(p0: number, eventIndex: number): number;
-	getEventdata(p0: number, eventIndex: number, eventData: number, p3: number): number;
-	getEventExists(p0: number, eventIndex: number): boolean;
-	getNumberOfEvents(p0: number): number;
+	/**
+	 * Event Group Type:
+	 *
+	 * **0** - CEventGroupScriptAI
+	 *
+	 * **1** - CEventGroupScriptNetwork
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Script::getEventAtIndex|Script::getEventAtIndex}
+	 * */
+	getEventAtIndex(eventGroup: number, eventIndex: number): number;
+	/**
+	 * Event Group Type:
+	 *
+	 * **0** - CEventGroupScriptAI
+	 *
+	 * **1** - CEventGroupScriptNetwork
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Script::getEventData|Script::getEventData}
+	 * */
+	getEventdata(eventGroup: number, eventIndex: number, eventData: number, eventDataSize: number): number;
+	/**
+	 * Event Group Type:
+	 *
+	 * **0** - CEventGroupScriptAI
+	 *
+	 * **1** - CEventGroupScriptNetwork
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Script::getEventData|Script::getEventData}
+	 * */
+	getEventExists(eventGroup: number, eventIndex: number): boolean;
+	/**
+	 * Event Group Type:
+	 *
+	 * **0** - CEventGroupScriptAI
+	 *
+	 * **1** - CEventGroupScriptNetwork
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Script::getNumberOfEvents|Script::getNumberOfEvents}
+	 * */
+	getNumberOfEvents(eventGroup: number): number;
 	getNumberOfInstancesOfStreamedScript(scriptHash: Hash): number;
 	getThreadName(threadId: number): string;
 	hasScriptLoaded(scriptName: string): boolean;
@@ -3246,7 +3309,7 @@ interface GameWeaponMp {
 	isWeaponValid(weaponHash: Hash): boolean;
 	removeAllProjectilesOfType(weaponhash: Hash, p1: boolean): void;
 	removeWeaponAsset(weaponHash: Hash): void;
-	removeWeaponComponentFromWeaponObject(p0: any, p1: any): void;
+	removeWeaponComponentFromWeaponObject(weaponObject: Handle, componentHash: Hash): void;
 	requestWeaponAsset(weaponHash: Hash, p1: number, p2: number): void;
 	requestWeaponHighDetailModel(weaponObject: Handle): void;
 	setFlashLightFadeDistance(distance: number): void;
@@ -3450,7 +3513,7 @@ interface DummyEntityMpPool extends EntityMpPool<DummyEntityMp> {
 }
 
 interface MarkerMpPool extends EntityMpPool<MarkerMp> {
-	"new"(type: number, position: Vector3Mp, scale: number, options?: {
+	"new"(type: RageEnums.Markers | number, position: Vector3Mp, scale: number, options?: {
 		bobUpAndDown?: boolean,
 		color?: RGBA,
 		dimension?: number,
@@ -3523,8 +3586,8 @@ interface Vector3Mp {
 	z: number;
 
 	add(value: number): Vector3Mp;
-  add(vector3: Vector3Mp): Vector3Mp;
-  angleTo(number: Vector3Mp): number;
+	add(vector3: Vector3Mp): Vector3Mp;
+	angleTo(number: Vector3Mp): number;
 	clone(): Vector3Mp;
 	cross(vector3: Vector3MpLike): Vector3Mp;
 	divide(value: number): Vector3Mp;
