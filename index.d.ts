@@ -1195,7 +1195,7 @@ interface VehicleMp extends EntityMp {
 	getLandingGearState(): number;
 	getLastPedInSeat(seatIndex: number): Handle;
 	getLayoutHash(): Hash;
-	getLightsState(lightsOn: boolean, highbeamsOn: boolean): {
+	getLightsState(lightsOn: number, highbeamsOn: number): {
 		lightsOn: boolean;
 		highbeamsOn: boolean;
 	};
@@ -1546,8 +1546,8 @@ interface NametagsMp {
 }
 
 interface RaycastingMp {
-	testPointToPoint(startPos: Vector3Mp, endPos: Vector3Mp, ignoreEntity?: Handle, flags?: number): RaycastResult; // TODO: ignoreEntity
-	testCapsule(startPos: Vector3Mp, endPos: Vector3Mp, radius: number, ignoreEntity?: Handle, flags?: number[]): RaycastResult; // TODO: ignoreEntity
+	testPointToPoint(startPos: Vector3Mp, endPos: Vector3Mp, ignoreEntity?: EntityMp, flags?: number): RaycastResult;
+	testCapsule(startPos: Vector3Mp, endPos: Vector3Mp, radius: number, ignoreEntity?: EntityMp, flags?: number[]): RaycastResult;
 }
 
 interface StorageMp {
