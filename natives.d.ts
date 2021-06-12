@@ -10,8 +10,8 @@ declare namespace RageEnums.Natives {
 		 * `APP`
 		 * @name APP_DATA_VALID
 		 * ```
-NativeDB Return Type: BOOL
-```
+         * NativeDB Return Type: BOOL
+         * ```
 		 * @return {number}
 		 */
 		APP_DATA_VALID = "0x846AA8E7D55EE5B6",
@@ -57652,22 +57652,22 @@ Use [`_GET_AIRCRAFT_COUNTERMEASURE_COUNT`](0xF846AA63DF56B804) to get the curren
 		 * `VEHICLE`
 		 * @name undefined
 		 * @alias "SET_VEHICLE_EXCLUSIVE_DRIVER"
+         *
 		 * Used to be incorrectly named `SET_VEHICLE_EXCLUSIVE_DRIVER`; likely `SET_VEHICLE_ALLOW_*`.
-
-Toggles a flag related to `SET_VEHICLE_EXCLUSIVE_DRIVER`, however, doesn't enable that feature (or trigger script events related to it).
-
-See [`_SET_VEHICLE_EXCLUSIVE_DRIVER_2`](0xB5C51B5502E85E83).
-
-```
-NativeDB Parameter 1: BOOL toggle
-NativeDB Removed Parameter 2: int index
-```
+         *
+         * Toggles a flag related to `SET_VEHICLE_EXCLUSIVE_DRIVER`, however, doesn't enable that feature (or trigger script events related to it).
+         * 
+         * See [`_SET_VEHICLE_EXCLUSIVE_DRIVER_2`](0xB5C51B5502E85E83).
+         *
+         * ```
+         * NativeDB Parameter 1: BOOL toggle
+         * NativeDB Removed Parameter 2: int index
+         * ```
 		 * @param {VehicleMp} vehicle
-		 * @param {PedMp} ped
-		 * @param {number} index
+		 * @param {PedMp} toggle
 		 * @return {void}
 		 */
-			"0x41062318F23ED854" = "0x41062318F23ED854",
+        SET_VEHICLE_EXCLUSIVE_DRIVER = "0x41062318F23ED854",
 		/**
 		 * `VEHICLE`
 		 * @name SET_VEHICLE_FLIGHT_NOZZLE_POSITION
