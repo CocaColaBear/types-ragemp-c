@@ -2809,7 +2809,12 @@ interface GameScriptMp {
 	hasStreamedScriptLoaded(scriptHash: Hash): boolean;
 	isStreamedScriptRunning(scriptHash: Hash): boolean;
 	isThreadActive(threadId: number): boolean;
-	requestScript(scriptName: string): void;
+	/**
+	 * @param scriptName - Script Name
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Script::requestScript|Script::requestScript}
+	 */
+	requestScript(scriptName: RageEnums.Scripts | string): void;
 	requestStreamedScript(scriptHash: Hash): void;
 	setNoLoadingScreen(toggle: boolean): void;
 	setScriptAsNoLongerNeeded(scriptName: string): void;
