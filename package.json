@@ -1,6 +1,6 @@
 {
 	"name": "@types/ragemp-c",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"author": "CocaColaBear",
 	"description": "Rage:MP TypeScript type definition for Clientside",
 	"license": "MIT",

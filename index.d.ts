@@ -332,6 +332,15 @@ interface EntityMp {
 	setInvincible(toggle: boolean): void;
 	setIsTargetPriority(p0: boolean, p1: number): void;
 	setLights(toggle: boolean): void;
+	/**
+	 * Loads collision grid for an entity spawned outside of a player's loaded area. This allows peds to execute tasks rather than sit dormant because of a lack of a physics grid.
+	 *
+	 * Certainly not the main usage of this native but when set to true for a Vehicle, it will prevent the vehicle to explode if it is spawned far away from the player.
+
+	 * @param {boolean} toggle
+	 *
+	 * @return {void}
+	 */
 	setLoadCollisionFlag(toggle: boolean): void;
 	setLodDist(value: number): void;
 	setMaxHealth(value: number): void;
@@ -2421,6 +2430,23 @@ interface GameObjectMp {
 	createAmbientPickup(pickupHash: Hash, posX: number, posY: number, posZ: number, p4: number, value: number,
 		modelHash: Hash, p7: boolean, p8: boolean): PickupMp;
 	createMoneyPickups(x: number, y: number, z: number, value: number, amount: number, model: Hash): void;
+	/**
+	 * Creates an object (prop) with the specified model centered at the specified position.
+	 This object will initially be owned by the creating script as a mission entity, and the model should be loaded already (e.g. using REQUEST_MODEL).
+	 *
+	 * @param {Hash} modelHash - The model to spawn.
+	 *
+	 * @param {number} x - Spawn coordinate X component.
+	 * @param {number} y - Spawn coordinate Y component.
+	 * @param {number} z - Spawn coordinate Z component.
+	 * @param {boolean} networkHandle - Whether to create a network object for the object. If false, the object exists only locally.
+	 * @param {boolean} createHandle - Whether to register the object as pinned to the script host in the R\* network model.
+	 * @param {boolean} dynamic - False to create a door archetype (archetype flag bit 26 set) as a door. Required to be set to true to create door models in network mode.
+	 *
+	 * @return {Handle} - A script handle (fwScriptGuid index) for the object, or `0` if the object failed to be created.
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Object::createObject|Object::createObject}
+	 */
 	createObject(modelHash: Hash, x: number, y: number, z: number, networkHandle: boolean,
 		createHandle: boolean,dynamic: boolean): Handle;
 	createObjectNoOffset(modelHash: Hash, x: number, y: number, z: number, networkHandle: boolean,
@@ -2809,7 +2835,12 @@ interface GameScriptMp {
 	hasStreamedScriptLoaded(scriptHash: Hash): boolean;
 	isStreamedScriptRunning(scriptHash: Hash): boolean;
 	isThreadActive(threadId: number): boolean;
-	requestScript(scriptName: string): void;
+	/**
+	 * @param scriptName - Script Name
+	 *
+	 * {@link https://wiki.rage.mp/index.php?title=Script::requestScript|Script::requestScript}
+	 */
+	requestScript(scriptName: RageEnums.Scripts | string): void;
 	requestStreamedScript(scriptHash: Hash): void;
 	setNoLoadingScreen(toggle: boolean): void;
 	setScriptAsNoLongerNeeded(scriptName: string): void;
