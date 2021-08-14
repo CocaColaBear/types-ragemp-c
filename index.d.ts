@@ -1379,6 +1379,7 @@ interface VehicleMp extends EntityMp {
 	setSearchlight(toggle: boolean, canBeUsedByAI: boolean): void;
 	setSilent(toggle: boolean): void;
 	setSiren(toggle: boolean): void;
+	setSirenSound(toggle: boolean): void;
 	setSteerBias(value: number): void;
 	setStrong(toggle: boolean): void;
 	setTaxiLights(state: boolean): void;
