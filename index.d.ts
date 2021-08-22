@@ -1973,6 +1973,7 @@ interface GameEntityMp {
 }
 
 interface GameFireMp {
+	addExplosion(x: number, y: number, z: number, explosionType: number, damageScale: number, isAudible:boolean, isInvisible:boolean, cameraShake:number ): void
 	addSpecfxExplosion(x: number, y: number, z: number, explosionType: number, explosionFx: Hash,
 		damageScale: number, isAudible: boolean, isInvisible: boolean, cameraShake: number): void;
 	getClosestFirePos(outPosition: Vector3Mp, x: number, y: number, z: number): Vector3Mp;
