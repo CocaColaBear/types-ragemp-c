@@ -12,10 +12,10 @@
 type Handle = number; // TODO: Temp type. Replace to the Entity, when methods are updated
 type Hash = number; // TODO: Temp type. Replace to HashOrString, when methods are updated
 type HashOrString = Hash;
-type RGB = [ number, number, number ];
-type RGBA = [ number, number, number, number ];
-type Array3d = [ number, number, number ];
-type Array2d = [ number, number ];
+type RGB = [number, number, number];
+type RGBA = [number, number, number, number];
+type Array3d = [number, number, number];
+type Array2d = [number, number];
 
 // -------------------------------------------------------------------------
 // Main MP interfaces
@@ -176,10 +176,10 @@ interface EntityMp {
 	dimension: number;
 	model: number;
 	position: Vector3Mp;
-  readonly handle: any;
-  readonly id: number;
-  readonly remoteId: number;
-  readonly type: string;
+	readonly handle: any;
+	readonly id: number;
+	readonly remoteId: number;
+	readonly type: string;
 
 	applyForceTo(forceType: number, x: number, y: number, z: number, xRot: number, yRot: number, zRot: number,
 		boneIndex: number, isRel: number, p9: boolean, highForce: boolean, p11: boolean, p12: boolean): void;
@@ -330,7 +330,7 @@ interface EntityMp {
 	setOnlyDamagedByPlayer(toggle: boolean): void;
 	setOnlyDamagedByRelationshipGroup(p0: boolean, p1: any): void;
 	setProofs(bulletProof: boolean, fireProof: boolean, explosionProof: boolean, collisionProof: boolean,
-		meleeProof: boolean, p5: boolean, p6: boolean,drownProof: boolean): void;
+		meleeProof: boolean, p5: boolean, p6: boolean, drownProof: boolean): void;
 	setQuaternion(x: number, y: number, z: number, w: number): void;
 	setRecordsCollisions(toggle: boolean): void;
 	setRenderScorched(toggle: boolean): void;
@@ -566,7 +566,7 @@ interface PedBaseMp extends EntityMp {
 	isReloading(): boolean;
 	isRunning(): boolean;
 	isRunningArrestTask(): boolean;
-	isRunningMobilePhoneTask():boolean;
+	isRunningMobilePhoneTask(): boolean;
 	isRunningRagdollTask(): boolean;
 	isScriptedScenarioUsingConditionalAnim(animDict: string, anim: string): boolean;
 	isShooting(): boolean;
@@ -611,7 +611,7 @@ interface PedBaseMp extends EntityMp {
 	resurrect(): void;
 	reviveInjured(): void;
 	setAccuracy(accuracy: number): void;
-	setAlertness(value:number): void;
+	setAlertness(value: number): void;
 	setAllowedToDuck(toggle: boolean): void;
 	setAllowVehiclesOverride(toggle: boolean): void;
 	setAlternateMovementAnim(stance: number, animDictionary: string, animationName: string, p4: number, p5: boolean): void;
@@ -865,7 +865,7 @@ interface PedBaseMp extends EntityMp {
 		animTime: number, p14: any, p15: any): void;
 	taskPlayPhoneGestureAnimation(p1: any, p2: any, p3: any, p4: number, p5: number, p6: boolean, p7: boolean): void;
 	taskPutDirectlyIntoCover(x: number, y: number, z: number, timeout: any, p5: boolean, p6: number, p7: boolean,
-		p8: boolean, p9:object, p10: boolean): void;
+		p8: boolean, p9: object, p10: boolean): void;
 	taskPutDirectlyIntoMelee(meleeTarget: Handle, p2: number, p3: number, p4: number, p5: boolean): void;
 	taskRappelFromHeli(p1: number): void;
 	taskReactAndFlee(fleeTarget: Handle): void;
@@ -1076,7 +1076,7 @@ interface PlayerMp extends PedBaseMp {
 	setWeaponDefenseModifier(modifier: number): void;
 	taskGotoOffset(p1: any, p2: any, x: number, y: number, z: number, duration: number): void;
 	taskGoToWhileAimingAtEntity(entityToWalkTo: Handle, entityToAimAt: Handle, speed: number, shootatEntity: boolean,
-	 p5: number, p6: number, p7: boolean, p8: boolean, firingPattern: Hash): void;
+		p5: number, p6: number, p7: boolean, p8: boolean, firingPattern: Hash): void;
 	taskVehicleShootAt(target: Handle, p2: number): void;
 	updateTaskSweepAim(entity: Handle): void;
 }
@@ -1449,7 +1449,7 @@ interface CameraMp {
 	isRendering(): boolean;
 	isShaking(): boolean;
 	playAnim(animName: string, animDictionary: string, x: number, y: number, z: number, xRot: number, yRot: number,
-		 zRot: number, p8: boolean, p9: number): void;
+		zRot: number, p8: boolean, p9: number): void;
 	playAnim(animName: string, propName: string, p2: number, p3: boolean, p4: boolean, p5: boolean, delta: number,
 		bitset: any): boolean;
 	pointAt(entity: EntityMp, offsetX: number, offsetY: number, offsetZ: number, p4: boolean): void;
@@ -1973,7 +1973,7 @@ interface GameEntityMp {
 }
 
 interface GameFireMp {
-	addExplosion(x: number, y: number, z: number, explosionType: number, damageScale: number, isAudible:boolean, isInvisible:boolean, cameraShake:number ): void
+	addExplosion(x: number, y: number, z: number, explosionType: number, damageScale: number, isAudible: boolean, isInvisible: boolean, cameraShake: number): void;
 	addSpecfxExplosion(x: number, y: number, z: number, explosionType: number, explosionFx: Hash,
 		damageScale: number, isAudible: boolean, isInvisible: boolean, cameraShake: number): void;
 	getClosestFirePos(outPosition: Vector3Mp, x: number, y: number, z: number): Vector3Mp;
@@ -2194,7 +2194,7 @@ interface GameGraphicsMp {
 		colorR: number, colorG: number, colorB: number, distance: number, brightness: number, roundness: number,
 		radius: number, falloff: number, shadow: number): void;
 	drawSprite(textureDict: string, textureName: string, screenX: number, screenY: number, scaleX: number,
-		scaleY: number,heading: number, colorR: number, colorG: number, colorB: number, alpha: number): void;
+		scaleY: number, heading: number, colorR: number, colorG: number, colorB: number, alpha: number): void;
 	drawText(text: string, position: Array3d | Array2d,
 		data?: {
 			font: number,
@@ -2229,7 +2229,7 @@ interface GameGraphicsMp {
 	hasScaleformContainerMovieLoadedIntoParent(scaleformHandle: number): boolean;
 	hasScaleformMovieLoaded(scaleformHandle: number): boolean;
 	hasStreamedTextureDictLoaded(textureDict: string): boolean;
-	isDecalAlive(decal: number):boolean;
+	isDecalAlive(decal: number): boolean;
 	isTrackedPointVisible(point: Handle): boolean;
 	loadMovieMeshSet(movieMeshSetName: string): number;
 	loadTvChannel(tvChannel: Hash): boolean;
@@ -2397,7 +2397,7 @@ interface GameObjectMp {
 		modelHash: Hash, p7: boolean, p8: boolean): PickupMp;
 	createMoneyPickups(x: number, y: number, z: number, value: number, amount: number, model: Hash): void;
 	createObject(modelHash: Hash, x: number, y: number, z: number, networkHandle: boolean,
-		createHandle: boolean,dynamic: boolean): Handle;
+		createHandle: boolean, dynamic: boolean): Handle;
 	createObjectNoOffset(modelHash: Hash, x: number, y: number, z: number, networkHandle: boolean,
 		createHandle: boolean, dynamic: boolean): Handle;
 	createPickup(pickupHash: Hash, posX: number, posY: number, posZ: number, p4: number, value: number,
@@ -2471,7 +2471,7 @@ interface GamePathfindMp {
 		nodeType: number, p6: number, p7: number): {
 			outPosition: Vector3Mp;
 			outHeading: number;
-	};
+		};
 	getIsSlowRoadFlag(nodeID: number): boolean;
 	getNthClosestVehicleNode(x: number, y: number, z: number, nthClosest: number, outPosition: Vector3Mp,
 		unknown1: any, unknown2: any, unknown3: any): Vector3Mp;
@@ -2480,7 +2480,7 @@ interface GamePathfindMp {
 		p11: any): {
 			outPosition: Vector3Mp;
 			outHeading: number;
-	};
+		};
 	getNthClosestVehicleNodeId(x: number, y: number, z: number, nth: number, nodetype: number, p5: number, p6: number): number;
 	getNthClosestVehicleNodeIdWithHeading(x: number, y: number, z: number, nthClosest: number, outPosition: Vector3Mp,
 		outHeading: number, p6: any, p7: number, p8: number): Vector3Mp;
@@ -2489,12 +2489,12 @@ interface GamePathfindMp {
 			outPosition: Vector3Mp;
 			heading: number;
 			unknown1: any;
-	};
+		};
 	getRandomVehicleNode(x: number, y: number, z: number, radius: number, p4: boolean, p5: boolean, p6: boolean,
 		outPosition: Vector3Mp, heading: number): {
 			outPosition: Vector3Mp;
 			outHeading: number;
-	};
+		};
 	getSafeCoordForPed(x: number, y: number, z: number, onGround: boolean, outPosition: Vector3Mp, flags: number): Vector3Mp;
 	getStreetNameAtCoord(x: number, y: number, z: number, streetName: number, crossingRoad: number): {
 		streetName: number;
@@ -2502,7 +2502,7 @@ interface GamePathfindMp {
 	};
 	getSupportsGpsRouteFlag(nodeID: number): boolean;
 	getVehicleNodePosition(nodeId: number, outPosition: Vector3Mp): Vector3Mp;
-	getVehicleNodeProperties(x: number, y: number, z: number, density: number, flags: number):{
+	getVehicleNodeProperties(x: number, y: number, z: number, density: number, flags: number): {
 		density: number;
 		flags: number;
 	};
@@ -2672,12 +2672,12 @@ interface GamePlayerMp {
 	setSwimMultiplierFor(multiplier: number): void;
 	setWantedLevelDifficulty(difficulty: number): void;
 	setWantedLevelMultiplier(multiplier: number): void;
-	simulateInputGait(amount: number,gaitType: number,speed: number,p4: boolean,p5: boolean): void;
-	specialAbilityChargeAbsolute(p1: number,p2: boolean): void;
+	simulateInputGait(amount: number, gaitType: number, speed: number, p4: boolean, p5: boolean): void;
+	specialAbilityChargeAbsolute(p1: number, p2: boolean): void;
 	specialAbilityChargeContinuous(p1: boolean): void;
-	specialAbilityChargeLarge(p1: boolean,p2: boolean): void;
-	specialAbilityChargeMedium(p1: boolean,p2: boolean): void;
-	specialAbilityChargeNormalized(normalizedValue: number,p2: boolean): void;
+	specialAbilityChargeLarge(p1: boolean, p2: boolean): void;
+	specialAbilityChargeMedium(p1: boolean, p2: boolean): void;
+	specialAbilityChargeNormalized(normalizedValue: number, p2: boolean): void;
 	specialAbilityChargeSmall(p1: boolean, p2: boolean): void;
 	specialAbilityDeactivate(): void;
 	specialAbilityDeactivateFast(): void;
@@ -2687,7 +2687,7 @@ interface GamePlayerMp {
 	specialAbilityReset(): void;
 	specialAbilityUnlock(playerModel: Hash): void;
 	startFiringAmnesty(duration: number): void;
-	startTeleport(x: number,y: number,z: number,heading: number,p5: boolean,p6: boolean,p7: boolean): void;
+	startTeleport(x: number, y: number, z: number, heading: number, p5: boolean, p6: boolean, p7: boolean): void;
 }
 
 interface GameRecorderMp {
@@ -2965,7 +2965,7 @@ interface GameUiMp {
 	clearAdditionalText(p0: number, p1: boolean): void;
 	clearFloatingHelp(p0: any, p1: boolean): void;
 	clearHelp(toggle: boolean): void;
-	clearThisPrint(p0:string): void;
+	clearThisPrint(p0: string): void;
 	displayAmmoThisFrame(display: boolean): void;
 	displayAreaName(toggle: boolean): void;
 	displayCash(toggle: boolean): void;
@@ -3066,7 +3066,7 @@ interface GameUiMp {
 	setRadarZoomLevelThisFrame(zoomLevel: number): void;
 	setTextCentre(align: boolean): void;
 	setTextChatUnk(p0: boolean): void;
-	setTextColour(red:  number, green:  number, blue:  number, alpha:  number): void;
+	setTextColour(red: number, green: number, blue: number, alpha: number): void;
 	setTextComponentFormat(inputType: string): void;
 	setTextDropshadow(distance: number, r: number, g: number, b: number, a: number): void;
 	setTextEdge(p0: number, r: number, g: number, b: number, a: number): void;
@@ -3266,7 +3266,7 @@ interface GameWorldprobeMp {
 			endCoords: Vector3Mp;
 			surfaceNormal: Vector3Mp;
 			entityHit: EntityMp;
-	};
+		};
 	getShapeTestResultEx(rayHandle: number, hit: boolean, endCoords: Vector3Mp, surfaceNormal: Vector3Mp,
 		materialHash: number, entityHit: EntityMp): {
 			hit: boolean;
@@ -3274,7 +3274,7 @@ interface GameWorldprobeMp {
 			surfaceNormal: Vector3Mp;
 			materialHash: number;
 			entityHit: EntityMp;
-	};
+		};
 	startShapeTestBox(x: number, y: number, z: number, sizeX: number, sizeY: number, sizeZ: number, rotationX: number,
 		rotationY: number, rotationZ: number, rotationOrder: number, flags: number, ignoreEntity: EntityMp | number,
 		p12: number): number;
@@ -3299,7 +3299,7 @@ interface GameZoneMp {
 }
 
 interface GameGxtMp {
-	set(labelNameOrHash: string, newLabelValue:string): void;
+	set(labelNameOrHash: string, newLabelValue: string): void;
 	get(labelNameOrHash: string): string;
 	getDefault(labelNameOrHash: string): string;
 	reset(): void;
@@ -3355,7 +3355,7 @@ interface CheckpointMpPool extends EntityMpPool<CheckpointMp> {
 		color?: RGBA,
 		dimension?: number,
 		direction?: Vector3Mp,
-		visible?	: boolean
+		visible?: boolean
 	}): CheckpointMp;
 }
 
@@ -3496,7 +3496,7 @@ interface TextLabelMpPool extends EntityMpPool<TextLabelMp> {
 interface VehicleMpPool extends EntityMpPool<VehicleMp> {
 	"new"(model: HashOrString, position: Vector3Mp, options?: {
 		alpha?: number,
-		color?: [ Array2d, Array2d ] | [ RGB, RGB ],
+		color?: [Array2d, Array2d] | [RGB, RGB],
 		dimension?: number,
 		engine?: boolean,
 		heading?: number;
@@ -3525,8 +3525,8 @@ interface Vector3Mp {
 	z: number;
 
 	add(value: number): Vector3Mp;
-  add(vector3: Vector3Mp): Vector3Mp;
-  angleTo(number: Vector3Mp): number;
+	add(vector3: Vector3Mp): Vector3Mp;
+	angleTo(number: Vector3Mp): number;
 	clone(): Vector3Mp;
 	cross(vector3: Vector3MpLike): Vector3Mp;
 	divide(value: number): Vector3Mp;
