@@ -313,7 +313,7 @@ interface EntityMp {
 		p6: number): boolean;
 	processAttachments(): void;
 	resetAlpha(): void;
-	setAlpha(alphaLevel: number/*skin: boolean*/): void; // TODO: Check this
+	setAlpha(alphaLevel: number, skin: boolean): void;
 	setAlwaysPrerender(toggle: boolean): void;
 	setAnimCurrentTime(animDict: string, animName: string, time: number): void;
 	setAnimSpeed(animDict: string, animName: string, speedMultiplier: number): void;
@@ -3641,7 +3641,7 @@ interface Vector3Mp {
 }
 
 interface RaycastResult {
-	entity: EntityMp,
+	entity: EntityMp | Handle, // Not weak world objects return the handle
 	position: Vector3Mp,
 	surfaceNormal: Vector3Mp
 }
