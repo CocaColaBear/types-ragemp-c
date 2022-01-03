@@ -13,10 +13,13 @@ or
 npm install --save-dev https://github.com/CocaColaBear/types-ragemp-c/tarball/master
 ```
 
-# 1.0 Developer Preview #1 Version:
+# 1.1 Developer Preview #1 Version:
 
 ``` bash
+npm install --save-dev github:CocaColaBear/types-ragemp-c#v2.0
+or
 npm install --save-dev github:CocaColaBear/types-ragemp-c#v1.0
+
 ```
 
 That's all, now you can use ragemp types for **Client-side**!
