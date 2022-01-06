@@ -44,6 +44,16 @@ interface Mp {
 	Vector3: Vector3Mp;
 	vehicles: VehicleMpPool;
 	voiceChat: VoiceChatMp;
+
+	Blip: typeof BlipMp;
+	Camera: typeof CameraMp;
+	Checkpoint: typeof CheckpointMp;
+	DummyEntity: typeof DummyEntityMp;
+	Marker: typeof MarkerMp;
+	Player: typeof PlayerMp;
+	Ped: typeof PedMp;
+	TextLabel: typeof TextLabelMp;
+	Vehicle: typeof VehicleMp;
 }
 
 interface GameMp {
@@ -107,7 +117,7 @@ interface GuiMp {
 // Entity MP types
 // -------------------------------------------------------------------------
 
-interface BlipMp {
+declare abstract class BlipMp {
 	dimension: number;
 	handle: number;
 	id: number;
@@ -363,15 +373,73 @@ interface EntityMp {
 	stopSynchronizedAnim(p0: number, p1: boolean): boolean;
 }
 
-interface CheckpointMp extends EntityMp {
-	// TODO
+interface CheckpointMp extends EntityMp {}
+declare abstract class CheckpointMp implements EntityMp {
+	/**
+	 * Radius of the checkpoint.
+	 */
+	radius: number;
+
+	/**
+	 * The direction the checkpoint icon is heading towards
+	 */
+	direction: Vector3Mp;
+
+	/**
+	 * Get/set checkpoint visibility state
+	 */
+	visible: boolean;
+
+	/**
+	 * Sets the height of the checkpoints cylinder.
+	 * 
+	 * @param nearHeight 
+	 * @param farHeight 
+	 * @param radius 
+	 */
+	setCheckpointCylinderHeight(nearHeight: number, farHeight: number, radius: number): void;
+
+	/**
+	 * Sets the scale of the icon within the checkpoint.
+	 * 
+	 * @param scale 
+	 */
+	setCheckpointIconScale(scale: number): void;
+
+	/**
+	 * Sets the scale of the icon within the checkpoint.
+	 * 
+	 * @param scale 
+	 */
+	setCheckpointScale(scale: number): void;
+
+	/**
+	 * Sets the colour of the checkpoint.
+	 * 
+	 * @param red 
+	 * @param green 
+	 * @param blue 
+	 * @param alpha 
+	 */
+	setCheckpointRgba(red: number, green: number, blue: number, alpha: number): void;
+
+	/**
+	 * Sets the colour of the checkpoint icon.
+	 * 
+	 * @param red 
+	 * @param green 
+	 * @param blue 
+	 * @param alpha 
+	 */
+	setCheckpointRgba2(red: number, green: number, blue: number, alpha: number): void;
 }
 
-interface ColshapeMp extends EntityMp {
+interface ColshapeMp extends EntityMp {}
+declare abstract class ColshapeMp implements EntityMp {
 	triggered: boolean;
 }
 
-interface DummyEntityMp {
+declare abstract class DummyEntityMp {
 	// TODO (temporary solution):
 	// Since this is a very abstract concept, it is not at all a familiar essence, but it has most of its properties.
 	// The easiest option is, of course, to inherit the EntityMpPool interface, but this will add
@@ -387,11 +455,18 @@ interface DummyEntityMp {
 	getVariable(value: string): any;
 }
 
-interface MarkerMp extends EntityMp {
-	// TODO
+interface MarkerMp extends EntityMp {}
+declare abstract class MarkerMp implements EntityMp {
+	bobUpAndDown: boolean;
+	colour: RGBA;
+	direction: Vector3Mp;
+	rotate: boolean;
+	scale: number;
+	visible: boolean;
 }
 
-interface ObjectMp extends EntityMp {
+interface ObjectMp extends EntityMp {}
+declare abstract class ObjectMp implements EntityMp {
 	hidden: boolean;
 	isWeak: boolean;
 	notifyStreaming: boolean;
@@ -957,7 +1032,8 @@ interface PedBaseMp extends EntityMp {
 	wasSkeletonUpdated(): boolean;
 }
 
-interface PedMp extends PedBaseMp {
+interface PedMp extends PedBaseMp {}
+declare abstract class PedMp implements PedBaseMp {
 	spawnPosition: Vector3Mp;
 	taskPlayAnim(animDictionary: string, animationName: string, speed: number, speedMultiplier: number, duration: number,
 	             flag: number, playbackRate: number, lockX: boolean, lockY: boolean, lockZ: boolean): void;
@@ -972,11 +1048,13 @@ interface PedMp extends PedBaseMp {
 	// TODO
 }
 
-interface PickupMp extends EntityMp {
+interface PickupMp extends EntityMp {}
+declare abstract class PickupMp implements EntityMp {
 
 }
 
-interface PlayerMp extends PedBaseMp {
+interface PlayerMp extends PedBaseMp {}
+declare abstract class PlayerMp implements PedBaseMp {
 	armour: number;
 	eyeColour: number;
 	hairColour: number;
@@ -1112,14 +1190,16 @@ interface PlayerMp extends PedBaseMp {
 	updateTaskSweepAim(entity: Handle): void;
 }
 
-interface TextLabelMp extends EntityMp {
+interface TextLabelMp extends EntityMp {}
+declare abstract class TextLabelMp implements EntityMp {
 	color: RGB;
 	drawDistance: number;
 	los: boolean;
 	text: string;
 }
 
-interface VehicleMp extends EntityMp {
+interface VehicleMp extends EntityMp {}
+declare abstract class VehicleMp implements EntityMp {
 	gear: number;
 	rpm: number;
 	steeringAngle: number;
@@ -1439,7 +1519,7 @@ interface VehicleMp extends EntityMp {
 // Simple MP types
 // -------------------------------------------------------------------------
 
-interface BrowserMp {
+declare abstract class BrowserMp {
 	active: boolean;
 	url: string;
 
@@ -1452,7 +1532,7 @@ interface BrowserMp {
 	executeCached(code: string): void;
 }
 
-interface CameraMp {
+declare abstract class CameraMp {
 	handle: Handle;
 
 	animatedShake(p0: string, p1: string, p2: string, p3: number): void;
@@ -3403,7 +3483,7 @@ interface GameGxtMp {
 
 interface GuiChatMp {
 	colors: boolean;
-	safe: boolean;
+	safeMode: boolean;
 
 	activate(state: boolean): void;
 	push(text: string): void;
@@ -3607,7 +3687,7 @@ interface Vector3MpLike {
 	z: number;
 }
 
-interface Vector3Mp {
+declare abstract class Vector3Mp {
 	new(vector: Vector3MpLike): Vector3Mp;
 	new(vector: [number, number, number]): Vector3Mp;
 	new(x?: number, y?: number, z?: number): Vector3Mp;
