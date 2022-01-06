@@ -3687,7 +3687,7 @@ interface Vector3MpLike {
 	z: number;
 }
 
-declare abstract class Vector3Mp {
+interface Vector3Mp {
 	new(vector: Vector3MpLike): Vector3Mp;
 	new(vector: [number, number, number]): Vector3Mp;
 	new(x?: number, y?: number, z?: number): Vector3Mp;
