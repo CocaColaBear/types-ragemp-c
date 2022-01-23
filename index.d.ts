@@ -1645,7 +1645,7 @@ interface StorageMp {
 	 *
 	 *  {@link https://wiki.rage.mp/index.php?title=Storage.sessionData|Storage.sessionData}
 	 */
-	sessionData: unknown;
+	sessionData: { [key: string]: any };
 
 	flush(): void;
 }
@@ -3519,10 +3519,14 @@ interface BrowserMpPool extends EntityMpPool<BrowserMp> {
 }
 
 interface CameraMpPool extends EntityMpPool<CameraMp> {
+	readonly gameplay: CameraMp;
+
 	"new"(name: string, position?: Vector3Mp, rotation?: Vector3Mp, fov?: number): CameraMp;
 }
 
 interface CheckpointMpPool extends EntityMpPool<CheckpointMp> {
+	maxStreamed: number;
+
 	"new"(type: number, position: Vector3Mp, radius: number, options?: {
 		color?: RGBA,
 		dimension?: number,
@@ -3532,6 +3536,8 @@ interface CheckpointMpPool extends EntityMpPool<CheckpointMp> {
 }
 
 interface ColshapeMpPool extends EntityMpPool<ColshapeMp> {
+	maxStreamed: number;
+
 	newCircle(x: number, y: number, range: number, dimension?: number): ColshapeMp;
 	newCuboid(x: number, y: number, z: number, width: number, depth: number, height: number, dimension?: number): ColshapeMp;
 	newRectangle(x: number, y: number, width: number, height: number, dimension?: number): ColshapeMp;
@@ -3624,6 +3630,8 @@ interface DummyEntityMpPool extends EntityMpPool<DummyEntityMp> {
 }
 
 interface MarkerMpPool extends EntityMpPool<MarkerMp> {
+	maxStreamed: number;
+
 	"new"(type: RageEnums.Markers | number, position: Vector3Mp, scale: number, options?: {
 		bobUpAndDown?: boolean,
 		color?: RGBA,
@@ -3635,6 +3643,8 @@ interface MarkerMpPool extends EntityMpPool<MarkerMp> {
 }
 
 interface ObjectMpPool extends EntityMpPool<ObjectMp> {
+	maxStreamed: number;
+
 	"new"(model: HashOrString, position: Vector3Mp, options?: {
 		alpha?: number,
 		dimension?: number,
@@ -3644,6 +3654,8 @@ interface ObjectMpPool extends EntityMpPool<ObjectMp> {
 }
 
 interface PedMpPool extends EntityMpPool<PedMp> {
+	maxStreamed: number;
+
 	"new"(model: RageEnums.Hashes.Ped | Hash, position: Vector3Mp, heading: number, dimension?: number): PedMp;
 }
 
@@ -3652,10 +3664,14 @@ interface PickupMpPool extends EntityMpPool<PickupMp> {
 }
 
 interface PlayerMpPool extends EntityMpPool<PlayerMp> {
+	maxStreamed: number;
+
 	local: PlayerMp;
 }
 
 interface TextLabelMpPool extends EntityMpPool<TextLabelMp> {
+	maxStreamed: number;
+
 	"new"(text: string, position: Vector3Mp, options?: {
 		color?: RGBA,
 		dimension?: number,
@@ -3666,6 +3682,8 @@ interface TextLabelMpPool extends EntityMpPool<TextLabelMp> {
 }
 
 interface VehicleMpPool extends EntityMpPool<VehicleMp> {
+	maxStreamed: number;
+
 	"new"(model: HashOrString, position: Vector3Mp, options?: {
 		alpha?: number,
 		color?: [ Array2d, Array2d ] | [ RGB, RGB ],
