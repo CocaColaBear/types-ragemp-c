@@ -1617,6 +1617,18 @@ interface KeysMp {
 
 interface NametagsMp {
 	enabled: boolean;
+	/**
+	 * Setting to true will order nametags by distance. The default is false.
+	 * When set to true, it is advised to draw nametags in reverse order.
+	 */
+	orderByDistance: boolean;
+	/**
+	 * When set to false, 3D world coordinates of the player are used in the nametags parameter of a render event handler.
+	 * Each nametag would have the following data [PlayerMp, x, y, z, distance].
+	 * 
+	 * The default value is true.
+	 */
+	useScreen2dCoords: boolean;
 
 	set(style: {
 		font: number;
@@ -3608,7 +3620,7 @@ interface EventMpPool {
 	add(eventName: RageEnums.EventKey.PLAYER_START_TALKING, callback: (player: PlayerMp) => void): void;
 	add(eventName: RageEnums.EventKey.PLAYER_STOP_TALKING, callback: (player: PlayerMp) => void): void;
 	add(eventName: RageEnums.EventKey.PLAYER_WEAPON_SHOT, callback: (targetPosition: Vector3Mp, targetEntity?: undefined | EntityMp) => void): void;
-	add(eventName: RageEnums.EventKey.RENDER, callback: (nametags: [PlayerMp, number, number, number][]) => void): void;
+	add(eventName: RageEnums.EventKey.RENDER, callback: (nametags: [PlayerMp, number, number, number][] | [PlayerMp, number, number, number, number][]) => void): void;
 	add(eventName: RageEnums.EventKey.VEHICLE_DEATH, callback: (vehicle: VehicleMp) => void): void;
 
 	add(eventName: RageEnums.EventKey | string, callback: (...args: any[]) => void): void;
