@@ -6,8 +6,9 @@
 // Custom types
 // -------------------------------------------------------------------------
 
-type Handle = number; // TODO: Temp type. Replace to the Entity, when methods are updated
-type Hash = number; // TODO: Temp type. Replace to HashOrString, when methods are updated
+type integer = number;
+type Handle = integer; // TODO: Temp type. Replace to the Entity, when methods are updated
+type Hash = integer; // TODO: Temp type. Replace to HashOrString, when methods are updated
 type HashOrString = Hash;
 type RGB = [ number, number, number ];
 type RGBA = [ number, number, number, number ];
@@ -28,7 +29,7 @@ interface Mp {
 	discord: DiscordMp;
 	dummies: DummyEntityMpPool;
 	events: EventMpPool;
-	game: LegacyGameMp;
+	game: GameMp;
 	game1: LegacyGameMp;
 	gui: GuiMp;
 	keys: KeysMp;
@@ -1645,17 +1646,6 @@ interface VoiceChatMp {
 	getPreprocessingParam(param: number): any; // TODO
 	setPreprocessingParam(param: number, value: any): void; // TODO
 	cleanupAndReload(p0: boolean, p1: boolean, p2: boolean): void;
-}
-
-// -------------------------------------------------------------------------
-// Game MP types
-// -------------------------------------------------------------------------
-
-interface GameGxtMp {
-	set(labelNameOrHash: string, newLabelValue:string): void;
-	get(labelNameOrHash: string): string;
-	getDefault(labelNameOrHash: string): string;
-	reset(): void;
 }
 
 // -------------------------------------------------------------------------
