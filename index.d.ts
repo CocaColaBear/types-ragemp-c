@@ -6,9 +6,9 @@
 // Custom types
 // -------------------------------------------------------------------------
 
-type integer = number & {};
-type Handle = integer & {}; // TODO: Temp type. Replace to the Entity, when methods are updated
-type Hash = integer & {}; // TODO: Temp type. Replace to HashOrString, when methods are updated
+type integer = number;
+type Handle = integer; // TODO: Temp type. Replace to the Entity, when methods are updated
+type Hash = integer; // TODO: Temp type. Replace to HashOrString, when methods are updated
 type HashOrString = Hash;
 type RGB = [ number, number, number ];
 type RGBA = [ number, number, number, number ];
@@ -73,10 +73,10 @@ interface GuiMp {
 
 declare abstract class BlipMp {
 	dimension: number;
-	readonly handle: Handle;
-	readonly id: number;
-	readonly remoteId: number;
-	readonly type: string;
+	handle: number;
+	id: number;
+	remoteId: number;
+	type: string;
 
 	addTextComponentSubstringName(): void;
 	destroy(): void;
@@ -136,7 +136,7 @@ interface EntityMp {
 	dimension: number;
 	model: number;
 	position: Vector3Mp;
-	readonly handle: Handle;
+	readonly handle: any;
 	readonly id: number;
 	readonly remoteId: number;
 	readonly type: string;
@@ -1487,7 +1487,7 @@ declare abstract class BrowserMp {
 }
 
 declare abstract class CameraMp {
-	readonly handle: Handle;
+	handle: Handle;
 
 	animatedShake(p0: string, p1: string, p2: string, p3: number): void;
 	attachTo(entity: Handle, boneIndex: number, xPos: number, yPos: number, zPos: number, xRot: number, yRot: number,
