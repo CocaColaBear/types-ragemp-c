@@ -124,6 +124,8 @@ interface GameVehicleLegacy {
 	/**
 	 * Native: VEHICLE::CREATE_VEHICLE
 	 *
+	 * p7 defaults to false
+	 *
 	 * Hash: 0xAF35D0D2583051B0 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xAF35D0D2583051B0)
 	 */
 	createVehicle(
@@ -134,7 +136,7 @@ interface GameVehicleLegacy {
 		heading: number,
 		isNetwork: boolean,
 		bScriptHostVeh: boolean,
-		p7: boolean
+		p7?: boolean
 	): Handle;
 
 	/**
@@ -1842,6 +1844,9 @@ interface GameVehicle extends GameVehicleLegacy {
 	/**
 	 * Native: VEHICLE::CREATE_MISSION_TRAIN
 	 *
+	 * p5 defaults to 0
+	 * p7 defaults to 0
+	 *
 	 * Hash: 0x63C6CCA8E68AE8C8 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x63C6CCA8E68AE8C8)
 	 */
 	createMissionTrain(
@@ -1850,8 +1855,8 @@ interface GameVehicle extends GameVehicleLegacy {
 		y: number,
 		z: number,
 		direction: boolean,
-		p5: integer,
-		p6: integer
+		p5?: integer,
+		p6?: integer
 	): Handle;
 
 	/**
@@ -2982,9 +2987,11 @@ interface GameVehicle extends GameVehicleLegacy {
 	/**
 	 * Native: VEHICLE::GET_PED_IN_VEHICLE_SEAT
 	 *
+	 * p2 defaults to false
+	 *
 	 * Hash: 0xBB40DD2270B65366 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xBB40DD2270B65366)
 	 */
-	getPedInSeat(vehicle: Handle, seatIndex: integer, p2: boolean): Handle;
+	getPedInSeat(vehicle: Handle, seatIndex: integer, p2?: boolean): Handle;
 
 	/**
 	 * Native: VEHICLE::GET_PED_USING_VEHICLE_DOOR
@@ -3551,9 +3558,11 @@ interface GameVehicle extends GameVehicleLegacy {
 	/**
 	 * Native: VEHICLE::IS_VEHICLE_SEAT_FREE
 	 *
+	 * isTaskRunning defaults to false
+	 *
 	 * Hash: 0x22AC59A870E6A669 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x22AC59A870E6A669)
 	 */
-	isSeatFree(vehicle: Handle, seatIndex: integer, isTaskRunning: boolean): boolean;
+	isSeatFree(vehicle: Handle, seatIndex: integer, isTaskRunning?: boolean): boolean;
 
 	/**
 	 * Native: VEHICLE::IS_SEAT_WARP_ONLY
@@ -5213,9 +5222,11 @@ interface GameVehicle extends GameVehicleLegacy {
 	/**
 	 * Native: VEHICLE::SET_VEHICLE_ON_GROUND_PROPERLY
 	 *
+	 * p1 defaults to 0.0
+	 *
 	 * Hash: 0x49733E92263139D1 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x49733E92263139D1)
 	 */
-	setOnGroundProperly(vehicle: Handle, p1: number): boolean;
+	setOnGroundProperly(vehicle: Handle, p1?: number): boolean;
 
 	/**
 	 * Native: VEHICLE::_SET_OPPRESSOR_TRANSFORM_STATE

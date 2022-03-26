@@ -965,9 +965,11 @@ interface GameEntity extends GameEntityLegacy {
 	/**
 	 * Native: ENTITY::IS_ENTITY_DEAD
 	 *
+	 * p1 defaults to false
+	 *
 	 * Hash: 0x5F9532F3B5CC2551 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x5F9532F3B5CC2551)
 	 */
-	isDead(entity: Handle, p1: boolean): boolean;
+	isDead(entity: Handle, p1?: boolean): boolean;
 
 	/**
 	 * Native: ENTITY::IS_ENTITY_IN_AIR
@@ -1381,9 +1383,11 @@ interface GameEntity extends GameEntityLegacy {
 	/**
 	 * Native: ENTITY::SET_ENTITY_HEALTH
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0x6B76DC1F3AE6E6A3 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x6B76DC1F3AE6E6A3)
 	 */
-	setHealth(entity: Handle, health: integer, p2: integer): void;
+	setHealth(entity: Handle, health: integer, p2?: integer): void;
 
 	/**
 	 * Native: ENTITY::SET_ENTITY_INVINCIBLE
@@ -1409,9 +1413,11 @@ interface GameEntity extends GameEntityLegacy {
 	/**
 	 * Native: ENTITY::SET_ENTITY_LOAD_COLLISION_FLAG
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0x0DC7CABAB1E9B67E - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x0DC7CABAB1E9B67E)
 	 */
-	setLoadCollisionFlag(entity: Handle, toggle: boolean, p2: integer): void;
+	setLoadCollisionFlag(entity: Handle, toggle: boolean, p2?: integer): void;
 
 	/**
 	 * Native: ENTITY::SET_ENTITY_LOD_DIST

@@ -366,6 +366,8 @@ interface GameTaskLegacy {
 	/**
 	 * Native: TASK::TASK_GO_TO_COORD_ANY_MEANS_EXTRA_PARAMS
 	 *
+	 * p12 defaults to 0
+	 *
 	 * Hash: 0x1DD45F9ECFDB1BC9 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x1DD45F9ECFDB1BC9)
 	 */
 	taskGoToCoordAnyMeansExtraParams(
@@ -381,11 +383,13 @@ interface GameTaskLegacy {
 		p9: integer,
 		p10: integer,
 		p11: integer,
-		p12: integer
+		p12?: integer
 	): void;
 
 	/**
 	 * Native: TASK::TASK_GO_TO_COORD_ANY_MEANS_EXTRA_PARAMS_WITH_CRUISE_SPEED
+	 *
+	 * p13 defaults to 0
 	 *
 	 * Hash: 0xB8ECD61F531A7B02 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xB8ECD61F531A7B02)
 	 */
@@ -403,7 +407,7 @@ interface GameTaskLegacy {
 		p10: integer,
 		p11: integer,
 		p12: integer,
-		p13: integer
+		p13?: integer
 	): void;
 
 	/**
@@ -558,9 +562,11 @@ interface GameTaskLegacy {
 	/**
 	 * Native: TASK::TASK_PARACHUTE
 	 *
+	 * p2 defaults to false
+	 *
 	 * Hash: 0xD2F1C53C97EE81AB - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xD2F1C53C97EE81AB)
 	 */
-	taskParachute(ped: Handle, p1: boolean, p2: boolean): void;
+	taskParachute(ped: Handle, p1: boolean, p2?: boolean): void;
 
 	/**
 	 * Native: TASK::TASK_PARACHUTE_TO_TARGET
@@ -616,6 +622,8 @@ interface GameTaskLegacy {
 	/**
 	 * Native: TASK::TASK_PLANE_MISSION
 	 *
+	 * p13 defaults to 0
+	 *
 	 * Hash: 0x23703CD154E83B88 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x23703CD154E83B88)
 	 */
 	taskPlaneMission(
@@ -632,7 +640,7 @@ interface GameTaskLegacy {
 		targetHeading: number,
 		maxZ: number,
 		minZ: number,
-		p13: integer
+		p13?: integer
 	): void;
 
 	/**
@@ -770,16 +778,20 @@ interface GameTaskLegacy {
 	/**
 	 * Native: TASK::TASK_SHUFFLE_TO_NEXT_VEHICLE_SEAT
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0x7AA80209BDA643EB - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x7AA80209BDA643EB)
 	 */
-	taskShuffleToNextVehicleSeat(ped: Handle, vehicle: Handle, p2: integer): void;
+	taskShuffleToNextVehicleSeat(ped: Handle, vehicle: Handle, p2?: integer): void;
 
 	/**
 	 * Native: TASK::TASK_SKY_DIVE
 	 *
+	 * p1 defaults fo false
+	 *
 	 * Hash: 0x601736CFE536B0A0 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x601736CFE536B0A0)
 	 */
-	taskSkyDive(ped: Handle, p1: boolean): void;
+	taskSkyDive(ped: Handle, p1?: boolean): void;
 
 	/**
 	 * Native: TASK::TASK_SMART_FLEE_COORD
@@ -852,9 +864,11 @@ interface GameTaskLegacy {
 	/**
 	 * Native: TASK::TASK_STOP_PHONE_GESTURE_ANIMATION
 	 *
+	 * p1 defaults to 0
+	 *
 	 * Hash: 0x3FA00D4F4641BFAE - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x3FA00D4F4641BFAE)
 	 */
-	taskStopPhoneGestureAnimation(ped: Handle, p1: integer): void;
+	taskStopPhoneGestureAnimation(ped: Handle, p1?: integer): void;
 
 	/**
 	 * Native: TASK::TASK_SWAP_WEAPON
@@ -884,9 +898,11 @@ interface GameTaskLegacy {
 	/**
 	 * Native: TASK::TASK_USE_MOBILE_PHONE
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0xBD2A8EC3AF4DE7DB - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xBD2A8EC3AF4DE7DB)
 	 */
-	taskUseMobilePhone(ped: Handle, p1: integer, p2: integer): void;
+	taskUseMobilePhone(ped: Handle, p1: integer, p2?: integer): void;
 
 	/**
 	 * Native: TASK::TASK_USE_MOBILE_PHONE_TIMED
@@ -1138,9 +1154,12 @@ interface GameTaskLegacy {
 	/**
 	 * Native: TASK::TASK_WRITHE
 	 *
+	 * p4 defaults to 0
+	 * p5 defaults to 0
+	 *
 	 * Hash: 0xCDDC2B77CE54AC6E - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xCDDC2B77CE54AC6E)
 	 */
-	taskWrithe(ped: Handle, target: Handle, time: integer, p3: integer, p4: integer, p5: integer): void;
+	taskWrithe(ped: Handle, target: Handle, time: integer, p3: integer, p4?: integer, p5?: integer): void;
 
 	/**
 	 * Native: TASK::UPDATE_TASK_AIM_GUN_SCRIPTED_TARGET

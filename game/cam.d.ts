@@ -165,9 +165,11 @@ interface GameCamLegacy {
 	/**
 	 * Native: CAM::RENDER_SCRIPT_CAMS
 	 *
+	 * p5 defaults to 0
+	 *
 	 * Hash: 0x07E5B515DB0636FC - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x07E5B515DB0636FC)
 	 */
-	renderScriptCams(render: boolean, ease: boolean, easeTime: integer, p3: boolean, p4: boolean, p5: integer): void;
+	renderScriptCams(render: boolean, ease: boolean, easeTime: integer, p3: boolean, p4: boolean, p5?: integer): void;
 
 	/**
 	 * Native: CAM::_SET_CAM_EFFECT

@@ -13,6 +13,9 @@ interface GameWeaponLegacy {
 	/**
 	 * Native: WEAPON::CREATE_WEAPON_OBJECT
 	 *
+	 * p8 defaults to 0
+	 * p9 defaults to 0
+	 *
 	 * Hash: 0x9541D3CF0D398F36 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x9541D3CF0D398F36)
 	 */
 	createWeaponObject(
@@ -24,8 +27,8 @@ interface GameWeaponLegacy {
 		showWorldModel: boolean,
 		scale: number,
 		p7: integer,
-		p8: integer,
-		p9: integer
+		p8?: integer,
+		p9?: integer
 	): Handle;
 
 	/**
@@ -417,9 +420,11 @@ interface GameWeapon extends GameWeaponLegacy {
 	/**
 	 * Native: WEAPON::GET_CURRENT_PED_WEAPON_ENTITY_INDEX
 	 *
+	 * p1 defaults to 0
+	 *
 	 * Hash: 0x3B390A939AF0B5FC - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x3B390A939AF0B5FC)
 	 */
-	getCurrentPedEntityIndex(ped: Handle, p1: integer): Handle;
+	getCurrentPedEntityIndex(ped: Handle, p1?: integer): Handle;
 
 	/**
 	 * Native: WEAPON::GET_CURRENT_PED_VEHICLE_WEAPON
@@ -921,9 +926,11 @@ interface GameWeapon extends GameWeaponLegacy {
 	/**
 	 * Native: WEAPON::SET_PED_AMMO
 	 *
+	 * p3 defaults to false
+	 *
 	 * Hash: 0x14E56BC5B5DB6A19 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x14E56BC5B5DB6A19)
 	 */
-	setPedAmmo(ped: Handle, weaponHash: integer, ammo: integer, p3: boolean): void;
+	setPedAmmo(ped: Handle, weaponHash: integer, ammo: integer, p3?: boolean): void;
 
 	/**
 	 * Native: WEAPON::SET_PED_AMMO_BY_TYPE

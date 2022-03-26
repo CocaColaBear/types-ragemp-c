@@ -36,17 +36,21 @@ interface GameAudioLegacy {
 
 	/**
 	 * Native: AUDIO::HINT_AMBIENT_AUDIO_BANK
+	 * 
+	 * p2 defaults to 0
 	 *
 	 * Hash: 0x8F8C0E370AE62F5C - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x8F8C0E370AE62F5C)
 	 */
-	hintAmbientAudioBank(p0: integer, p1: integer, p2: integer): integer;
+	hintAmbientAudioBank(p0: integer, p1: integer, p2?: integer): integer;
 
 	/**
 	 * Native: AUDIO::HINT_SCRIPT_AUDIO_BANK
+	 * 
+	 * p2 defaults to 0
 	 *
 	 * Hash: 0xFB380A29641EC31A - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xFB380A29641EC31A)
 	 */
-	hintScriptAudioBank(p0: integer, p1: integer, p2: integer): integer;
+	hintScriptAudioBank(p0: integer, p1: integer, p2?: integer): integer;
 
 	/**
 	 * Native: AUDIO::IS_AUDIO_SCENE_ACTIVE
@@ -126,10 +130,12 @@ interface GameAudioLegacy {
 
 	/**
 	 * Native: AUDIO::REQUEST_AMBIENT_AUDIO_BANK
+	 * 
+	 * p2 defaults to 0.
 	 *
 	 * Hash: 0xFE02FFBED8CA9D99 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xFE02FFBED8CA9D99)
 	 */
-	requestAmbientAudioBank(p0: string, p1: boolean, p2: integer): boolean;
+	requestAmbientAudioBank(p0: string, p1: boolean, p2?: integer): boolean;
 
 	/**
 	 * Native: AUDIO::REQUEST_MISSION_AUDIO_BANK
@@ -140,10 +146,12 @@ interface GameAudioLegacy {
 
 	/**
 	 * Native: AUDIO::REQUEST_SCRIPT_AUDIO_BANK
+	 * 
+	 * p2 defaults to 0
 	 *
 	 * Hash: 0x2F844A8B08D76685 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x2F844A8B08D76685)
 	 */
-	requestScriptAudioBank(p0: string, p1: boolean, p2: integer): boolean;
+	requestScriptAudioBank(p0: string, p1: boolean, p2?: integer): boolean;
 
 	/**
 	 * Native: AUDIO::RESET_PED_AUDIO_FLAGS
@@ -1223,23 +1231,29 @@ interface GameAudio extends GameAudioLegacy {
 	/**
 	 * Native: AUDIO::PLAY_PAIN
 	 *
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0xBC9AE166038A5CEC - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xBC9AE166038A5CEC)
 	 */
-	playPain(ped: Handle, painID: integer, p1: integer, p3: integer): void;
+	playPain(ped: Handle, painID: integer, p1: integer, p3?: integer): void;
 
 	/**
 	 * Native: AUDIO::PLAY_PED_AMBIENT_SPEECH_AND_CLONE_NATIVE
 	 *
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0xC6941B4A3A8FBBB9 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xC6941B4A3A8FBBB9)
 	 */
-	playPedAmbientSpeechAndCloneNative(ped: Handle, speechName: string, speechParam: string, p3: integer): void;
+	playPedAmbientSpeechAndCloneNative(ped: Handle, speechName: string, speechParam: string, p3?: integer): void;
 
 	/**
 	 * Native: AUDIO::PLAY_PED_AMBIENT_SPEECH_NATIVE
 	 *
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0x8E04FEDD28D42462 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x8E04FEDD28D42462)
 	 */
-	playPedAmbientSpeechNative(ped: Handle, speechName: string, speechParam: string, p3: integer): void;
+	playPedAmbientSpeechNative(ped: Handle, speechName: string, speechParam: string, p3?: integer): void;
 
 	/**
 	 * Native: AUDIO::PLAY_PED_AMBIENT_SPEECH_WITH_VOICE_NATIVE
@@ -1498,9 +1512,11 @@ interface GameAudio extends GameAudioLegacy {
 	/**
 	 * Native: AUDIO::REQUEST_MISSION_AUDIO_BANK
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0x7345BDD95E62E0F2 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x7345BDD95E62E0F2)
 	 */
-	requestMissionBank(p0: string, p1: boolean, p2: integer): boolean;
+	requestMissionBank(p0: string, p1: boolean, p2?: integer): boolean;
 
 	/**
 	 * Native: AUDIO::REQUEST_SCRIPT_AUDIO_BANK

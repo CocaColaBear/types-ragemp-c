@@ -2139,6 +2139,9 @@ interface GameNetwork extends GameNetworkLegacy {
 	/**
 	 * Native: NETWORK::NETWORK_CREATE_SYNCHRONISED_SCENE
 	 *
+	 * animTime defaults to 0.0
+	 * p11 defaults to 0.0
+	 *
 	 * Hash: 0x7CD6BC4C2BBDD526 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x7CD6BC4C2BBDD526)
 	 */
 	createSynchronisedScene(
@@ -2152,8 +2155,8 @@ interface GameNetwork extends GameNetworkLegacy {
 		useOcclusionPortal: boolean,
 		looped: boolean,
 		p9: number,
-		animTime: number,
-		p11: number
+		animTime?: number,
+		p11?: number
 	): integer;
 
 	/**
@@ -2236,9 +2239,12 @@ interface GameNetwork extends GameNetworkLegacy {
 	/**
 	 * Native: NETWORK::NETWORK_DO_TRANSITION_QUICKMATCH
 	 *
+	 * p4 defaults to 0
+	 * p5 defaults to 0
+	 *
 	 * Hash: 0x71FB0EBCD4915D56 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x71FB0EBCD4915D56)
 	 */
-	doTransitionQuickmatch(p0: integer, p1: integer, p2: integer, p3: integer, p4: integer, p5: integer): boolean;
+	doTransitionQuickmatch(p0: integer, p1: integer, p2: integer, p3: integer, p4?: integer, p5?: integer): boolean;
 
 	/**
 	 * Native: NETWORK::NETWORK_DO_TRANSITION_QUICKMATCH_ASYNC
@@ -2250,6 +2256,9 @@ interface GameNetwork extends GameNetworkLegacy {
 	/**
 	 * Native: NETWORK::NETWORK_DO_TRANSITION_QUICKMATCH_WITH_GROUP
 	 *
+	 * p6 defaults to 0
+	 * p7 defaults to 0
+	 *
 	 * Hash: 0x9C4AB58491FDC98A - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x9C4AB58491FDC98A)
 	 */
 	doTransitionQuickmatchWithGroup(
@@ -2258,8 +2267,8 @@ interface GameNetwork extends GameNetworkLegacy {
 		p2: integer,
 		p3: integer,
 		p5: integer,
-		p6: integer,
-		p7: integer
+		p6?: integer,
+		p7?: integer
 	): integer;
 
 	/**
@@ -2389,9 +2398,11 @@ interface GameNetwork extends GameNetworkLegacy {
 	/**
 	 * Native: NETWORK::NETWORK_FADE_IN_ENTITY
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0x1F4ED342ACEFE62D - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x1F4ED342ACEFE62D)
 	 */
-	fadeInEntity(entity: Handle, state: boolean, p2: integer): void;
+	fadeInEntity(entity: Handle, state: boolean, p2?: integer): void;
 
 	/**
 	 * Native: NETWORK::NETWORK_FADE_OUT_ENTITY
@@ -2858,23 +2869,29 @@ interface GameNetwork extends GameNetworkLegacy {
 	/**
 	 * Native: NETWORK::GET_NUM_RESERVED_MISSION_OBJECTS
 	 *
+	 * p1 defaults to 0
+	 *
 	 * Hash: 0xAA81B5F10BC43AC2 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xAA81B5F10BC43AC2)
 	 */
-	getNumReservedMissionObjects(p0: boolean, p1: integer): integer;
+	getNumReservedMissionObjects(p0: boolean, p1?: integer): integer;
 
 	/**
 	 * Native: NETWORK::GET_NUM_RESERVED_MISSION_PEDS
 	 *
+	 * p1 defaults to 0
+	 *
 	 * Hash: 0x1F13D5AE5CB17E17 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x1F13D5AE5CB17E17)
 	 */
-	getNumReservedMissionPeds(p0: boolean, p1: integer): integer;
+	getNumReservedMissionPeds(p0: boolean, p1?: integer): integer;
 
 	/**
 	 * Native: NETWORK::GET_NUM_RESERVED_MISSION_VEHICLES
 	 *
+	 * p1 defaults to 0
+	 *
 	 * Hash: 0xCF3A965906452031 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xCF3A965906452031)
 	 */
-	getNumReservedMissionVehicles(p0: boolean, p1: integer): integer;
+	getNumReservedMissionVehicles(p0: boolean, p1?: integer): integer;
 
 	/**
 	 * Native: NETWORK::NETWORK_GET_NUM_SCRIPT_PARTICIPANTS
@@ -3516,6 +3533,11 @@ interface GameNetwork extends GameNetworkLegacy {
 	/**
 	 * Native: NETWORK::NETWORK_HOST_TRANSITION
 	 *
+	 * p6 defaults to 0
+	 * p7 defaults to 0
+	 * p8 defaults to 0
+	 * p9 defaults to 0
+	 *
 	 * Hash: 0xA60BB5CE242BB254 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xA60BB5CE242BB254)
 	 */
 	hostTransition(
@@ -3525,10 +3547,10 @@ interface GameNetwork extends GameNetworkLegacy {
 		p3: integer,
 		p4: integer,
 		p5: boolean,
-		p6: boolean,
-		p7: integer,
-		p8: integer,
-		p9: integer
+		p6?: boolean,
+		p7?: integer,
+		p8?: integer,
+		p9?: integer
 	): boolean;
 
 	/**
@@ -4682,6 +4704,8 @@ interface GameNetwork extends GameNetworkLegacy {
 	/**
 	 * Native: NETWORK::NETWORK_RESURRECT_LOCAL_PLAYER
 	 *
+	 * p7 defaults to 0
+	 *
 	 * Hash: 0xEA23C49EAA83ACFB - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xEA23C49EAA83ACFB)
 	 */
 	resurrectLocalPlayer(
@@ -4691,7 +4715,7 @@ interface GameNetwork extends GameNetworkLegacy {
 		heading: number,
 		unk: boolean,
 		changetime: boolean,
-		p6: integer
+		p6?: integer
 	): void;
 
 	/**
@@ -5201,9 +5225,11 @@ interface GameNetwork extends GameNetworkLegacy {
 	/**
 	 * Native: NETWORK::_SET_LOCAL_PLAYER_AS_GHOST
 	 *
+	 * p1 defaults to 0
+	 *
 	 * Hash: 0x5FFE9B4144F9712F - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x5FFE9B4144F9712F)
 	 */
-	setLocalPlayerAsGhost(toggle: boolean, p1: boolean): void;
+	setLocalPlayerAsGhost(toggle: boolean, p1?: boolean): void;
 
 	/**
 	 * Native: NETWORK::NETWORK_SET_LOCAL_PLAYER_INVINCIBLE_TIME
@@ -5390,9 +5416,12 @@ interface GameNetwork extends GameNetworkLegacy {
 	/**
 	 * Native: NETWORK::SET_NETWORK_VEHICLE_RESPOT_TIMER
 	 *
+	 * p2 defaults to 0
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0xEC51713AB6EC36E8 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xEC51713AB6EC36E8)
 	 */
-	setVehicleRespotTimer(netId: integer, time: integer, p2: integer, p3: integer): void;
+	setVehicleRespotTimer(netId: integer, time: integer, p2?: integer, p3?: integer): void;
 
 	/**
 	 * Native: NETWORK::_NETWORK_SET_VEHICLE_WHEELS_DESTRUCTIBLE

@@ -509,9 +509,11 @@ interface GamePlayer extends GamePlayerLegacy {
 	/**
 	 * Native: PLAYER::ENABLE_SPECIAL_ABILITY
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0x181EC197DAEFE121 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x181EC197DAEFE121)
 	 */
-	enableSpecialAbility(toggle: boolean, p2: integer): void;
+	enableSpecialAbility(toggle: boolean, p2?: integer): void;
 
 	/**
 	 * Native: PLAYER::EXTEND_WORLD_BOUNDARY_FOR_PLAYER
@@ -1405,9 +1407,11 @@ interface GamePlayer extends GamePlayerLegacy {
 	/**
 	 * Native: PLAYER::SET_PLAYER_MELEE_WEAPON_DAMAGE_MODIFIER
 	 *
+	 * p2 defaults to false
+	 *
 	 * Hash: 0x4A3DC7ECCC321032 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x4A3DC7ECCC321032)
 	 */
-	setMeleeWeaponDamageModifier(modifier: number, p2: boolean): void;
+	setMeleeWeaponDamageModifier(modifier: number, p2?: boolean): void;
 
 	/**
 	 * Native: PLAYER::SET_PLAYER_MELEE_WEAPON_DEFENSE_MODIFIER
@@ -1692,33 +1696,43 @@ interface GamePlayer extends GamePlayerLegacy {
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_CHARGE_ABSOLUTE
 	 *
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0xB7B0870EB531D08D - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xB7B0870EB531D08D)
 	 */
-	specialAbilityChargeAbsolute(p1: integer, p2: boolean, p3: integer): void;
+	specialAbilityChargeAbsolute(p1: integer, p2: boolean, p3?: integer): void;
 
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_CHARGE_CONTINUOUS
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0xED481732DFF7E997 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xED481732DFF7E997)
 	 */
-	specialAbilityChargeContinuous(p1: Handle, p2: integer): void;
+	specialAbilityChargeContinuous(p1: Handle, p2?: integer): void;
 
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_CHARGE_LARGE
 	 *
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0xF733F45FA4497D93 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xF733F45FA4497D93)
 	 */
-	specialAbilityChargeLarge(p1: boolean, p2: boolean, p3: integer): void;
+	specialAbilityChargeLarge(p1: boolean, p2: boolean, p3?: integer): void;
 
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_CHARGE_MEDIUM
 	 *
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0xF113E3AA9BC54613 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xF113E3AA9BC54613)
 	 */
-	specialAbilityChargeMedium(p1: boolean, p2: boolean, p3: integer): void;
+	specialAbilityChargeMedium(p1: boolean, p2: boolean, p3?: integer): void;
 
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_CHARGE_NORMALIZED
+	 *
+	 * p3 defaults to 0
 	 *
 	 * Hash: 0xA0696A65F009EE18 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xA0696A65F009EE18)
 	 */
@@ -1734,9 +1748,11 @@ interface GamePlayer extends GamePlayerLegacy {
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_CHARGE_SMALL
 	 *
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0x2E7B9B683481687D - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x2E7B9B683481687D)
 	 */
-	specialAbilityChargeSmall(p1: boolean, p2: boolean, p3: integer): void;
+	specialAbilityChargeSmall(p1: boolean, p2: boolean, p3?: integer): void;
 
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_DEACTIVATE
@@ -1762,23 +1778,29 @@ interface GamePlayer extends GamePlayerLegacy {
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_DEPLETE_METER
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0x1D506DBBBC51E64B - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x1D506DBBBC51E64B)
 	 */
-	specialAbilityDepleteMeter(p1: boolean, p2: integer): void;
+	specialAbilityDepleteMeter(p1: boolean, p2?: integer): void;
 
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_FILL_METER
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0x3DACA8DDC6FD4980 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x3DACA8DDC6FD4980)
 	 */
-	specialAbilityFillMeter(p1: boolean, p2: integer): void;
+	specialAbilityFillMeter(p1: boolean, p2?: integer): void;
 
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_LOCK
 	 *
+	 * p1 defaults to 0
+	 *
 	 * Hash: 0x6A09D0D590A47D13 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x6A09D0D590A47D13)
 	 */
-	specialAbilityLock(playerModel: integer, p1: integer): void;
+	specialAbilityLock(playerModel: integer, p1?: integer): void;
 
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_RESET
@@ -1790,9 +1812,11 @@ interface GamePlayer extends GamePlayerLegacy {
 	/**
 	 * Native: PLAYER::SPECIAL_ABILITY_UNLOCK
 	 *
+	 * p1 defaults to 0
+	 *
 	 * Hash: 0xF145F3BE2EFA9A3B - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xF145F3BE2EFA9A3B)
 	 */
-	specialAbilityUnlock(playerModel: integer, p1: integer): void;
+	specialAbilityUnlock(playerModel: integer, p1?: integer): void;
 
 	/**
 	 * Native: PLAYER::START_FIRING_AMNESTY

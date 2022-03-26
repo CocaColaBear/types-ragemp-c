@@ -78,6 +78,8 @@ interface GameFire extends GameFireLegacy {
 	/**
 	 * Native: FIRE::ADD_EXPLOSION
 	 *
+	 * noDamage defaults to false
+	 *
 	 * Hash: 0xE3AD2BDBAEE269AC - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xE3AD2BDBAEE269AC)
 	 */
 	addExplosion(
@@ -89,7 +91,7 @@ interface GameFire extends GameFireLegacy {
 		isAudible: boolean,
 		isInvisible: boolean,
 		cameraShake: number,
-		noDamage: boolean
+		noDamage?: boolean
 	): void;
 
 	/**

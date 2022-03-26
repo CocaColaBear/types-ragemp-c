@@ -612,6 +612,8 @@ interface GameMisc extends GameMiscLegacy {
 	/**
 	 * Native: MISC::ADD_STUNT_JUMP
 	 *
+	 * p17 defaults to 0
+	 *
 	 * Hash: 0x1A992DA297A4630C - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x1A992DA297A4630C)
 	 */
 	addStuntJump(
@@ -632,11 +634,13 @@ interface GameMisc extends GameMiscLegacy {
 		camZ: number,
 		p15: integer,
 		p16: integer,
-		p17: integer
+		p17?: integer
 	): integer;
 
 	/**
 	 * Native: MISC::ADD_STUNT_JUMP_ANGLED
+	 *
+	 * p19 defaults to 0
 	 *
 	 * Hash: 0xBBE5D803A5360CBF - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xBBE5D803A5360CBF)
 	 */
@@ -660,7 +664,7 @@ interface GameMisc extends GameMiscLegacy {
 		camZ: number,
 		p17: integer,
 		p18: integer,
-		p19: integer
+		p19?: integer
 	): integer;
 
 	/**
@@ -750,6 +754,8 @@ interface GameMisc extends GameMiscLegacy {
 	/**
 	 * Native: MISC::CLEAR_ANGLED_AREA_OF_VEHICLES
 	 *
+	 * p12 defaults to 0
+	 *
 	 * Hash: 0x11DB3500F042A8AA - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x11DB3500F042A8AA)
 	 */
 	clearAngledAreaOfVehicles(
@@ -765,7 +771,7 @@ interface GameMisc extends GameMiscLegacy {
 		p9: boolean,
 		p10: boolean,
 		p11: boolean,
-		p12: integer
+		p12?: integer
 	): void;
 
 	/**
@@ -831,6 +837,8 @@ interface GameMisc extends GameMiscLegacy {
 	/**
 	 * Native: MISC::CLEAR_AREA_OF_VEHICLES
 	 *
+	 * p9 defaults to 0
+	 *
 	 * Hash: 0x01C7B9B38428AEB6 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x01C7B9B38428AEB6)
 	 */
 	clearAreaOfVehicles(
@@ -843,7 +851,7 @@ interface GameMisc extends GameMiscLegacy {
 		p6: boolean,
 		p7: boolean,
 		p8: boolean,
-		p9: boolean
+		p9?: boolean
 	): void;
 
 	/**
@@ -926,6 +934,9 @@ interface GameMisc extends GameMiscLegacy {
 	/**
 	 * Native: MISC::CREATE_INCIDENT
 	 *
+	 * p7 defaults to 0
+	 * p8 defaults to 0
+	 *
 	 * Hash: 0x3F892CAF67444AE7 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x3F892CAF67444AE7)
 	 */
 	createIncident(
@@ -935,12 +946,15 @@ interface GameMisc extends GameMiscLegacy {
 		z: number,
 		numUnits: integer,
 		radius: number,
-		p7: integer,
-		p8: integer
+		p7?: integer,
+		p8?: integer
 	): integer;
 
 	/**
 	 * Native: MISC::CREATE_INCIDENT_WITH_ENTITY
+	 *
+	 * p5 defaults to 0
+	 * p6 defaults to 0
 	 *
 	 * Hash: 0x05983472F0494E60 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x05983472F0494E60)
 	 */
@@ -949,8 +963,8 @@ interface GameMisc extends GameMiscLegacy {
 		ped: Handle,
 		numUnits: integer,
 		radius: number,
-		p5: integer,
-		p6: integer
+		p5?: integer,
+		p6?: integer
 	): integer;
 
 	/**
@@ -1261,9 +1275,11 @@ interface GameMisc extends GameMiscLegacy {
 	/**
 	 * Native: MISC::GET_GROUND_Z_FOR_3D_COORD
 	 *
+	 * p5 defaults to false
+	 *
 	 * Hash: 0xC906A7DAB05C8D2B - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xC906A7DAB05C8D2B)
 	 */
-	getGroundZFor3DCoord(x: number, y: number, z: number, ignoreWater: boolean, p5: boolean): number;
+	getGroundZFor3DCoord(x: number, y: number, z: number, ignoreWater: boolean, p5?: boolean): number;
 
 	/**
 	 * Native: MISC::_GET_GROUND_Z_FOR_3D_COORD_2

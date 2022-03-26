@@ -1056,9 +1056,11 @@ interface GameObject extends GameObjectLegacy {
 	/**
 	 * Native: OBJECT::HAS_OBJECT_BEEN_BROKEN
 	 *
+	 * p1 defaults to 0
+	 *
 	 * Hash: 0x8ABFB70C49CC43E2 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x8ABFB70C49CC43E2)
 	 */
-	hasBeenBroken(object: Handle, p1: integer): boolean;
+	hasBeenBroken(object: Handle, p1?: integer): boolean;
 
 	/**
 	 * Native: OBJECT::HAS_CLOSEST_OBJECT_OF_TYPE_BEEN_BROKEN

@@ -206,9 +206,11 @@ interface GameStatsLegacy {
 	/**
 	 * Native: STATS::STAT_SAVE
 	 *
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0xE07BCA305B82D2FD - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xE07BCA305B82D2FD)
 	 */
-	statSave(p0: integer, p1: boolean, p2: integer, p3: integer): boolean;
+	statSave(p0: integer, p1: boolean, p2: integer, p3?: integer): boolean;
 
 	/**
 	 * Native: STATS::_STAT_SAVE_MIGRATION_CANCEL

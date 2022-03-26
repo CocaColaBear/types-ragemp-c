@@ -308,6 +308,11 @@ interface GameGraphicsLegacy {
 	/**
 	 * Native: GRAPHICS::START_NETWORKED_PARTICLE_FX_LOOPED_ON_ENTITY
 	 *
+	 * p12 defaults to 0
+	 * p13 defaults to 0
+	 * p14 defaults to 0
+	 * p15 defaults to 15
+	 *
 	 * Hash: 0x6F60E89A7B64EE1D - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x6F60E89A7B64EE1D)
 	 */
 	startParticleFxLoopedOnEntity2(
@@ -323,14 +328,19 @@ interface GameGraphicsLegacy {
 		xAxis: boolean,
 		yAxis: boolean,
 		zAxis: boolean,
-		p12: integer,
-		p13: integer,
-		p14: integer,
-		p15: integer
+		p12?: integer,
+		p13?: integer,
+		p14?: integer,
+		p15?: integer
 	): integer;
 
 	/**
 	 * Native: GRAPHICS::START_NETWORKED_PARTICLE_FX_LOOPED_ON_ENTITY_BONE
+	 *
+	 * p13 defaults to 0
+	 * p14 defaults to 0
+	 * p15 defaults to 0
+	 * p16 defaults to 0
 	 *
 	 * Hash: 0xDDE23F30CC5A0F03 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xDDE23F30CC5A0F03)
 	 */
@@ -348,14 +358,16 @@ interface GameGraphicsLegacy {
 		xAxis: boolean,
 		yAxis: boolean,
 		zAxis: boolean,
-		p13: integer,
-		p14: integer,
-		p15: integer,
-		p16: integer
+		p13?: integer,
+		p14?: integer,
+		p15?: integer,
+		p16?: integer
 	): integer;
 
 	/**
 	 * Native: GRAPHICS::START_NETWORKED_PARTICLE_FX_NON_LOOPED_AT_COORD
+	 *
+	 * p11 defaults to false
 	 *
 	 * Hash: 0xF56B8137DF10135D - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xF56B8137DF10135D)
 	 */
@@ -371,7 +383,7 @@ interface GameGraphicsLegacy {
 		xAxis: boolean,
 		yAxis: boolean,
 		zAxis: boolean,
-		p11: boolean
+		p11?: boolean
 	): boolean;
 
 	/**
@@ -1880,6 +1892,8 @@ interface GameGraphics extends GameGraphicsLegacy {
 	/**
 	 * Native: GRAPHICS::DRAW_RECT
 	 *
+	 * p8 defaults to 0
+	 *
 	 * Hash: 0x3A618A217E5154F0 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x3A618A217E5154F0)
 	 */
 	drawRect(
@@ -1891,7 +1905,7 @@ interface GameGraphics extends GameGraphicsLegacy {
 		g: integer,
 		b: integer,
 		a: integer,
-		p8: boolean
+		p8?: boolean
 	): void;
 
 	/**
@@ -2070,6 +2084,8 @@ interface GameGraphics extends GameGraphicsLegacy {
 	/**
 	 * Native: GRAPHICS::DRAW_SPRITE
 	 *
+	 * p11 defaults to false
+	 *
 	 * Hash: 0xE7FFAE5EBF23D890 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xE7FFAE5EBF23D890)
 	 */
 	drawSprite(
@@ -2084,7 +2100,7 @@ interface GameGraphics extends GameGraphicsLegacy {
 		green: integer,
 		blue: integer,
 		alpha: integer,
-		p11: boolean
+		p11?: boolean
 	): void;
 
 	/**

@@ -515,6 +515,8 @@ interface GamePathfind extends GamePathfindLegacy {
 	/**
 	 * Native: PATHFIND::SET_PED_PATHS_BACK_TO_ORIGINAL
 	 *
+	 * p6 defaults to 0
+	 *
 	 * Hash: 0xE04B48F2CC926253 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xE04B48F2CC926253)
 	 */
 	setPedPathsBackToOriginal(
@@ -524,11 +526,13 @@ interface GamePathfind extends GamePathfindLegacy {
 		p3: integer,
 		p4: integer,
 		p5: integer,
-		p6: integer
+		p6?: integer
 	): void;
 
 	/**
 	 * Native: PATHFIND::SET_PED_PATHS_IN_AREA
+	 *
+	 * p7 defaults to 0
 	 *
 	 * Hash: 0x34F060F4BF92E018 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x34F060F4BF92E018)
 	 */
@@ -540,18 +544,22 @@ interface GamePathfind extends GamePathfindLegacy {
 		y2: number,
 		z2: number,
 		unknown: boolean,
-		p7: integer
+		p7?: integer
 	): void;
 
 	/**
 	 * Native: PATHFIND::SET_ROADS_BACK_TO_ORIGINAL
 	 *
+	 * p6 defaults to 0
+	 *
 	 * Hash: 0x1EE7063B80FFC77C - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x1EE7063B80FFC77C)
 	 */
-	setRoadsBackToOriginal(p0: number, p1: number, p2: number, p3: number, p4: number, p5: number, p6: integer): void;
+	setRoadsBackToOriginal(p0: number, p1: number, p2: number, p3: number, p4: number, p5: number, p6?: integer): void;
 
 	/**
 	 * Native: PATHFIND::SET_ROADS_BACK_TO_ORIGINAL_IN_ANGLED_AREA
+	 *
+	 * p7 defaults to 0
 	 *
 	 * Hash: 0x0027501B9F3B407E - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x0027501B9F3B407E)
 	 */
@@ -563,7 +571,7 @@ interface GamePathfind extends GamePathfindLegacy {
 		y2: number,
 		z2: number,
 		width: number,
-		p7: integer
+		p7?: integer
 	): void;
 
 	/**

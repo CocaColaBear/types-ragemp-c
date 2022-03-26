@@ -174,9 +174,11 @@ interface GameHudLegacy {
 	/**
 	 * Native: HUD::END_TEXT_COMMAND_DISPLAY_TEXT
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0xCD015E5BB0D96A57 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xCD015E5BB0D96A57)
 	 */
-	drawText(x: number, y: number, p2: integer): void;
+	drawText(x: number, y: number, p2?: integer): void;
 
 	/**
 	 * Native: HUD::_0x4895BDEA16E7C080
@@ -321,9 +323,11 @@ interface GameHudLegacy {
 	/**
 	 * Native: HUD::SET_MP_GAMER_TAG_VISIBILITY
 	 *
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0x63BB75ABEDC1F6A0 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x63BB75ABEDC1F6A0)
 	 */
-	setHeadDisplayFlag(gamerTagId: integer, component: integer, toggle: boolean, p3: integer): void;
+	setHeadDisplayFlag(gamerTagId: integer, component: integer, toggle: boolean, p3?: integer): void;
 
 	/**
 	 * Native: HUD::SET_MP_GAMER_TAG_NAME
@@ -363,9 +367,11 @@ interface GameHudLegacy {
 	/**
 	 * Native: HUD::_SET_MINIMAP_ALTITUDE_INDICATOR_LEVEL
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0xD201F3FF917A506D - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xD201F3FF917A506D)
 	 */
-	setMinimapAttitudeIndicatorLevel(altitude: number, p1: boolean, p2: integer): void;
+	setMinimapAttitudeIndicatorLevel(altitude: number, p1: boolean, p2?: integer): void;
 
 	/**
 	 * Native: HUD::SET_MINIMAP_HIDE_FOW
@@ -509,6 +515,8 @@ interface GameHudLegacy {
 	/**
 	 * Native: HUD::SET_WARNING_MESSAGE_WITH_HEADER
 	 *
+	 * p9 defaults to 0
+	 *
 	 * Hash: 0xDC38CC1E35B6A5D7 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xDC38CC1E35B6A5D7)
 	 */
 	setWarningMessage2(
@@ -519,11 +527,13 @@ interface GameHudLegacy {
 		p4: boolean,
 		p5: integer,
 		p8: boolean,
-		p9: integer
+		p9?: integer
 	): SetWarningMessageWithHeaderResult;
 
 	/**
 	 * Native: HUD::SET_WARNING_MESSAGE_WITH_HEADER_AND_SUBSTRING_FLAGS
+	 *
+	 * errorCode defaults to 0
 	 *
 	 * Hash: 0x701919482C74B5AB - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x701919482C74B5AB)
 	 */
@@ -538,7 +548,7 @@ interface GameHudLegacy {
 		additionalTextInfoLine1: string,
 		additionalTextInfoLine2: string,
 		showBackground: boolean,
-		errorCode: integer
+		errorCode?: integer
 	): void;
 
 	/**
@@ -3160,9 +3170,11 @@ interface GameHud extends GameHudLegacy {
 	/**
 	 * Native: HUD::SET_BLIP_SHOW_CONE
 	 *
+	 * p2 defaults to 0
+	 *
 	 * Hash: 0x13127EC3665E8EE1 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x13127EC3665E8EE1)
 	 */
-	setBlipShowCone(blip: Handle, toggle: boolean, p2: integer): void;
+	setBlipShowCone(blip: Handle, toggle: boolean, p2?: integer): void;
 
 	/**
 	 * Native: HUD::SET_BLIP_SPRITE
@@ -3811,6 +3823,8 @@ interface GameHud extends GameHudLegacy {
 	/**
 	 * Native: HUD::SET_WARNING_MESSAGE
 	 *
+	 * errorCode defaults to 0
+	 *
 	 * Hash: 0x7B1776B3B53F8D74 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x7B1776B3B53F8D74)
 	 */
 	setWarningMessage(
@@ -3822,7 +3836,7 @@ interface GameHud extends GameHudLegacy {
 		p5: string,
 		p6: string,
 		showBackground: boolean,
-		errorCode: integer
+		errorCode?: integer
 	): void;
 
 	/**

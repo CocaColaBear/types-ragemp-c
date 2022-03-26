@@ -189,9 +189,11 @@ interface GameDatafileLegacy {
 	/**
 	 * Native: DATAFILE::DATAFILE_LOAD_OFFLINE_UGC
 	 *
+	 * p1 defaults to 0
+	 *
 	 * Hash: 0xC5238C011AF405E4 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0xC5238C011AF405E4)
 	 */
-	loadUgcFile(filename: string, p1: integer): boolean;
+	loadUgcFile(filename: string, p1?: integer): boolean;
 
 	/**
 	 * Native: DATAFILE::DATADICT_CREATE_ARRAY

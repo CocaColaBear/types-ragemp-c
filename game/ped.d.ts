@@ -952,9 +952,11 @@ interface GamePed extends GamePedLegacy {
 	/**
 	 * Native: PED::APPLY_DAMAGE_TO_PED
 	 *
+	 * p3 defaults to 0
+	 *
 	 * Hash: 0x697157CED63F18D4 - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x697157CED63F18D4)
 	 */
-	applyDamageTo(ped: Handle, damageAmount: integer, p2: boolean, p3: integer): void;
+	applyDamageTo(ped: Handle, damageAmount: integer, p2: boolean, p3?: integer): void;
 
 	/**
 	 * Native: PED::ATTACH_SYNCHRONIZED_SCENE_TO_ENTITY
@@ -4052,9 +4054,11 @@ interface GamePed extends GamePedLegacy {
 	/**
 	 * Native: PED::SET_PED_HELMET_PROP_INDEX
 	 *
+	 * p2 defaults to false
+	 *
 	 * Hash: 0x26D83693ED99291C - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x26D83693ED99291C)
 	 */
-	setHelmetPropIndex(ped: Handle, propIndex: integer, p2: boolean): void;
+	setHelmetPropIndex(ped: Handle, propIndex: integer, p2?: boolean): void;
 
 	/**
 	 * Native: PED::SET_PED_HELMET_TEXTURE_INDEX
