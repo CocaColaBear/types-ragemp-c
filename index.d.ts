@@ -1822,6 +1822,13 @@ interface ObjectMpPool extends EntityMpPool<ObjectMp> {
 		rotation?: Vector3Mp
 	}): ObjectMp;
 	newWeak(handle: number): ObjectMp;
+	newWeaponObject(weaponHash: HashOrString, position: Vector3Mp, options?: {
+		ammo?: integer,
+		dimension?: integer,
+		rotation?: Vector3Mp,
+		scale?: number,
+		showWorldObject?: boolean
+	}): ObjectMp;
 }
 
 interface PedMpPool extends EntityMpPool<PedMp> {
