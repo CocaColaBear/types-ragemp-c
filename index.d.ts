@@ -49,6 +49,7 @@ interface Mp {
 	voiceChat: VoiceChatMp;
 
 	Blip: typeof BlipMp;
+	Browser: typeof BrowserMp;
 	Camera: typeof CameraMp;
 	Checkpoint: typeof CheckpointMp;
 	DummyEntity: typeof DummyEntityMp;
@@ -1477,13 +1478,15 @@ declare abstract class BrowserMp {
 	active: boolean;
 	url: string;
 
+	call(eventName: string, ...args: any[]): void;
+	callProc<T = any>(procName: string, ...args: any[]): Promise<T>;
+	cancelPendingProc(procName: string): void;
 	destroy(): void;
 	execute(code: string): void;
+	executeCached(code: string): void;
+	hasPendingProc(procName: string): boolean;
 	markAsChat(): void;
 	reload(ignoreCache: boolean): void;
-	call(eventName: string, ...args: any[]): void;
-	callProc(procName: string, ...args: any[]): Promise<any>;
-	executeCached(code: string): void;
 }
 
 declare abstract class CameraMp {
@@ -1787,11 +1790,11 @@ interface EventMpPool {
 	addProc(procName: string, callback: (...args: any[]) => void): void;
 	addProc(procs: ({ [name: string]: (...args: any[]) => void; })): void;
 	call(eventName: string, ...args: any[]): void;
-	callRemoteProc(procName: string, ...args: any[]): Promise<any>;
+	callRemoteProc<T = any>(procName: string, ...args: any[]): Promise<T>;
 	callRemoteUnreliable(eventName: string, ...args: any[]): void;
 	callRemote(eventName: string, ...args: any[]): void;
-	cancelPendingRpc(procName?: string): void;
-	hasPendingRpc(procName?: string): boolean;
+	cancelPendingProc(procName: string): void;
+	hasPendingProc(procName: string): boolean;
 	remove(eventName: string, handler?: (...args: any[]) => void): void;
 	remove(eventNames: string[]): void;
 }
