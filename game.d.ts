@@ -16,6 +16,7 @@
 /// <reference path="game/hud.d.ts" />
 /// <reference path="game/interior.d.ts" />
 /// <reference path="game/itemset.d.ts" />
+/// <reference path="game/legacy.d.ts" />
 /// <reference path="game/loadingscreen.d.ts" />
 /// <reference path="game/localization.d.ts" />
 /// <reference path="game/misc.d.ts" />
