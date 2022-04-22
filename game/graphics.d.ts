@@ -311,7 +311,7 @@ interface GameGraphicsLegacy {
 	 * p12 defaults to 0
 	 * p13 defaults to 0
 	 * p14 defaults to 0
-	 * p15 defaults to 15
+	 * p15 defaults to 0
 	 *
 	 * Hash: 0x6F60E89A7B64EE1D - [NativeDB Reference](https://alloc8or.re/gta5/nativedb/?n=0x6F60E89A7B64EE1D)
 	 */
