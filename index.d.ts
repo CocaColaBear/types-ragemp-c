@@ -52,8 +52,10 @@ interface Mp {
 	Browser: typeof BrowserMp;
 	Camera: typeof CameraMp;
 	Checkpoint: typeof CheckpointMp;
+	Colshape: typeof ColshapeMp;
 	DummyEntity: typeof DummyEntityMp;
 	Marker: typeof MarkerMp;
+	Object: typeof ObjectMp;
 	Player: typeof PlayerMp;
 	Ped: typeof PedMp;
 	TextLabel: typeof TextLabelMp;
@@ -989,6 +991,7 @@ interface PedBaseMp extends EntityMp {
 
 interface PedMp extends PedBaseMp {}
 declare abstract class PedMp implements PedBaseMp {
+	readonly controller: PlayerMp | undefined;
 	spawnPosition: Vector3Mp;
 	taskPlayAnim(animDictionary: string, animationName: string, speed: number, speedMultiplier: number, duration: number,
 	             flag: number, playbackRate: number, lockX: boolean, lockY: boolean, lockZ: boolean): void;
@@ -1155,6 +1158,7 @@ declare abstract class TextLabelMp implements EntityMp {
 
 interface VehicleMp extends EntityMp {}
 declare abstract class VehicleMp implements EntityMp {
+	readonly controller: PlayerMp | undefined;
 	gear: number;
 	rpm: number;
 	steeringAngle: number;
