@@ -442,6 +442,8 @@ declare abstract class ObjectMp implements EntityMp {
 }
 
 interface PedBaseMp extends EntityMp {
+	readonly isPositionFrozen: boolean;
+
 	applyBlood(boneIndex: number, xRot: number, yRot: number, zRot: number, woundType: string): void;
 	applyBloodByZone(p1: any, p2: number, p3: number, p4: any): void;
 	applyBloodDamageByZone(p1: any, p2: number, p3: number, p4: any): void;
@@ -1159,9 +1161,12 @@ declare abstract class TextLabelMp implements EntityMp {
 interface VehicleMp extends EntityMp {}
 declare abstract class VehicleMp implements EntityMp {
 	readonly controller: PlayerMp | undefined;
+	readonly isPositionFrozen: boolean;
+
 	gear: number;
 	rpm: number;
 	steeringAngle: number;
+	readonly wheelCount: number;
 
 	addUpsidedownCheck(): void;
 	areAllWindowsIntact(): boolean;
@@ -1289,17 +1294,49 @@ declare abstract class VehicleMp implements EntityMp {
 	getPedUsingDoor(doorIndex: number): Handle;
 	getPetrolTankHealth(): number;
 	getPlateType(): number;
+	/**
+	 * Returns the radius of the rim on a specific wheel.
+	 */
+	getRimRadius(wheelId: number): number;
 	getSuspensionHeight(): number;
 	getTrailer(vehicle: Handle): Handle;
 	getTrainCarriage(cariage: number): Handle;
+	/**
+	 * Returns radius of specific tyre.
+	 */
+	getTyreRadius(wheelId: number): number;
 	getTyresCanBurst(): boolean;
 	getTyreSmokeColor(r: number, g: number, b: number): {
 		r: number;
 		g: number;
 		b: number
 	};
+	/**
+	 * Returns the width of a specific tyre.
+	 */
+	getTyreWidth(wheelId: number): number;
 	getVehicleTrailer(vehicle: Handle): Handle;
+	/**
+	 * Returns the camber of a specific wheel.
+	 */
+	getWheelCamber(wheelId: number): number;
+	/**
+	 * Returns the height of a specific wheel.
+	 */
+	getWheelHeight(wheelId: number): number;
+	/**
+	 * Returns the radius of the wheels on a vehicle.
+	 */
+	getWheelRadius(): number;
+	/**
+	 * Returns the track width of a specific wheel.
+	 */
+	getWheelTrackWidth(wheelId: number): number;
 	getWheelType(): number;
+	/**
+	 * Returns the width of the wheels on a vehicle.
+	 */
+	getWheelWidth(): number;
 	getWindowTint(): number;
 	isAConvertible(p0: boolean): boolean;
 	isAlarmActivated(): boolean;
@@ -1445,12 +1482,26 @@ declare abstract class VehicleMp implements EntityMp {
 	setProvidesCover(toggle: boolean): void;
 	setReduceGrip(toggle: boolean): void;
 	setRenderTrainAsDerailed(toggle: boolean): void;
+	/**
+	 * Sets the radius of the rim. This has no visual effect, but affects physics.
+	 * 
+	 * This effect is observed when the tyre is blown.
+	 * 
+	 * Use vehicle.wheelCount to get the total number of wheels on a vehicle.
+	 */
+	setRimRadius(wheelId: number, value: number): void;
 	setRudderBroken(p0: boolean): void;
 	setSearchlight(toggle: boolean, canBeUsedByAI: boolean): void;
 	setSilent(toggle: boolean): void;
 	setSiren(toggle: boolean): void;
 	setSteerBias(value: number): void;
 	setStrong(toggle: boolean): void;
+	/**
+	 * Sets the visual suspension height of a vehicle.
+	 * 
+	 * A positive value lowers the car. A negative value raises it.
+	 */
+	setSuspensionHeight(value: number): void;
 	setTaxiLights(state: boolean): void;
 	setTimedExplosion(ped: Handle, toggle: boolean): void;
 	setTowTruckCraneHeight(height: number): void;
@@ -1458,12 +1509,68 @@ declare abstract class VehicleMp implements EntityMp {
 	setTrainSpeed(speed: number): void;
 	setTyreBurst(tyreIndex: number, onRim: boolean, p2: number): void;
 	setTyreFixed(tyreIndex: number): void;
+	/**
+	 * Sets the radius of the tyre. This does not cause a visual effect, but affects physics.
+	 * 
+	 * Use vehicle.setWheelRadius(value) to set the visual wheel radius.
+	 * 
+	 * Use vehicle.wheelCount to get the total number of wheels on a vehicle.
+	 */
+	setTyreRadius(wheelId: number, value: number): void;
 	setTyresCanBurst(toggle: boolean): void;
 	setTyreSmokeColor(r: number, g: number, b: number): void;
+	/**
+	 * Sets the wheel size to affect physics.
+	 * 
+	 * Passing 255 as the wheelId sets the tyre width for all wheels. Use in interval if setting for a single wheel.
+	 * 
+	 * Use vehicle.wheelCount to get the total number of wheels of a vehicle.
+	 * 
+	 * Use vehicle.setWheelRadius(value) to set the visual effect.
+	 */
+	setTyreWidth(wheelId: number, value: number): void;
 	setUndriveable(toggle: boolean): void;
+	/**
+	 * Sets camber (y-rotation) for wheel(s).
+	 * 
+	 * Passing 255 as the wheelId sets the camber for all wheels. Use in interval if setting for a single wheel.
+	 * 
+	 * Use vehicle.wheelCount to get the total number of wheels of a vehicle.
+	 */
+	setWheelCamber(wheelId: number, value: number): void;
+	/**
+	 * Sets height for wheel.
+	 * 
+	 * Passing 255 as the wheelId sets the height for all wheels. Use in interval if setting for a single wheel.
+	 * 
+	 * Use vehicle.wheelCount to get the total number of wheels of a vehicle.
+	 */
+	setWheelHeight(wheelId: number, value: number): void;
+	/**
+	 * Sets the radius of all wheels on a vehicle.
+	 * This only works with custom wheels.
+	 * 
+	 * Use vehicle.setTyreWidth(wheelid, value) to adjust physics.
+	 */
+	setWheelRadius(value: number): void;
 	setWheelsCanBreak(enabled: boolean): void;
 	setWheelsCanBreakOffWhenBlowUp(toggle: boolean): void;
+	/**
+	 * Sets the wheel offset relative to its axle. A negative value indicates left to axle. Positive value indicates right
+	 * of axle.
+	 * 
+	 * Passing 255 as the wheelId sets the track width for all wheels. Use in interval if setting for a single wheel.
+	 * 
+	 * Use vehicle.wheelCount to get the total number of wheels of a vehicle.
+	 */
+	setWheelTrackWidth(wheelId: number, value: number): void;
 	setWheelType(wheelType: number): void;
+	/**
+	 * Sets the visual width of all the wheels on a vehicle. 
+	 * 
+	 * Requires a non-default wheel for the effect to be visible.
+	 */
+	setWheelWidth(value: number): void;
 	setWindowTint(tint: number): void;
 	smashWindow(index: number): void;
 	startAlarm(): void;
