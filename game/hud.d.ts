@@ -4292,4 +4292,40 @@ interface GameHud extends GameHudLegacy {
 	unk: GameHudUnk;
 }
 
-interface GameHudMp extends GameHud {}
+interface GameHudMp extends GameHud {
+	/**
+	 * Gets minimap component data for given name in frontend.xml. Returns undefined for invalid components.
+	 *
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::getMinimapComponentValues)
+	 */
+	getMinimapComponentValues(
+		name: string
+	): { alignX: string; alignY: string; posX: number; posY: number; sizeX: number; sizeY: number } | undefined;
+
+	/**
+	 * Resets minimap component data.
+	 *
+	 * You might want to use [mp.game.ui.setBigmapActive](https://wiki.rage.mp/index.php?title=Ui::setBigmapActive) to 
+	 * force the minimap to re-render.
+	 * 
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::resetMinimapComponentValues)
+	 */
+	resetMinimapComponentValues(name: string): void;
+
+	/**
+	 * Sets minimap component data. Check frontend.xml for more data.
+	 *
+	 * You might want to use mp.game.ui.setBigmapActive to force the minimap to re-render.
+	 * 
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::setMinimapComponentValues)
+	 */
+	setMinimapComponentValues(
+		name: string,
+		alignX: number,
+		alignY: number,
+		posX: number,
+		posY: number,
+		sizeX: number,
+		sizeY: number
+	): void;
+}

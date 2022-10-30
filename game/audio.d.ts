@@ -2197,4 +2197,11 @@ interface GameAudio extends GameAudioLegacy {
 	unk: GameAudioUnk;
 }
 
-interface GameAudioMp extends GameAudio {}
+interface GameAudioMp extends GameAudio {
+	/**
+	 * Same as mp.game.audio.playSound (0x7FF4944CC209192D) but audio* parameters take hashes instead of strings.
+	 * 
+	 * See [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Audio::playSound)
+	 */
+	playSoundHash(soundId: integer, audioNameHash: Hash, audioRefHash: Hash, p3: boolean, p4: integer, p5: boolean): void;
+}
