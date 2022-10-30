@@ -76,10 +76,11 @@ interface GuiMp {
 
 declare abstract class BlipMp {
 	dimension: number;
-	handle: number;
-	id: number;
-	remoteId: number;
-	type: string;
+	position: Vector3Mp;
+	readonly handle: number;
+	readonly id: number;
+	readonly remoteId: number;
+	readonly type: string;
 
 	addTextComponentSubstringName(): void;
 	destroy(): void;
@@ -229,7 +230,7 @@ interface EntityMp {
 	getSubmergedLevel(): number;
 	getType(): number;
 	getUprightValue(): number;
-	getVariable(value: string): any;
+	getVariable<T = any>(value: string): T;
 	getVehicleIndexFromIndex(): Handle;
 	getVelocity(): Vector3Mp;
 	getWorldPositionOfBone(boneIndex: number): Vector3Mp;
@@ -243,6 +244,7 @@ interface EntityMp {
 	hasClearLosToInFront(entity: Handle): boolean;
 	hasCollidedWithAnything(): boolean;
 	hasCollisionLoadedAround(): boolean;
+	hasVariable(value: string): boolean;
 	isAMission(): boolean;
 	isAnObject(): boolean;
 	isAPed(): boolean;
@@ -323,7 +325,6 @@ interface EntityMp {
 	setRenderScorched(toggle: boolean): void;
 	setRotation(pitch: number, roll: number, yaw: number, rotationOrder: number, p4: boolean): void;
 	setTrafficlightOverride(state: number): void;
-	setVariable(key: string, value: any): any;
 	setVelocity(x: number, y: number, z: number): void;
 	setVisible(toggle: boolean, p1: boolean): void;
 	stopAnim(animation: string, animGroup: string, p2: number): void;
@@ -410,6 +411,7 @@ declare abstract class DummyEntityMp {
 	readonly type: string;
 
 	getVariable(value: string): any;
+	getVariable<T = any>(value: string): T;
 }
 
 interface MarkerMp extends EntityMp {}
@@ -556,6 +558,7 @@ interface PedBaseMp extends EntityMp {
 	isBeingJacked(): boolean;
 	isBeingStealthKilled(): boolean;
 	isBeingStunned(p1: number): boolean;
+	isClimbing(): boolean;
 	isComponentVariationValid(componentId: number, drawableId: number, textureId: number): boolean;
 	isConversationDead(): boolean;
 	isCuffed(): boolean;
@@ -994,7 +997,10 @@ interface PedBaseMp extends EntityMp {
 interface PedMp extends PedBaseMp {}
 declare abstract class PedMp implements PedBaseMp {
 	readonly controller: PlayerMp | undefined;
+	readonly isDynamic: boolean;
 	spawnPosition: Vector3Mp;
+	spawnHeading: number;
+	
 	taskPlayAnim(animDictionary: string, animationName: string, speed: number, speedMultiplier: number, duration: number,
 	             flag: number, playbackRate: number, lockX: boolean, lockY: boolean, lockZ: boolean): void;
 	setHeadOverlay(overlayID: number, index: number, opacity: number): void;
@@ -1026,13 +1032,12 @@ declare abstract class PlayerMp implements PedBaseMp {
 	p2pConnected: boolean;
 	voiceAutoVolume: boolean;
 	voiceVolume: number;
-	voice3d: any; // TODO
+	voice3d: boolean;
 	weapon: Hash;
 	readonly action: string;
 	readonly aimTarget: boolean;
 	readonly ip: string;
 	readonly isAiming: boolean;
-	readonly isClimbing: boolean;
 	readonly isEnteringVehicle: boolean;
 	readonly isInCover: boolean;
 	readonly isJumping: boolean;
@@ -2259,7 +2264,7 @@ interface EntityMpPool<TEntity> {
 }
 
 interface EventMpPool {
-	addDataHandler(keyName: string, callback: (...args: any[]) => void): void;
+	addDataHandler<T = any>(keyName: string, callback: (entity: EntityMp, value: T, oldValue: T | undefined) => void): void;
 
 	add(eventName: RageEnums.EventKey.BROWSER_CREATED, callback: (browser: BrowserMp) => void): void;
 	add(eventName: RageEnums.EventKey.BROWSER_DOM_READY, callback: (browser: BrowserMp) => void): void;
