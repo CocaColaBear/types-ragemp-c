@@ -1665,6 +1665,8 @@ declare abstract class VehicleMp implements EntityMp {
 	getPlateType(): number;
 	/**
 	 * Returns the radius of the rim on a specific wheel.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::getRimRadius)
 	 */
 	getRimRadius(wheelId: number): number;
 	getSuspensionHeight(): number;
@@ -1672,6 +1674,8 @@ declare abstract class VehicleMp implements EntityMp {
 	getTrainCarriage(cariage: number): Handle;
 	/**
 	 * Returns radius of specific tyre.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::getTyreRadius)
 	 */
 	getTyreRadius(wheelId: number): number;
 	getTyresCanBurst(): boolean;
@@ -1682,28 +1686,40 @@ declare abstract class VehicleMp implements EntityMp {
 	};
 	/**
 	 * Returns the width of a specific tyre.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::getTyreWidth)
 	 */
 	getTyreWidth(wheelId: number): number;
 	getVehicleTrailer(vehicle: Handle): Handle;
 	/**
 	 * Returns the camber of a specific wheel.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::getWheelCamber)
 	 */
 	getWheelCamber(wheelId: number): number;
 	/**
 	 * Returns the height of a specific wheel.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::getWheelHeight)
 	 */
 	getWheelHeight(wheelId: number): number;
 	/**
 	 * Returns the radius of the wheels on a vehicle.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::getWheelRadius)
 	 */
 	getWheelRadius(): number;
 	/**
 	 * Returns the track width of a specific wheel.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::getWheelTrackWidth)
 	 */
 	getWheelTrackWidth(wheelId: number): number;
 	getWheelType(): number;
 	/**
 	 * Returns the width of the wheels on a vehicle.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::getWheelWidth)
 	 */
 	getWheelWidth(): number;
 	getWindowTint(): number;
@@ -1857,6 +1873,8 @@ declare abstract class VehicleMp implements EntityMp {
 	 * This effect is observed when the tyre is blown.
 	 * 
 	 * Use vehicle.wheelCount to get the total number of wheels on a vehicle.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::setRimRadius)
 	 */
 	setRimRadius(wheelId: number, value: number): void;
 	setRudderBroken(p0: boolean): void;
@@ -1869,6 +1887,8 @@ declare abstract class VehicleMp implements EntityMp {
 	 * Sets the visual suspension height of a vehicle.
 	 * 
 	 * A positive value lowers the car. A negative value raises it.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::setSuspensionHeight)
 	 */
 	setSuspensionHeight(value: number): void;
 	setTaxiLights(state: boolean): void;
@@ -1884,6 +1904,8 @@ declare abstract class VehicleMp implements EntityMp {
 	 * Use vehicle.setWheelRadius(value) to set the visual wheel radius.
 	 * 
 	 * Use vehicle.wheelCount to get the total number of wheels on a vehicle.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::setTyreRadius)
 	 */
 	setTyreRadius(wheelId: number, value: number): void;
 	setTyresCanBurst(toggle: boolean): void;
@@ -1896,6 +1918,8 @@ declare abstract class VehicleMp implements EntityMp {
 	 * Use vehicle.wheelCount to get the total number of wheels of a vehicle.
 	 * 
 	 * Use vehicle.setWheelRadius(value) to set the visual effect.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::setTyreWidth)
 	 */
 	setTyreWidth(wheelId: number, value: number): void;
 	setUndriveable(toggle: boolean): void;
@@ -1905,6 +1929,8 @@ declare abstract class VehicleMp implements EntityMp {
 	 * Passing 255 as the wheelId sets the camber for all wheels. Use in interval if setting for a single wheel.
 	 * 
 	 * Use vehicle.wheelCount to get the total number of wheels of a vehicle.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::setWheelCamber)
 	 */
 	setWheelCamber(wheelId: number, value: number): void;
 	/**
@@ -1913,6 +1939,8 @@ declare abstract class VehicleMp implements EntityMp {
 	 * Passing 255 as the wheelId sets the height for all wheels. Use in interval if setting for a single wheel.
 	 * 
 	 * Use vehicle.wheelCount to get the total number of wheels of a vehicle.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::setWheelHeight)
 	 */
 	setWheelHeight(wheelId: number, value: number): void;
 	/**
@@ -1920,6 +1948,8 @@ declare abstract class VehicleMp implements EntityMp {
 	 * This only works with custom wheels.
 	 * 
 	 * Use vehicle.setTyreWidth(wheelid, value) to adjust physics.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::setWheelRadius)
 	 */
 	setWheelRadius(value: number): void;
 	setWheelsCanBreak(enabled: boolean): void;
@@ -1931,6 +1961,8 @@ declare abstract class VehicleMp implements EntityMp {
 	 * Passing 255 as the wheelId sets the track width for all wheels. Use in interval if setting for a single wheel.
 	 * 
 	 * Use vehicle.wheelCount to get the total number of wheels of a vehicle.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::setWheelTrackWidth)
 	 */
 	setWheelTrackWidth(wheelId: number, value: number): void;
 	setWheelType(wheelType: number): void;
@@ -1938,6 +1970,8 @@ declare abstract class VehicleMp implements EntityMp {
 	 * Sets the visual width of all the wheels on a vehicle. 
 	 * 
 	 * Requires a non-default wheel for the effect to be visible.
+	 * 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Vehicle::setWheelWidth)
 	 */
 	setWheelWidth(value: number): void;
 	setWindowTint(tint: number): void;
