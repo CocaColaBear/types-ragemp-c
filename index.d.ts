@@ -1055,6 +1055,14 @@ declare abstract class PlayerMp implements PedBaseMp {
 	clearSecondaryTask(): void;
 	clearWantedLevel(): void;
 	explodeHead(weaponHash: Hash): void;
+	/**
+	 * Returns current scripted animation info.
+	 */
+	getCurrentScriptedAnim(): any;
+	/**
+	 * Returns the current scenario id/index that is playing.
+	 */
+	getCurrentScenarioId(): number | undefined;
 	getCurrentStealthNoise(): number;
 	getGroup(): number;
 	getHasReserveParachute(): boolean;
@@ -1100,9 +1108,25 @@ declare abstract class PlayerMp implements PedBaseMp {
 	isScriptControlOn(): boolean;
 	isTargettingAnything(): boolean;
 	isWantedLevelGreater(wantedLevel: number): boolean;
+	/**
+	 * Removes effect from a player's voice stream.
+	 * @param fxHandle Handle returned from creating effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_ChannelRemoveFX.html) |
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::removeVoiceFx)
+	 */
+	removeVoiceFx(fxHandle: Handle): integer;
 	resetArrestState(): void;
 	resetInputGait(): void;
 	resetStamina(): void;
+	/**
+	 * Resets the state of an effect to its original state.
+	 * @param fxHandle Handle returned from creating effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_FXReset.html) |
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::resetVoiceFx)
+	 */
+	resetVoiceFx(fxHandle: Handle): integer;
 	setCanBeHassledByGangs(toggle: boolean): void;
 	setCanDoDriveBy(toggle: boolean): void;
 	setCanLeaveParachuteSmokeTrail(enabled: boolean): void;
@@ -1137,6 +1161,351 @@ declare abstract class PlayerMp implements PedBaseMp {
 	setVehicleDamageModifier(damageAmount: number): void;
 	setVehicleDefenseModifier(modifier: number): void;
 	setVoiceAttribute(attribute: any, value: any): void; // TODO
+	/**
+	 * Sets effect on a player's voice stream.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_ChannelSetFX.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFx)
+	 * 
+	 * @param fxType Type of effect. Based on BASS and BASS_FX libraries.
+	 * @param priority Priority of effect. This determines the effect's position in the DSP chain.
+	 * Higher priority effects are applied first.
+	 */
+	setVoiceFx(fxType: RageEnums.Voice.BASSFX.FxType, priority: number): Handle;
+	/**
+	 * Sets BiQuad filter effect.
+	 * 
+	 * [BASS FX Documentation](https://documentation.help/BASS_FX/BASS_BFX_BQF.htm) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxBQF)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams: 
+	 * - iFilter - BQF filter type. See !{@link RageEnums.Voice.BASSFX.BiQuadFilter}
+	 * - fCenter - Cutoff (central) frequency in Hz. Range [1 ... sampleFreq/2]
+	 * - fGain - Used only for PEAKINGEQ and Shelving filters in dB. Range [-15 ... 0 ... 15]
+	 * - fBandwidth - Bandwidth in octaves (fQ is not in use (fBandwidth has a priority over fQ)).
+	 * 		(between -3 dB frequencies for BANDPASS and NOTCH or between midpoint (fGgain/2) gain frequencies for PEAKINGEQ)
+	 * 		Range [0.1 ... < 10]
+	 * - fQ - The EE kinda definition (linear) (if fBandwidth is not in use)
+	 * - fS - A "shelf slope" parameter (linear) (used only with Shelving filters) when fS = 1, 
+	 * 		the shelf slope is as steep as you can get it and remain monotonically increasing or decreasing 
+	 * 		gain with frequency.
+	 * - lChannel - The affected channels. See !{@link RageEnums.Voice.BASSFxChan}. Use BASS_BFX_CHANALL (-1).
+	 */
+	 setVoiceFxBQF(fxHandle: Handle, fxParams: {
+		iFilter: integer,
+		fCenter: number,
+		fGain: number,
+		fBandwidth: number,
+		fQ: number,
+		fS: number,
+		lChannel: RageEnums.Voice.BASSFX.Channel
+	}): void;
+	/**
+	 * Sets chorus effect.
+	 * 
+	 * [BASS documentation](http://www.un4seen.com/doc/#bass/BASS_DX8_CHORUS.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxChorus)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams:
+	 * - fWetDryMix - Ratio of wet (processed) signal to dry (unprocessed) signal. Must be in the range from 0 
+	 * 		through 100 (all wet). The default value is 50.
+	 * - fDepth - Percentage by which the delay time is modulated by the low-frequency oscillator (LFO). 
+	 * 		Must be in the range from 0 through 100. The default value is 10.
+	 * - fFeedback - Percentage of output signal to feed back into the effect's input, in the range from -99 to 99. 
+	 * 		The default value is 25.
+	 * - fFrequency - Frequency of the LFO, in the range from 0 to 10. The default value is 1.1.
+	 * - lWaveform - Waveform of the LFO... 0 = triangle, 1 = sine. By default, the waveform is sine.
+	 * - fDelay - Number of milliseconds the input is delayed before it is played back, in the range from 0 to 20. 
+	 * 		The default value is 16 ms.
+	 * - lPhase - Phase differential between left and right LFOs. The default value is BASS_DX8_PHASE_90 (3).
+	 * 		Enum {@link RageEnums.Voice.BASSFX.Phase | Phase Enum}
+	 */
+	setVoiceFxChorus(fxHandle: Handle, fxParams: {
+		fWetDryMix: number,
+		fDepth: number,
+		fFeedback: number,
+		fFrequency: number,
+		lWaveform: number,
+		fDelay: number,
+		lPhase: RageEnums.Voice.BASSFX.Phase
+	}): void;
+	/**
+	 * Sets compressor effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_DX8_COMPRESSOR.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxCompressor)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams:
+	 * - fGain - Output gain of signal after compression, in the range from -60 to 60. The default value is 0 dB.
+	 * - fAttack - Time before compression reaches its full value, in the range from 0.01 to 500. 
+	 * 		The default value is 10 ms.
+	 * - fRelease - Speed at which compression is stopped after input drops below fThreshold, 
+	 * 		in the range from 50 to 3000. The default value is 200 ms.
+	 * - fThreshold - Point at which compression begins, in decibels, in the range from -60 to 0. 
+	 * 		The default value is -20 dB.
+	 * - fRatio - Compression ratio, in the range from 1 to 100. The default value is 3, which means 3:1 compression.
+	 * - fPredelay - Time after fThreshold is reached before attack phase is started, 
+	 * 		in milliseconds, in the range from 0 to 4. The default value is 4 ms.
+	 */
+	setVoiceFxCompressor(fxHandle: Handle, fxParams: {
+		fGain: number,
+		fAttack: number,
+		fRelease: number,
+		fThreshold: number,
+		fRatio: number,
+		fPredelay: number,
+	}): void;
+	/**
+	 * Sets distortion effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_DX8_DISTORTION.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxDistortion)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams: 
+	 * - fGain - Amount of signal change after distortion, in the range from -60 through 0. The default value is -18 dB.
+	 * - fEdge - Percentage of distortion intensity, in the range in the range from 0 through 100. 
+	 * 		The default value is 15 percent.
+	 * - fPostEQCenterFrequency - Center frequency of harmonic content addition, in the range from 100 through 8000. 
+	 * 		The default value is 2400 Hz.
+	 * - fPostEQBandwidth - Width of frequency band that determines range of harmonic content addition, 
+	 * 		in the range from 100 through 8000. The default value is 2400 Hz.
+	 * - fPreLowpassCutoff - Filter cutoff for high-frequency harmonics attenuation, in the range from 100 
+	 * 		through 8000. The default value is 8000 Hz.
+	 */
+	setVoiceFxDistortion(fxHandle: Handle, fxParams: {
+		fGain: number,
+		fEdge: number,
+		fPostEQCenterFrequency: number,
+		fPostEQBandwidth: number,
+		fPreLowpassCutoff: number
+	}): void;
+	/**
+	 * Sets echo effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_DX8_ECHO.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxEcho)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams:
+	 * - fWetDryMix - Ratio of wet (processed) signal to dry (unprocessed) signal. Must be 
+	 * 		in the range from 0 through 100 (all wet). The default value is 50.
+	 * - fFeedback - Percentage of output fed back into input, in the range from 0 through 100. The default value is 50.
+	 * - fLeftDelay - Delay for left channel, in milliseconds, in the range from 1 through 2000. 
+	 * 		The default value is 500 ms.
+	 * - fRightDelay - Delay for right channel, in milliseconds, in the range from 1 through 2000. 
+	 * 		The default value is 500 ms.
+	 * - lPanDelay - Value that specifies whether to swap left and right delays with each successive echo. 
+	 * 		The default value is FALSE, meaning no swap.
+	 */
+	setVoiceFxEcho(fxHandle: Handle, fxParams: {
+		fWetDryMix: number,
+		fFeedback: number,
+		fLeftDelay: number,
+		fRightDelay: number,
+		lPanDelay: boolean
+	}): void;
+	/**
+	 * Sets flanger effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_DX8_FLANGER.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxFlanger)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams:
+	 * - fWetDryMix - Ratio of wet (processed) signal to dry (unprocessed) signal. Must be in the range 
+	 * 		from 0 through 100 (all wet). The default value is 50.
+	 * - fDepth - Percentage by which the delay time is modulated by the low-frequency oscillator (LFO). 
+	 * 		Must be in the range from 0 through 100. The default value is 100.
+	 * - fFeedback - Percentage of output signal to feed back into the effect's input, 
+	 * 		in the range from -99 to 99. The default value is -50.
+	 * - fFrequency - Frequency of the LFO, in the range from 0 to 10. The default value is 0.25.
+	 * - lWaveform - Waveform of the LFO... 0 = triangle, 1 = sine. By default, the waveform is sine.
+	 * - fDelay - Number of milliseconds the input is delayed before it is played back, 
+	 * 		in the range from 0 to 4. The default value is 2 ms.
+	 * - lPhase - Phase differential between left and right LFOs. {@link RageEnums.Voice.BASSFX.Phase | Phase Enum}
+	 * 		Default is BASS_DX8_PHASE_ZERO (2).
+	 */
+	setVoiceFxFlanger(fxHandle: Handle, fxParams: {
+		fWetDryMix: number,
+		fDepth: number,
+		fFeedback: number,
+		fFrequency: number,
+		lWaveform: number,
+		fDelay: number,
+		lPhase: RageEnums.Voice.BASSFX.Phase
+	}): void;
+	/**
+	 * Sets gargle (amplitude modulation) effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_DX8_GARGLE.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxGargle)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams: 
+	 * - dwRateHz - Rate of modulation, in Hertz. Must be in the range from 1 through 1000. The default value is 20.
+	 * - dwWaveShape - Shape of the modulation waveform... 0 = triangle, 1 = square. By default, the waveform is triangle.
+	 */
+	setVoiceFxGargle(fxHandle: Handle, fxParams: {
+		dwRateHz: number,
+		dwWaveShape: number
+	}): void;
+	/**
+	 * Sets Interactive 3D Audio Level 2 reverb effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_DX8_I3DL2REVERB.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxI3DL2Reverb)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams:
+	 * - lRoom - Attenuation of the room effect, in millibels (mB), in the range from -10000 to 0. 
+	 * 		The default value is -1000 mB.
+	 * - lRoomHF - Attenuation of the room high-frequency effect, in mB, in the range from -10000 to 0. 
+	 * 		The default value is -100 mB.
+	 * - flRoomRolloffFactor - Rolloff factor for the reflected signals, in the range from 0 to 10. 
+	 * 		The default value is 0.0.
+	 * - flDecayTime - Decay time, in seconds, in the range from 0.1 to 20. The default value is 1.49 seconds.
+	 * - flDecayHFRatio - Ratio of the decay time at high frequencies to the decay time at low frequencies, 
+	 * 		in the range from 0.1 to 2. The default value is 0.83.
+	 * - lReflections - Attenuation of early reflections relative to lRoom, in mB, 
+	 * 		in the range from -10000 to 1000. The default value is -2602 mB.
+	 * - flReflectionsDelay - Delay time of the first reflection relative to the direct path, in seconds, 
+	 * 		in the range from 0 to 0.3. The default value is 0.007 seconds.
+	 * - lReverb - Attenuation of late reverberation relative to lRoom, in mB, in the range from -10000 to 2000. 
+	 * 		The default value is 200 mB.
+	 * - flReverbDelay - Time limit between the early reflections and the late reverberation relative 
+	 * 		to the time of the first reflection, in seconds, in the range from 0 to 0.1. The default value is 0.011 seconds.
+	 * - flDiffusion - Echo density in the late reverberation decay, in percent, in the range from 0 to 100. 
+	 * 		The default value is 100.0 percent.
+	 * - flDensity - Modal density in the late reverberation decay, in percent, in the range from 0 to 100. 
+	 * 		The default value is 100.0 percent.
+	 * - flHFReference - Reference high frequency, in hertz, in the range from 20 to 20000. 
+	 * 		The default value is 5000.0 Hz.
+	 */
+	setVoiceFxI3DL2Reverb(fxHandle: Handle, fxParams: {
+		lRoom: integer,
+		lRoomHF: integer,
+		flRoomRolloffFactor: number,
+		flDecayTime: number,
+		flDecayHFRatio: number,
+		lReflections: integer,
+		flReflectionsDelay: number,
+		lReverb: integer,
+		flReverbDelay: number,
+		flDiffusion: number,
+		flDensity: number,
+		flHFReference: number
+	}): void;
+	/**
+	 * Sets parametric equalizer effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_DX8_PARAMEQ.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxParamEq)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams:
+	 * - fCenter - Center frequency, in hertz.
+	 * - fBandwidth - Bandwidth, in semitones, in the range from 1 to 36. The default value is 12.
+	 * - fGain - Gain, in the range from -15 to 15. The default value is 0 dB.
+	 */
+	setVoiceFxParamEq(fxHandle: Handle, fxParams: {
+		fCenter: number,
+		fBandwidth: number,
+		fGain: number
+	}): void;
+	/**
+	 * Sets reverb effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_DX8_REVERB.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxReverb)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams: 
+	 * - fInGain - Input gain of signal, in decibels (dB), in the range from -96 through 0. The default value is 0 dB.
+	 * - fReverbMix - Reverb mix, in dB, in the range from -96 through 0. The default value is 0 dB.
+	 * - fReverbTime - Reverb time, in milliseconds, in the range from 0.001 through 3000. The default value is 1000.
+	 * - fHighFreqRTRatio - High-frequency reverb time ratio, in the range from 0.001 through 0.999. 
+	 * 		The default value is 0.001.
+	 */
+	setVoiceFxReverb(fxHandle: Handle, fxParams: {
+		fInGain: number,
+		fReverbMix: number,
+		fReverbTime: number,
+		fHighFreqRTRatio: number
+	}): void;
+	/**
+	 * Sets volume level effect.
+	 * 
+	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_FX_VOLUME_PARAM.html) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxVolume)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams: 
+	 * - fTarget - The new volume level... 0 = silent, 1.0 = normal, above 1.0 = amplification. The default value is 1.
+	 * - fCurrent - The current volume level... -1 = leave existing current level when setting parameters. 
+	 * 		The default value is 1.
+	 * - fTime - The time to take to transition from the current level to the new level, in seconds. 
+	 * 		The default value is 0.
+	 * - lCurve - The curve to use in the transition... 0 = linear, 1 = logarithmic. The default value is 0.
+	 */
+	setVoiceFxVolume(fxHandle: Handle, fxParams: {
+		fTarget: number,
+		fCurrent: number,
+		fTime: number,
+		lCurve: number
+	}): void;
+	/**
+	 * Sets peaking equalizer DSP effect.
+	 * 
+	 * [BASS FX Documentation](https://documentation.help/BASS_FX/BASS_BFX_PEAKEQ.htm) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxPeakEq)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams:
+	 * - lBand - Number of bands, more bands means more memory and cpu usage. Default = 0.
+	 * - fBandwidth - In octaves - fQ is not in use (Bandwidth has a priority over fQ)
+	 * 		0 = off. Range [0.1 ... 10]
+	 * - fQ - Quality Factor, the EE kinda definition (linear) (if Bandwidth is not in use).
+	 * 		Range [0 ... 1]
+	 * - fCenter - Center frequency, in Hz. Range [1 ... sampleRate/2]
+	 * - fGain - Gain, in dB. Range [-15 ... 0 ... 15]
+	 * - lChannel - The affected channels. See !{@link RageEnums.Voice.BASSFxChan}. Use BASS_BFX_CHANALL (-1)
+	 */
+	setVoiceFxPeakEq(fxHandle: Handle, fxParams: {
+		lBand: integer,
+		fBandwidth: number,
+		fQ: number,
+		fCenter: number,
+		fGain: number,
+		lChannel: RageEnums.Voice.BASSFxChan
+	}): void;
 	setWantedCentrePosition(x: number, y: number, z: number): void;
 	setWantedLevel(wantedLevel: number, disableNoMission: boolean): void;
 	setWantedLevelNoDrop(wantedLevel: number, p2: boolean): void;
