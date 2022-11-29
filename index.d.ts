@@ -1176,7 +1176,7 @@ declare abstract class PlayerMp implements PedBaseMp {
 	 * @param priority Priority of effect. This determines the effect's position in the DSP chain.
 	 * Higher priority effects are applied first.
 	 */
-	setVoiceFx(fxType: RageEnums.Voice.BASSFX.FxType, priority: number): Handle;
+	setVoiceFx(fxType: RageEnums.Voice.Fx.Key, priority: number): Handle;
 	/**
 	 * Sets BiQuad filter effect.
 	 * 
@@ -1187,7 +1187,7 @@ declare abstract class PlayerMp implements PedBaseMp {
 	 * @param fxParams Object with effect parameters. See below: 
 	 * 
 	 * fxParams: 
-	 * - iFilter - BQF filter type. See !{@link RageEnums.Voice.BASSFX.BiQuadFilter}
+	 * - iFilter - BQF filter type. See {@link RageEnums.Voice.Fx.BiQuadFilter | BQF enum}.
 	 * - fCenter - Cutoff (central) frequency in Hz. Range [1 ... sampleFreq/2]
 	 * - fGain - Used only for PEAKINGEQ and Shelving filters in dB. Range [-15 ... 0 ... 15]
 	 * - fBandwidth - Bandwidth in octaves (fQ is not in use (fBandwidth has a priority over fQ)).
@@ -1197,7 +1197,7 @@ declare abstract class PlayerMp implements PedBaseMp {
 	 * - fS - A "shelf slope" parameter (linear) (used only with Shelving filters) when fS = 1, 
 	 * 		the shelf slope is as steep as you can get it and remain monotonically increasing or decreasing 
 	 * 		gain with frequency.
-	 * - lChannel - The affected channels. See !{@link RageEnums.Voice.BASSFxChan}. Use BASS_BFX_CHANALL (-1).
+	 * - lChannel - The affected channels. See {@link RageEnums.Voice.BASSFxChan | channel enum}. Use BASS_BFX_CHANALL (-1).
 	 */
 	 setVoiceFxBQF(fxHandle: Handle, fxParams: {
 		iFilter: integer,
@@ -1206,7 +1206,7 @@ declare abstract class PlayerMp implements PedBaseMp {
 		fBandwidth: number,
 		fQ: number,
 		fS: number,
-		lChannel: RageEnums.Voice.BASSFX.Channel
+		lChannel: RageEnums.Voice.Fx.Channel
 	}): void;
 	/**
 	 * Sets chorus effect.
@@ -1229,7 +1229,7 @@ declare abstract class PlayerMp implements PedBaseMp {
 	 * - fDelay - Number of milliseconds the input is delayed before it is played back, in the range from 0 to 20. 
 	 * 		The default value is 16 ms.
 	 * - lPhase - Phase differential between left and right LFOs. The default value is BASS_DX8_PHASE_90 (3).
-	 * 		Enum {@link RageEnums.Voice.BASSFX.Phase | Phase Enum}
+	 * 		Enum {@link RageEnums.Voice.Fx.Phase | Phase enum}
 	 */
 	setVoiceFxChorus(fxHandle: Handle, fxParams: {
 		fWetDryMix: number,
@@ -1238,7 +1238,7 @@ declare abstract class PlayerMp implements PedBaseMp {
 		fFrequency: number,
 		lWaveform: number,
 		fDelay: number,
-		lPhase: RageEnums.Voice.BASSFX.Phase
+		lPhase: RageEnums.Voice.Fx.Phase
 	}): void;
 	/**
 	 * Sets compressor effect.
@@ -1343,7 +1343,7 @@ declare abstract class PlayerMp implements PedBaseMp {
 	 * - lWaveform - Waveform of the LFO... 0 = triangle, 1 = sine. By default, the waveform is sine.
 	 * - fDelay - Number of milliseconds the input is delayed before it is played back, 
 	 * 		in the range from 0 to 4. The default value is 2 ms.
-	 * - lPhase - Phase differential between left and right LFOs. {@link RageEnums.Voice.BASSFX.Phase | Phase Enum}
+	 * - lPhase - Phase differential between left and right LFOs. {@link RageEnums.Voice.Fx.Phase | Phase Enum}
 	 * 		Default is BASS_DX8_PHASE_ZERO (2).
 	 */
 	setVoiceFxFlanger(fxHandle: Handle, fxParams: {
@@ -1353,7 +1353,7 @@ declare abstract class PlayerMp implements PedBaseMp {
 		fFrequency: number,
 		lWaveform: number,
 		fDelay: number,
-		lPhase: RageEnums.Voice.BASSFX.Phase
+		lPhase: RageEnums.Voice.Fx.Phase
 	}): void;
 	/**
 	 * Sets gargle (amplitude modulation) effect.
@@ -1501,7 +1501,7 @@ declare abstract class PlayerMp implements PedBaseMp {
 	 * 		Range [0 ... 1]
 	 * - fCenter - Center frequency, in Hz. Range [1 ... sampleRate/2]
 	 * - fGain - Gain, in dB. Range [-15 ... 0 ... 15]
-	 * - lChannel - The affected channels. See !{@link RageEnums.Voice.BASSFxChan}. Use BASS_BFX_CHANALL (-1)
+	 * - lChannel - The affected channels. See {@link RageEnums.Voice.Fx.Channel | channel enum}. Use BASS_BFX_CHANALL (-1)
 	 */
 	setVoiceFxPeakEq(fxHandle: Handle, fxParams: {
 		lBand: integer,

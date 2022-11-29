@@ -1,6 +1,6 @@
 declare namespace RageEnums.Voice {
-	namespace BASSFX {
-		const enum FxType {
+	namespace Fx {
+		const enum Key {
 			BASS_FX_DX8_CHORUS = 0,
 			BASS_FX_DX8_COMPRESSOR = 1,
 			BASS_FX_DX8_DISTORTION = 2,
@@ -41,7 +41,7 @@ declare namespace RageEnums.Voice {
 	
 		const enum Channel {
 			/**
-			 * All channels at once. Usually default
+			 * All channels at once. Usually default.
 			 */
 			BASS_BFX_CHANALL = -1,
 			/* Disables an effect for all channels. */
@@ -80,9 +80,11 @@ declare namespace RageEnums.Voice {
 
 declare namespace RageEnums {
 	namespace Voice {
-		export import BASSFxEffectType = RageEnums.Voice.BASSFX.FxType;
-		export import BASSFxPhase = RageEnums.Voice.BASSFX.Phase;
-		export import BASSFxChan = RageEnums.Voice.BASSFX.Channel;
-		export import BASSFxBQF = RageEnums.Voice.BASSFX.BiQuadFilter
+		export import FxKey = RageEnums.Voice.Fx.Key;
+		export import FxType = RageEnums.Voice.Fx.Key;
+		export import BQF = RageEnums.Voice.Fx.BiQuadFilter;
+		export import BASSFxPhase = RageEnums.Voice.Fx.Phase;
+		export import BASSFxChan = RageEnums.Voice.Fx.Channel;
+		export import BASSFxBQF = RageEnums.Voice.Fx.BiQuadFilter;
 	}
 }
