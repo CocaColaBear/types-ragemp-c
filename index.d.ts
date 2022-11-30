@@ -2277,6 +2277,7 @@ interface EventMpPool {
 	add(eventName: RageEnums.EventKey.ENTITY_CREATED, callback: (entity: EntityMp) => void): void;
 	add(eventName: RageEnums.EventKey.ENTITY_STREAM_IN, callback: (entity: EntityMp) => void): void;
 	add(eventName: RageEnums.EventKey.ENTITY_STREAM_OUT, callback: (entity: EntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.EXPLOSION, callback: (sourcePlayer: PlayerMp, type: RageEnums.Explosions, position: Vector3Mp) => void | boolean): void;
 	add(eventName: RageEnums.EventKey.GUI_READY, callback: () => void): void;
 	add(eventName: RageEnums.EventKey.INCOMING_DAMAGE, callback: (sourceEntity: EntityMp, sourcePlayer: PlayerMp, targetEntity: EntityMp, weapon: number, boneIndex: number, damage: number) => void): void;
 	add(eventName: RageEnums.EventKey.OUTGOING_DAMAGE, callback: (sourceEntity: EntityMp, targetEntity: EntityMp, targetPlayer: PlayerMp, weapon: number, boneIndex: number, damage: number) => void): void;
@@ -2301,6 +2302,7 @@ interface EventMpPool {
 	add(eventName: RageEnums.EventKey.PLAYER_START_TALKING, callback: (player: PlayerMp) => void): void;
 	add(eventName: RageEnums.EventKey.PLAYER_STOP_TALKING, callback: (player: PlayerMp) => void): void;
 	add(eventName: RageEnums.EventKey.PLAYER_WEAPON_SHOT, callback: (targetPosition: Vector3Mp, targetEntity?: undefined | EntityMp) => void): void;
+	add(eventName: RageEnums.EventKey.PROJECTILE, callback: (sourcePlayer: PlayerMp, weaponHash: Hash, ammoType: Hash, position: Vector3Mp, direction: Vector3Mp) => void | boolean): void;
 	add(eventName: RageEnums.EventKey.RENDER, callback: (nametags: [PlayerMp, number, number, number][] | [PlayerMp, number, number, number, number][]) => void): void;
 	add(eventName: RageEnums.EventKey.VEHICLE_DEATH, callback: (vehicle: VehicleMp) => void): void;
 
