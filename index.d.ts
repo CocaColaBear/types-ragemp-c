@@ -2124,6 +2124,7 @@ interface NametagsMp {
 
 interface RaycastingMp {
 	testPointToPoint(startPos: Vector3Mp, endPos: Vector3Mp, ignoreEntity?: EntityMp, flags?: number): RaycastResult;
+	testPointToPointAsync(startPos: Vector3Mp, endPos: Vector3Mp, ignoreEntity?: Handle, flag?: number): Promise<RaycastResult>;
 	testCapsule(startPos: Vector3Mp, endPos: Vector3Mp, radius: number, ignoreEntity?: EntityMp, flags?: number[]): RaycastResult;
 }
 
