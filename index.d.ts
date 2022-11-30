@@ -487,7 +487,7 @@ interface PedBaseMp extends EntityMp {
 	getCombatFloat(ped: Handle, p1: number): number
 	getCombatMovement(): number;
 	getCombatRange(): number;
-	getConfigFlag(flagId: number, p2: boolean): boolean;
+	getConfigFlag(flagId: RageEnums.Ped.ConfigFlags | number, p2: boolean): boolean;
 	getDeadPickupCoords(p1: number, p2: number): Vector3Mp;
 	getDecorationsState(): number;
 	getDefensiveAreaPosition(p1: boolean): Vector3Mp;
@@ -536,7 +536,7 @@ interface PedBaseMp extends EntityMp {
 	getRelationshipBetweens(ped2: Handle): void;
 	getRelationshipGroupDefaultHash(): Hash;
 	getRelationshipGroupHash(): Hash;
-	getResetFlag(flagId: number): boolean;
+	getResetFlag(flagId: RageEnums.Ped.ResetFlags | number): boolean;
 	getScriptTaskStatus(taskHash: Hash): number;
 	getSeatIsTryingToEnter(): number;
 	getSequenceProgress(): number;
@@ -716,7 +716,7 @@ interface PedBaseMp extends EntityMp {
 	setCombatMovement(combatMovement: number): void;
 	setCombatRange(p1: number): void;
 	setComponentVariation(componentId: number, drawableId: number, textureId: number, paletteId: number): void;
-	setConfigFlag(flagId: number, value: boolean): void;
+	setConfigFlag(flagId: RageEnums.Ped.ConfigFlags | number, value: boolean): void;
 	setCoordsKeepVehicle(posX: number, posY: number, posZ: number): void;
 	setCoordsNoGang(posX: number, posY: number, posZ: number): void;
 	setCowerHash(p1: string): void;
@@ -812,7 +812,7 @@ interface PedBaseMp extends EntityMp {
 	setRandomProps(): void;
 	setRelationshipGroupDefaultHash(hash: Hash): void;
 	setRelationshipGroupHash(hash: Hash): void;
-	setResetFlag(flagId: number, doReset: boolean): void;
+	setResetFlag(flagId: RageEnums.Ped.ResetFlags | number, doReset: boolean): void;
 	setResetFlagPreferRearSeats(flags: number): void;
 	setResetRagdollFlag(flag: number): void;
 	setScriptedAnimSeatOffset(p1: number): void;
