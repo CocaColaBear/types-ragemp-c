@@ -97,7 +97,7 @@ declare abstract class BlipMp {
 	getInfoIdType(): number;
 	getNextInfoId(): BlipMp;
 	getSprite(): number;
-	getVariable(value: string): any;
+	getVariable<T = any>(value: string): T;
 	hasVariable(value: string): boolean;
 	hideNumberOn(): void;
 	isFlashing(): boolean;
