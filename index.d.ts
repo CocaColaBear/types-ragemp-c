@@ -1061,13 +1061,13 @@ declare abstract class PlayerMp implements PedBaseMp {
 	clearWantedLevel(): void;
 	explodeHead(weaponHash: Hash): void;
 	/**
+	 * Returns the current scenario id/index that is playing.
+	 */
+	 getCurrentScenarioId(): number | undefined;
+	/**
 	 * Returns current scripted animation info.
 	 */
 	getCurrentScriptedAnim(): any;
-	/**
-	 * Returns the current scenario id/index that is playing.
-	 */
-	getCurrentScenarioId(): number | undefined;
 	getCurrentStealthNoise(): number;
 	getGroup(): number;
 	getHasReserveParachute(): boolean;
@@ -1440,6 +1440,33 @@ declare abstract class PlayerMp implements PedBaseMp {
 		fGain: number
 	}): void;
 	/**
+	 * Sets peaking equalizer DSP effect.
+	 * 
+	 * [BASS FX Documentation](https://documentation.help/BASS_FX/BASS_BFX_PEAKEQ.htm) | 
+	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxPeakEq)
+	 * 
+	 * @param fxHandle Handle returned from creating effect.
+	 * @param fxParams Object with effect parameters. See below: 
+	 * 
+	 * fxParams:
+	 * - lBand - Number of bands, more bands means more memory and cpu usage. Default = 0.
+	 * - fBandwidth - In octaves - fQ is not in use (Bandwidth has a priority over fQ)
+	 * 		0 = off. Range [0.1 ... 10]
+	 * - fQ - Quality Factor, the EE kinda definition (linear) (if Bandwidth is not in use).
+	 * 		Range [0 ... 1]
+	 * - fCenter - Center frequency, in Hz. Range [1 ... sampleRate/2]
+	 * - fGain - Gain, in dB. Range [-15 ... 0 ... 15]
+	 * - lChannel - The affected channels. See {@link RageEnums.Voice.Fx.Channel | channel enum}. Use BASS_BFX_CHANALL (-1)
+	 */
+	 setVoiceFxPeakEq(fxHandle: Handle, fxParams: {
+		lBand: integer,
+		fBandwidth: number,
+		fQ: number,
+		fCenter: number,
+		fGain: number,
+		lChannel: RageEnums.Voice.Fx.Channel
+	}): void;
+	/**
 	 * Sets reverb effect.
 	 * 
 	 * [BASS Documentation](http://www.un4seen.com/doc/#bass/BASS_DX8_REVERB.html) | 
@@ -1483,33 +1510,6 @@ declare abstract class PlayerMp implements PedBaseMp {
 		fCurrent: number,
 		fTime: number,
 		lCurve: number
-	}): void;
-	/**
-	 * Sets peaking equalizer DSP effect.
-	 * 
-	 * [BASS FX Documentation](https://documentation.help/BASS_FX/BASS_BFX_PEAKEQ.htm) | 
-	 * [RAGE:MP Wiki Page](https://wiki.rage.mp/index.php?title=Player::setVoiceFxPeakEq)
-	 * 
-	 * @param fxHandle Handle returned from creating effect.
-	 * @param fxParams Object with effect parameters. See below: 
-	 * 
-	 * fxParams:
-	 * - lBand - Number of bands, more bands means more memory and cpu usage. Default = 0.
-	 * - fBandwidth - In octaves - fQ is not in use (Bandwidth has a priority over fQ)
-	 * 		0 = off. Range [0.1 ... 10]
-	 * - fQ - Quality Factor, the EE kinda definition (linear) (if Bandwidth is not in use).
-	 * 		Range [0 ... 1]
-	 * - fCenter - Center frequency, in Hz. Range [1 ... sampleRate/2]
-	 * - fGain - Gain, in dB. Range [-15 ... 0 ... 15]
-	 * - lChannel - The affected channels. See {@link RageEnums.Voice.Fx.Channel | channel enum}. Use BASS_BFX_CHANALL (-1)
-	 */
-	setVoiceFxPeakEq(fxHandle: Handle, fxParams: {
-		lBand: integer,
-		fBandwidth: number,
-		fQ: number,
-		fCenter: number,
-		fGain: number,
-		lChannel: RageEnums.Voice.BASSFxChan
 	}): void;
 	setWantedCentrePosition(x: number, y: number, z: number): void;
 	setWantedLevel(wantedLevel: number, disableNoMission: boolean): void;
