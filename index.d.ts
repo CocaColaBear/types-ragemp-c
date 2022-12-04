@@ -54,6 +54,7 @@ interface Mp {
 	Checkpoint: typeof CheckpointMp;
 	Colshape: typeof ColshapeMp;
 	DummyEntity: typeof DummyEntityMp;
+	Event: typeof EventMp;
 	Marker: typeof MarkerMp;
 	Object: typeof ObjectMp;
 	Player: typeof PlayerMp;
@@ -2445,6 +2446,23 @@ interface RaycastResult {
 	entity: EntityMp | Handle, // Not weak world objects return the handle
 	position: Vector3Mp,
 	surfaceNormal: Vector3Mp
+}
+
+declare class EventMp {
+	/**
+	 * Wrapper for mp.events.add(eventName, callback)
+	 * 
+	 * @param eventName 
+	 * @param callback 
+	 */
+	constructor(eventName: RageEnums.Event.Key | string, callback: (...args: any[]) => void);
+
+	public readonly name: string;
+
+	/**
+	 * Wrapper for mp.events.remove(eventName, callback)
+	 */
+	public destroy();
 }
 
 // -------------------------------------------------------------------------
