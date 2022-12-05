@@ -2266,7 +2266,8 @@ interface EntityMpPool<TEntity> {
 }
 
 interface EventMpPool {
-	addDataHandler<T = any>(keyName: string, callback: (entity: EntityMp, value: T, oldValue: T | undefined) => void): void;
+	addDataHandler(keyName: string, callback: (...args: any[]) => void): void;
+	addDataHandler<T extends EntityMp, K = any>(keyName: string, callback: (entity: T, value: K, oldValue: K | undefined) => void): void;
 
 	add(eventName: RageEnums.EventKey.BROWSER_CREATED, callback: (browser: BrowserMp) => void): void;
 	add(eventName: RageEnums.EventKey.BROWSER_DOM_READY, callback: (browser: BrowserMp) => void): void;
