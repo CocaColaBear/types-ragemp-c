@@ -420,6 +420,6 @@ interface GamePadMp extends GamePad {
 	 */
 	setDisableControlActionBatch(
 		isMoveOrLookInputGroup: boolean,
-		controlActions: Array<RageEnums.Controls | number>
+		controlActions: RageEnums.Controls[]
 	): void;
 }

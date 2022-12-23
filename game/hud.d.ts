@@ -4394,5 +4394,5 @@ interface GameHudMp extends GameHud {
 	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::setShowHudComponentsThisFrameBatch)
 	 * | [HUD Components List](https://wiki.rage.mp/index.php?title=HUD_Components)
 	 */
-	setShowHudComponentsThisFrameBatch(show: boolean, hudComponents: Array<RageEnums.Hud.Component | number>): void;
+	setShowHudComponentsThisFrameBatch(show: boolean, hudComponents: RageEnums.Hud.Component[]): void;
 }
