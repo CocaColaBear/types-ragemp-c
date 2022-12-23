@@ -4294,6 +4294,20 @@ interface GameHud extends GameHudLegacy {
 
 interface GameHudMp extends GameHud {
 	/**
+	 * Applies the batch this frame. Example:
+	 *
+	 * ```
+	 * // Disable weapon reticle
+	 * mp.game.hud.setShowHudComponentsThisFrameBatch(false, [14]);
+	 * mp.events.add('render', () => {
+	 * 	mp.game.hud.applyShowHudComponentsThisFrameBatch();
+	 * });
+	 * ```
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::applyShowHudComponentsThisFrameBatch)
+	 */
+	applyShowHudComponentsThisFrameBatch(): void;
+
+	/**
 	 * Returns current area hash.
 	 *
 	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::getCurrentAreaNameHash)
@@ -4366,4 +4380,19 @@ interface GameHudMp extends GameHud {
 		sizeX: number,
 		sizeY: number
 	): void;
+
+	/**
+	 * Sets the batch of hud components to show/not show. The batch is retained/persists between frames. Example:
+	 *
+	 * ```
+	 * // Disable weapon reticle
+	 * mp.game.hud.setShowHudComponentsThisFrameBatch(false, [14]);
+	 * mp.events.add('render', () => {
+	 * 	mp.game.hud.applyShowHudComponentsThisFrameBatch();
+	 * });
+	 * ```
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::setShowHudComponentsThisFrameBatch)
+	 * | [HUD Components List](https://wiki.rage.mp/index.php?title=HUD_Components)
+	 */
+	setShowHudComponentsThisFrameBatch(show: boolean, hudComponents: Array<RageEnums.Hud.Component | number>): void;
 }
