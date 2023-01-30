@@ -66,6 +66,13 @@ interface Mp {
 interface GuiMp {
 	chat: GuiChatMp;
 	cursor: GuiCursorMp;
+	/**
+	 * Returns whether CEF benefits from GPU acceleration.
+	 * 
+	 * Players can toggle this in the RAGE:MP launcher settings.
+	 * It is not enabled by default.
+	 */
+	readonly isGpuRenderingEnabled: boolean;
 
 	execute(code: string): void;
 	takeScreenshot(name: string, type: RageEnums.ScreenshotType | number, quality: number, compressionQuality: number): void;
