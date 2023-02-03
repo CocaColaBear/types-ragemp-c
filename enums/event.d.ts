@@ -23,6 +23,8 @@ declare namespace RageEnums.Event {
 		ENTITY_STREAM_IN = "entityStreamIn",
 		/** [https://wiki.rage.mp/index.php?title=EntityStreamOut](https://wiki.rage.mp/index.php?title=EntityStreamOut) */
 		ENTITY_STREAM_OUT = "entityStreamOut",
+		/** [https://wiki.rage.mp/index.php?title=Explosion](https://wiki.rage.mp/index.php?title=Explosion) */
+		EXPLOSION = "explosion",
 		/** [https://wiki.rage.mp/index.php?title=GuiReady](https://wiki.rage.mp/index.php?title=GuiReady) */
 		GUI_READY = "guiReady",
 		/** [https://wiki.rage.mp/index.php?title=IncomingDamage](https://wiki.rage.mp/index.php?title=IncomingDamage) */
@@ -71,6 +73,8 @@ declare namespace RageEnums.Event {
 		PLAYER_STOP_TALKING = "playerStopTalking",
 		/** [https://wiki.rage.mp/index.php?title=PlayerWeaponShot](https://wiki.rage.mp/index.php?title=PlayerWeaponShot) */
 		PLAYER_WEAPON_SHOT = "playerWeaponShot",
+		/** [https://wiki.rage.mp/index.php?title=Projectile](https://wiki.rage.mp/index.php?title=Projectile) */
+		PROJECTILE = "projectile",
 		/** [https://wiki.rage.mp/index.php?title=Render](https://wiki.rage.mp/index.php?title=Render) */
 		RENDER = "render",
 		/** [https://wiki.rage.mp/index.php?title=VehicleDeath](https://wiki.rage.mp/index.php?title=VehicleDeath) */

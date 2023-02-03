@@ -12,14 +12,14 @@ interface GameGxtMp extends GameGxt {
 	 *
 	 * [RAGE:MP Wiki article](https://wiki.rage.mp/index.php?title=GXT::get)
 	 */
-	get(labelNameOrHash: string | integer): void;
+	get(labelNameOrHash: string | integer): string;
 
 	/**
 	 * This function is used to get the default value of a GXT entry.
 	 *
 	 * [RAGE:MP Wiki article](https://wiki.rage.mp/index.php?title=GXT::getDefault)
 	 */
-	getDefault(labelNameOrHash: string | integer): void;
+	getDefault(labelNameOrHash: string | integer): string;
 
 	/**
 	 * This function is used to reset all changes done to GXT entries.

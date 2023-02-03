@@ -4292,4 +4292,107 @@ interface GameHud extends GameHudLegacy {
 	unk: GameHudUnk;
 }
 
-interface GameHudMp extends GameHud {}
+interface GameHudMp extends GameHud {
+	/**
+	 * Applies the batch this frame. Example:
+	 *
+	 * ```
+	 * // Disable weapon reticle
+	 * mp.game.hud.setShowHudComponentsThisFrameBatch(false, [14]);
+	 * mp.events.add('render', () => {
+	 * 	mp.game.hud.applyShowHudComponentsThisFrameBatch();
+	 * });
+	 * ```
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::applyShowHudComponentsThisFrameBatch)
+	 */
+	applyShowHudComponentsThisFrameBatch(): void;
+
+	/**
+	 * Returns current area hash.
+	 *
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::getCurrentAreaNameHash)
+	 */
+	getCurrentAreaNameHash(): Hash;
+
+	/**
+	 * Returns the current area name's label. You can use this with `mp.game.hud.getZoneFromNameId(label)` 
+	 * or `mp.game.gxt.get(label)` to get the name of the zone but you probably want to use 
+	 * `mp.game.hud.getCurrentAreaNameString()` instad.
+	 *
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::getCurrentAreaNameLabel)
+	 */
+	getCurrentAreaNameLabel(): string;
+
+	/**
+	 * Returns current area name as a string. By using this you can avoid having to use `mp.game.ui.getNameOfZone(x, y, z)`.
+	 *
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::getCurrentAreaNameString)
+	 */
+	getCurrentAreaNameString(): string;
+
+	/**
+	 * Returns current street name as a hash which you can then use with `mp.game.hud.getStreetNameFromHashKey(hash)` 
+	 * to return the localised street name.
+	 *
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::getCurrentStreetNameHash)
+	 */
+	getCurrentStreetNameHash(): Hash;
+
+	/**
+	 * Returns current street name as a string.
+	 *
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::getCurrentStreetNameString)
+	 */
+	getCurrentStreetNameString(): string;
+
+	/**
+	 * Gets minimap component data for given name in frontend.xml. Returns undefined for invalid components.
+	 *
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::getMinimapComponentValues)
+	 */
+	getMinimapComponentValues(
+		name: string
+	): { alignX: string; alignY: string; posX: number; posY: number; sizeX: number; sizeY: number } | undefined;
+
+	/**
+	 * Resets all minimap component data or specific component data if `name` argument is provided.
+	 *
+	 * You might want to use [mp.game.ui.setBigmapActive](https://wiki.rage.mp/index.php?title=Ui::setBigmapActive) to 
+	 * force the minimap to re-render.
+	 * 
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::resetMinimapComponentValues)
+	 */
+	resetMinimapComponentValues(name?: string): void;
+
+	/**
+	 * Sets minimap component data. Check frontend.xml for more data.
+	 *
+	 * You might want to use mp.game.ui.setBigmapActive to force the minimap to re-render.
+	 * 
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::setMinimapComponentValues)
+	 */
+	setMinimapComponentValues(
+		name: string,
+		alignX: number,
+		alignY: number,
+		posX: number,
+		posY: number,
+		sizeX: number,
+		sizeY: number
+	): void;
+
+	/**
+	 * Sets the batch of hud components to show/not show. The batch is retained/persists between frames. Example:
+	 *
+	 * ```
+	 * // Disable weapon reticle
+	 * mp.game.hud.setShowHudComponentsThisFrameBatch(false, [14]);
+	 * mp.events.add('render', () => {
+	 * 	mp.game.hud.applyShowHudComponentsThisFrameBatch();
+	 * });
+	 * ```
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Ui::setShowHudComponentsThisFrameBatch)
+	 * | [HUD Components List](https://wiki.rage.mp/index.php?title=HUD_Components)
+	 */
+	setShowHudComponentsThisFrameBatch(show: boolean, hudComponents: RageEnums.Hud.Component[]): void;
+}

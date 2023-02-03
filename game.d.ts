@@ -104,6 +104,11 @@ interface GameMp extends GameMpShared {
 
 	enableInvokeDebug: boolean;
 	enableResultObjCache: boolean;
+
+	/**
+	 * Returns a BigInt pointer that can be used with the native invoker when making use of ArrayBuffers.
+	 */
+	allocateString(string: string): bigint;
 }
 
 interface LegacyGameMp extends GameMpShared {

@@ -416,6 +416,8 @@ interface LegacyGameFireMp {
 }
 
 interface LegacyGameGameplayMp {
+	enableSnow: boolean;
+	
 	absf(value: number): number;
 	absi(value: number): number;
 	acos(p0: number): number;

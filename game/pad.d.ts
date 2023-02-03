@@ -390,4 +390,36 @@ interface GamePad extends GamePadLegacy {
 
 interface GamePadMp extends GamePad {
 	useDefaultVehicleEntering: boolean;
+
+	/**
+	 * Applies the batch this frame. Example:
+	 *
+	 * ```
+	 * // Disable switching view (Default key: V)
+	 * mp.game.controls.setDisableControlActionBatch(false, [0]);
+	 * mp.events.add('render', () => {
+	 * 	mp.game.controls.applyDisableControlActionBatch();
+	 * });
+	 * ```
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Controls::applyDisableControlActionBatch)
+	 */
+	applyDisableControlActionBatch(): void;
+
+	/**
+	 * Sets the batch of control actions to disable. The batch is retained/persists between frames. Example:
+	 *
+	 * ```
+	 * // Disable switching view (Default key: V)
+	 * mp.game.controls.setDisableControlActionBatch(false, [0]);
+	 * mp.events.add('render', () => {
+	 * 	mp.game.controls.applyDisableControlActionBatch();
+	 * });
+	 * ```
+	 * [RAGE:MP Wiki page](https://wiki.rage.mp/index.php?title=Controls::setDisableControlActionBatch)
+	 *  | [Game Controls List](https://wiki.rage.mp/index.php?title=Controls)
+	 */
+	setDisableControlActionBatch(
+		isMoveOrLookInputGroup: boolean,
+		controlActions: RageEnums.Controls[]
+	): void;
 }

@@ -1520,21 +1520,23 @@ interface GameObjectMp extends GameObject {
 	 *
 	 * [RAGE:MP Wiki article](https://wiki.rage.mp/index.php?title=Object::getAllByHash)
 	 */
-	getAllByHash(hash: integer): Vector3Mp[] | undefined;
+	getAllByHash(hash: Hash): Vector3Mp[] | undefined;
 
 	/**
 	 * Returns data of world objects within specified range.
 	 *
 	 * Each element in the array that is returned will contain:
+	 * 
 	 * 	[Number model, Vector3Mp position, Vector3Mp rotation]
 	 * [RAGE:MP Wiki article](https://wiki.rage.mp/index.php?title=Object::getAllInRange)
 	 */
-	getAllInRange(position: Vector3Mp, range: number): [number, Vector3Mp, Vector3Mp][] | undefined;
+	getAllInRange(position: Vector3Mp, range: number): [Hash, Vector3Mp, Vector3Mp][] | undefined;
 
 	/**
 	 * Returns data of world objects within specified range.
 	 *
 	 * Each element in the array that is returned will contain:
+	 * 
 	 * 	[number model, Vector3Mp position, Vector3Mp rotation, number distanceSquared]
 	 * [RAGE:MP Wiki article](https://wiki.rage.mp/index.php?title=Object::getAllInRange)
 	 */
@@ -1543,5 +1545,5 @@ interface GameObjectMp extends GameObject {
 		range: number,
 		includeDistance: boolean,
 		sortByDistance?: boolean
-	): [number, Vector3Mp, Vector3Mp, number][] | undefined;
+	): [Hash, Vector3Mp, Vector3Mp, number][] | undefined;
 }

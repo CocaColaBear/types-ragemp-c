@@ -2835,4 +2835,11 @@ interface GameMisc extends GameMiscLegacy {
 	unk: GameMiscUnk;
 }
 
-interface GameMiscMp extends GameMisc {}
+interface GameMiscMp extends GameMisc {
+	/**
+	 * Renders snow on the ground.
+	 *
+	 * [RAGE:MP Wiki article](https://wiki.rage.mp/index.php?title=Gameplay::enableSnow)
+	 */
+	enableSnow: boolean;
+}
