@@ -502,6 +502,7 @@ interface PedBaseMp extends EntityMp {
 	isBeingJacked(): boolean;
 	isBeingStealthKilled(): boolean;
 	isBeingStunned(p1: number): boolean;
+	isClimbing(): boolean;
 	isComponentVariationValid(componentId: number, drawableId: number, textureId: number): boolean;
 	isConversationDead(): boolean;
 	isCuffed(): boolean;
@@ -963,7 +964,6 @@ interface PlayerMp extends PedBaseMp {
 	readonly aimTarget: boolean;
 	readonly ip: string;
 	readonly isAiming: boolean;
-	readonly isClimbing: boolean;
 	readonly isEnteringVehicle: boolean;
 	readonly isInCover: boolean;
 	readonly isJumping: boolean;
