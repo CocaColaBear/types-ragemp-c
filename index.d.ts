@@ -392,7 +392,6 @@ interface PlayerMp extends EntityMp {
 	readonly aimTarget: boolean;
 	readonly ip: string;
 	readonly isAiming: boolean;
-	readonly isClimbing: boolean;
 	readonly isEnteringVehicle: boolean;
 	readonly isInCover: boolean;
 	readonly isJumping: boolean;
@@ -561,6 +560,7 @@ interface PlayerMp extends EntityMp {
 	isBeingJacked(): boolean;
 	isBeingStealthKilled(): boolean;
 	isBeingStunned(p1: number): boolean;
+	isClimbing(): boolean;
 	isComponentVariationValid(componentId: number, drawableId: number, textureId: number): boolean;
 	isControlOn(): boolean;
 	isConversationDead(): boolean;
